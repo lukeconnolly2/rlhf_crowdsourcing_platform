@@ -10,6 +10,7 @@ class VideoData(BaseModel):
     video1id: str
     video2id: str
     videoRef: str
+    viewed: bool = False
 
     class Config:
         allow_population_by_field_name = True
@@ -66,3 +67,8 @@ def add_video(request: Request, video: VideoData = Body(...) ):
     video = jsonable_encoder(video)
     result = app.database["videos"].insert_one(video)
     return {"id": str(result.inserted_id)}
+
+@app.get("/videolinks")
+def get_video_links():
+    video_links = list(app.database.videolinks.find())
+    return video_links

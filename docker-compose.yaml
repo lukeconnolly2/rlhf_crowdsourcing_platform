@@ -27,7 +27,7 @@ services:
     depends_on:
       - db
   
-  minio:
+  data_lake:
     image: minio/minio
     ports:
       - "9000:9000"

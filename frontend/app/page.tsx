@@ -3,7 +3,7 @@
 import VideoPlayer from '@/components/VideoPlayer';
 import dynamic from 'next/dynamic'
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 const VIDEOS = [
   '/Reference_Clips/Minigrid_Clips/TestPairClip_8.mp4',
@@ -24,6 +24,7 @@ interface Preference {
 export default function Home() {
   const [videoIndex, setVideoIndex] = useState(0)
   const [preferences, setPreferences] = useState([] as Preference[])
+  const [videoLinks, setVideoLinks] = useState([] as string[])
 
   const reset = () => {
     setVideoIndex(0)
@@ -36,6 +37,10 @@ export default function Home() {
     if(index === VIDEOS.length - 1) {reset()}
     else {setVideoIndex(index + 1)};
   }
+
+  useEffect(()=> {
+     const links = fetch('http://orchastrator:8080/videolink')
+  }, [])
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-white">
