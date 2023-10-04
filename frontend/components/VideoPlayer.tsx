@@ -16,7 +16,7 @@ export default function VideoPlayer({fileName}: Props){
     return (
         <div className='h-video aspect-square bg-transparent justify-center'> 
             <video
-                src={fileName}
+                src={'Reference_Clips/Minigrid_Clips/TestPairClip_2.mp4'}
                 autoPlay
                 controls
                 loop
@@ -24,9 +24,6 @@ export default function VideoPlayer({fileName}: Props){
                 onWaiting={() => {setPlaying(false)}}
                 suppressHydrationWarning
             />
-            {
-                !playing && <div className='h-full w-full flex items-center bg-black justify-center'>spinner</div>
-            }
         </div>
     )
 }

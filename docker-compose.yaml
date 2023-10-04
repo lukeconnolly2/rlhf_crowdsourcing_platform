@@ -9,6 +9,8 @@ services:
     depends_on:
       - orchastrator
       - db
+      - datalake
+      - mock_ml
     
   db:
     image: mongo
@@ -46,6 +48,7 @@ services:
     depends_on:
       - datalake
       - orchastrator
+      - db
 
 volumes:
   minio_storage: {}

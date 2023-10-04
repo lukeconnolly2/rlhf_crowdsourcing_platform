@@ -19,11 +19,7 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         const {links} = data
-        console.log(links, 'links')
-        const newLinks = links.map((link: string) => {
-          return link.replace('datalake', 'localhost')
-        })
-        setVideoLinks(["http://127.0.0.1:9000/videos/video1.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=S9Z3ERKU6FSL1ZEZMP53%2F20230929%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230929T154134Z&X-Amz-Expires=604800&X-Amz-Security-Token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3NLZXkiOiJTOVozRVJLVTZGU0wxWkVaTVA1MyIsImV4cCI6MTY5NjA0NDE3NywicGFyZW50IjoibHVrZSJ9._PjAltpbZIPQdzCQVx9fqcFcYaXbbaSeAIbP89xwgLQrfx8oIgfsqTs-eVVLr3-Gez_JpriIr1OQUAWqitjgFw&X-Amz-SignedHeaders=host&versionId=null&X-Amz-Signature=6b0fcdc3f100352835de40cb9eb6a830a661c7627ada16064fd0adbb2987e21a"])
+        setVideoLinks(links)
       })
   }, [])
 
@@ -32,14 +28,16 @@ export default function Home() {
     setPreferences([])
   }
 
-  console.log(videoLinks)
-
   const humanInput = (index: number, preference: [number, number]) => {
     setPreferences([...preferences, {index, preference}])
 
     if(index === videoLinks.length - 1) {reset()}
     else {setVideoIndex(index + 1)};
   }
+
+  console.log(preferences, 'preferences');
+  console.log(videoLinks, 'videoLinks');
+  console.log(videoIndex, 'videoIndex');
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-white">
@@ -55,7 +53,7 @@ export default function Home() {
                 <button className='bg-button-right rounded-md' onClick={() => humanInput(videoIndex, [0, 1])}>Right</button> 
               </div>
             </div>
-            <div className='flex flex-col pt-7 gap-5'>
+            <div className='flex flex-col pt-7 gap-5 border border-white rounded-lg p-2'>
               <p>Current Video: {videoLinks[videoIndex]}</p>
               {
                 preferences.map((preference, index) => {

@@ -3,6 +3,9 @@ FROM python:3.11.0-alpine
 WORKDIR /code
 
 COPY ./Test_Clip_1.mp4 /code/Test_Clip_1.mp4
+COPY ./Test_Clip_2.mp4 /code/Test_Clip_2.mp4
+COPY ./Test_Clip_3.mp4 /code/Test_Clip_3.mp4
+COPY ./Test_Clip_4.mp4 /code/Test_Clip_4.mp4
 COPY ./requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt

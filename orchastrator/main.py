@@ -6,8 +6,8 @@ from models import VideoData
 
 datalake = Minio(
     "datalake:9000",
-    access_key="test1",
-    secret_key="MsJWKd0vvzYi3IvNnwoV9T8D4y4W4y091XZb9pXt",
+    access_key="test",
+    secret_key="GzF9dPnMT6Ao22rHeud2v86wHCTsWOsj1Jkd168b",
     secure=False,
 )
 
@@ -49,12 +49,13 @@ def get_video_links():
     videos = list(app.database.videos.find())
     for vid in videos:
         name = vid['videoName']
-        url = datalake.get_presigned_url(
-            "GET",
-            'videos',
-            name,
-        )
-        print(url)
+        #url = datalake.get_presigned_url(
+        #    "GET",
+        #    'videos',
+        #    name,
+        #)
+        #print(url)
+        url = "http://localhost:9000/videos/" + name
         links.append(url)
     return links
     
