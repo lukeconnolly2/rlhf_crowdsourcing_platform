@@ -35,9 +35,6 @@ export default function Home() {
     else {setVideoIndex(index + 1)};
   }
 
-  console.log(preferences, 'preferences');
-  console.log(videoLinks, 'videoLinks');
-  console.log(videoIndex, 'videoIndex');
 
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-white">

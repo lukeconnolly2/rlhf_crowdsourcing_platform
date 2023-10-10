@@ -12,6 +12,7 @@ def send_video(video_name, filename, video1_id, video2_id, client):
     client.fput_object(
         "videos", video_name, filename,
     )
+    
     print('Put object {} to bucket {} successfully.'.format(video_name, "videos"))
 
 def main():
