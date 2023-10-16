@@ -1,5 +1,6 @@
 'use client'
 
+import PreferenceSelector from '@/components/PreferenceSelector';
 import VideoPlayer from '@/components/VideoPlayer';
 import React, { useEffect, useState } from "react"
 
@@ -20,6 +21,7 @@ export default function Home() {
       .then((data) => {
         const {links} = data
         setVideoLinks(links)
+        console.log(links)
       })
   }, [])
 
@@ -31,24 +33,21 @@ export default function Home() {
   const humanInput = (index: number, preference: [number, number]) => {
     setPreferences([...preferences, {index, preference}])
 
-    if(index === videoLinks.length - 1) {reset()}
+    if(index === videoLinks.length) {reset()}
     else {setVideoIndex(index + 1)};
   }
 
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-white">
-      <h1 className="text-2xl font-bold text-center">
-        Final Year Project
-      </h1>
+    <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-black">
         <div className="grid grid-cols-2 gap-4">
             <div>
               <VideoPlayer fileName={videoLinks[videoIndex]} />
-              <div className='grid grid-cols-3 h-10 gap-2 mt-2'>
+              {/* <div className='grid grid-cols-3 h-10 gap-2 mt-2'>
                 <button className='bg-button-left rounded-md' onClick={() => humanInput(videoIndex, [1, 0])}>Left</button>
                 <button className='bg-button-cant-tell rounded-md' onClick={() => humanInput(videoIndex, [0.5, 0.5])}>Cant Tell</button>
                 <button className='bg-button-right rounded-md' onClick={() => humanInput(videoIndex, [0, 1])}>Right</button> 
-              </div>
+              </div> */}
             </div>
             <div className='flex flex-col pt-7 gap-5 border border-white rounded-lg p-2'>
               <p>Current Video: {videoLinks[videoIndex]}</p>
@@ -64,6 +63,7 @@ export default function Home() {
               }
             </div>
         </div>
+        <PreferenceSelector />
     </main>
   )
 }

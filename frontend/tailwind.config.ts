@@ -9,8 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'background': '#545B63',
-        'text-white': '#FEFDFF',
+        'background': '#FFF2D8',
+        'dark-background': '#BCA37F',
+        'light-background': '#EAD7BB',
+        'navy': '#113946',
         'button-left': '#81667A',
         'button-cant-tell': '#223843',
         'button-right': '#8EB1C7'
