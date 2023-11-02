@@ -7,7 +7,7 @@ from models import VideoData
 datalake = Minio(
     "datalake:9000",
     access_key="test",
-    secret_key="GzF9dPnMT6Ao22rHeud2v86wHCTsWOsj1Jkd168b",
+    secret_key="DZP7JUMve3bgE1Ft1aQXcljSVxHIRZzyHBXyCnFs",
     secure=False,
 )
 
