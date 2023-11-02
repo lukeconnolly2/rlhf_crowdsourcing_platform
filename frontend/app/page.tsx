@@ -15,7 +15,7 @@ export default function Home() {
   const [videoLinks, setVideoLinks] = useState([] as string[])
 
   useEffect(() => {
-    console.log('fetching!! ')
+    console.log('CiCd only on merge ')
     fetch('/api')
       .then((res) => res.json())
       .then((data) => {
