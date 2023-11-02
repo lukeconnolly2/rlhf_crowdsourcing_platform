@@ -18,8 +18,8 @@ def send_video(video_name, filename, video1_id, video2_id, client):
 def main():
     client = Minio(
         "datalake:9000",
-        access_key="test1",
-        secret_key="MsJWKd0vvzYi3IvNnwoV9T8D4y4W4y091XZb9pXt",
+        access_key="test2",
+        secret_key="3hIO7cIqMLqBudHBZk2er0xHgrlJotnAC9Y6FCbc",
         secure=False,
     )
 
