@@ -9,7 +9,7 @@ variables:
 build:
   stage: build
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker login -u lukeconnolly2 -p $DOCKER_TOKEN
     - docker build -t $FRONTEND_IMAGE ./frontend
     - docker push $FRONTEND_IMAGE
     - docker build -t $ORCHASTRATOR_IMAGE ./orchestrator
