@@ -2,14 +2,14 @@ stages:
   - build
 
 variables:
-  FRONTEND_IMAGE: FRONTEND-$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  ORCHASTRATOR_IMAGE: ORCHASTRATOR_IMAGE-$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
-  MOCK_ML_IMAGE: MOCK_ML_IMAGE-$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  FRONTEND_IMAGE: $DOCKER_USER/fyp-frontend
+  ORCHASTRATOR_IMAGE: $DOCKER_USER/fyp-orchestrator
+  MOCK_ML_IMAGE: $DOCKER_USER/fyp-mock-ml
 
 build:
   stage: build
   script:
-    - docker login -u lukeconnolly2 -p $DOCKER_TOKEN
+    - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - docker build -t $FRONTEND_IMAGE ./frontend
     - docker push $FRONTEND_IMAGE
     - docker build -t $ORCHASTRATOR_IMAGE ./orchestrator
