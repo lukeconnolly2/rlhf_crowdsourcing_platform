@@ -7,6 +7,6 @@ variables:
 build:
   stage: build
   script:
-    - docker build -t $DOCKER_IMAGE .
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker push $DOCKER_IMAGE
+    - sudo docker build -t $DOCKER_IMAGE .
+    - sudo docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - sudo docker push $DOCKER_IMAGE
