@@ -15,7 +15,7 @@ export default function Home() {
   const [videoLinks, setVideoLinks] = useState([] as string[])
 
   useEffect(() => {
-    console.log('fetching')
+    console.log('fetching! ')
     fetch('/api')
       .then((res) => res.json())
       .then((data) => {
