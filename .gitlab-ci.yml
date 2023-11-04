@@ -1,0 +1,20 @@
+stages:
+  - build
+
+variables:
+  FRONTEND_IMAGE: $DOCKER_USER/fyp-frontend
+  ORCHESTRATOR_IMAGE: $DOCKER_USER/fyp-orchestrator
+  MOCK_ML_IMAGE: $DOCKER_USER/fyp-mock-ml
+
+build:
+  stage: build
+  script:
+    - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    - docker build -t $FRONTEND_IMAGE ./frontend
+    - docker push $FRONTEND_IMAGE
+    - docker build -t $ORCHESTRATOR_IMAGE ./orchestrator
+    - docker push $ORCHESTRATOR_IMAGE
+    - docker build -t $MOCK_ML_IMAGE ./mock-ml
+    - docker push $MOCK_ML_IMAGE
+  only:
+    - main
