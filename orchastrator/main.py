@@ -3,11 +3,18 @@ from pymongo import MongoClient
 from fastapi.encoders import jsonable_encoder
 from minio import Minio
 from models import VideoData
+import os
+
+ACCESS_NAME = os.getenv("MINIO_ACCESS_NAME")
+ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
+
+print(ACCESS_NAME)
+print(ACCESS_KEY)
 
 datalake = Minio(
     "datalake:9000",
-    access_key="test",
-    secret_key="DZP7JUMve3bgE1Ft1aQXcljSVxHIRZzyHBXyCnFs",
+    access_key=ACCESS_NAME,
+    secret_key=ACCESS_KEY,
     secure=False,
 )
 
