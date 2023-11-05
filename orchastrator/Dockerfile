@@ -4,8 +4,10 @@ WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
 
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
+
 RUN /usr/local/bin/python -m pip install --upgrade pip
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY main.py /code/main.py 
 COPY models.py /code/models.py
