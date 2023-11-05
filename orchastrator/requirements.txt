@@ -3,7 +3,7 @@ azure-core==1.29.5
 azure-identity==1.15.0
 azure-storage-blob==12.18.3
 certifi==2023.7.22
-cffi==1.16.0
+cffi==1.15.1
 charset-normalizer==3.3.2
 click==8.1.7
 cryptography==41.0.5
