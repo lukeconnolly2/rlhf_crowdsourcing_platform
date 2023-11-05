@@ -3,20 +3,14 @@ from pymongo import MongoClient
 from fastapi.encoders import jsonable_encoder
 from minio import Minio
 from models import VideoData
-import os
+import os, uuid
+from azure.identity import DefaultAzureCredential
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
-ACCESS_NAME = os.getenv("MINIO_ACCESS_NAME")
-ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
+CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
 
-print(ACCESS_NAME)
-print(ACCESS_KEY)
-
-datalake = Minio(
-    "datalake:9000",
-    access_key=ACCESS_NAME,
-    secret_key=ACCESS_KEY,
-    secure=False,
-)
+blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
+container_client = blob_service_client.get_container_client("videos")
 
 app = FastAPI()
 
@@ -55,14 +49,11 @@ def get_video_links():
     links = []
     videos = list(app.database.videos.find())
     for vid in videos:
+        if vid['viewed'] == True:
+            continue
+        
         name = vid['videoName']
-        #url = datalake.get_presigned_url(
-        #    "GET",
-        #    'videos',
-        #    name,
-        #)
-        #print(url)
-        url = "http://localhost:9000/videos/" + name
+        url = container_client.get_blob_client(name).url
         links.append(url)
     return links
     
