@@ -1,11 +1,10 @@
-FROM python:3.11.0
+FROM python:3.11.0-alpine3.17
 
 WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
 
-ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
-
+RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo pkgconfig
 RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
