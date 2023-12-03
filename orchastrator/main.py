@@ -23,15 +23,10 @@ def startup_db_client():
     app.database = app.mongodb_client['videos']
     print("Connected to the MongoDB database!")
 
+
 @app.on_event("shutdown")
 def shutdown_db_client():
     app.mongodb_client.close()
-
-@app.get("/")
-def read_root():
-    #delete all videos
-    app.database.videos.delete_many({})
-    return {"Hello": "World"}
 
 @app.get("/video")
 def get_videos():
