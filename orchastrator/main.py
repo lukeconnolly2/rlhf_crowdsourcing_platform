@@ -32,6 +32,7 @@ def check_private_api_key(
         api_key_header: str = Security(api_key_header),
 ) -> str:
     if api_key_header == PRIVATE_API_KEY:
+        print("Private API Key accepted")
         return api_key_header
     raise HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
