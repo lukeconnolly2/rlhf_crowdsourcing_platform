@@ -3,12 +3,12 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
     const user = request.nextUrl.searchParams.get("user")
-    const res = await fetch(`http://localhost:56983/getAPIKey?user=${user}`,
+    const res = await fetch(`${process.env.ORCHESTRATOR_URL}/getAPIKey?user=${user}`,
         {
             headers: 
                 { 
                     'Content-Type': 'application/json',
-                    'x-api-key': 'admin'
+                    'x-api-key': process.env.PRIVATE_API_KEY
                 }
         }
     )
