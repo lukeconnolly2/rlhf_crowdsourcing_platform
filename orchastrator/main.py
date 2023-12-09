@@ -15,8 +15,10 @@ CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
 client_uri = "mongodb://admin:admin@db:27017/"
 PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
 
+print(PRIVATE_API_KEY)
+
 if not CONNECTION_STRING:
-    print("Running in local mode. Getting connection string from .env.local")
+    print("Running in local mode. Getting connection strings from .env.local")
     load_dotenv(".env.local")
     CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
     client_uri = os.getenv("MONGO_CONNECTION_STRING")
