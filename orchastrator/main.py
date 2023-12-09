@@ -1,5 +1,5 @@
-from fastapi import FastAPI, Body, Request, HTTPException, Security
-from fastapi.security import APIKeyHeader
+from fastapi import FastAPI, Body, Request, HTTPException, status, Security
+from fastapi.security import APIKeyHeader, APIKeyQuery
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 from fastapi.encoders import jsonable_encoder
