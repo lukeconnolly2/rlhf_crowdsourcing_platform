@@ -17,7 +17,8 @@ const config: Config = {
         'button-cant-tell': '#223843',
         'button-right': '#8EB1C7',
         'electric-purple': '#5D2E8C',
-        'electric-yellow': '#E6AF2E'
+        'electric-yellow': '#E6AF2E',
+        'night': '#0A100D',
       }
     },
     height: {

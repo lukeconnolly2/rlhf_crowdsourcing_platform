@@ -19,10 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" className='scroll-smooth'>
         <body className={inter.className}>
-          <NavBar />
-          {children}
+          <NavBar/>
+          <div className='ml-32'>
+            {children}
+          </div>
         </body>
       </html>
     </ClerkProvider>

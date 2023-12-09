@@ -1,66 +1,38 @@
 'use client'
+import React from "react"
+import { Playfair_Display, Roboto } from 'next/font/google'
+import { useSession } from "@clerk/nextjs"
 
-import VideoPlayer from '@/components/VideoPlayer';
-import React, { useEffect, useState } from "react"
-
-
-interface Preference {
-  index: number,
-  preference: [number, number]
-}
+const playfair = Playfair_Display({ subsets: ['latin'] })
+const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] })
 
 export default function Home() {
-  const [videoIndex, setVideoIndex] = useState(0)
-  const [preferences, setPreferences] = useState([] as Preference[])
-  const [videoLinks, setVideoLinks] = useState([] as string[])
-
-  useEffect(() => {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((data) => {
-        const {links} = data
-        setVideoLinks(links)
-        console.log(links)
-      })
-  }, [])
-
-  const reset = () => {
-    setVideoIndex(0)
-    setPreferences([])
-  }
-
-  const humanInput = (index: number, preference: [number, number]) => {
-    setPreferences([...preferences, {index, preference}])
-
-    if(index === videoLinks.length) {reset()}
-    else {setVideoIndex(index + 1)};
-  }
+  const { isLoaded, session, isSignedIn } = useSession();
 
   return (
-    <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-black">
-        <div className="grid grid-cols-2 gap-4">
-            <div className='w-max'>
-              <VideoPlayer fileName={videoLinks[videoIndex]} />
-              <div className="w-full flex flex-row place-content-evenly">
-                <button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onClick={() => humanInput(videoIndex, [1, 0])} >Left</button>
-                <button type="button" className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" onClick={() => humanInput(videoIndex, [0.5, 0.5])} >Can't Tell</button>
-                <button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onClick={() => humanInput(videoIndex, [0, 1])} >Right</button>
-              </div>
-            </div>
-            <div className='flex flex-col pt-7 gap-5 border border-white rounded-lg p-2'>
-              <p>Current Video: {videoLinks[videoIndex]}</p>
-              {
-                preferences.map((preference, index) => {
-                  return (
-                    <div key={index} className='flex flex-col gap-1'>
-                      <p>Video: {videoLinks[preference.index].split('/')[3]}</p>
-                      <p>Preference: {preference.preference[0]} : {preference.preference[1]}</p>
-                    </div>
-                  )
-                })
-              }
-            </div>
+    <main className="flex flex-col ">
+      { !isSignedIn &&
+      <div className="min-h-screen flex flex-col items-center justify-center text-4xl gap-2"> 
+         <h1 className={playfair.className + " font-bold"}> Human in the loop </h1>
+         <p className={roboto.className}> Luke Connolly </p>
+         <div className={playfair.className + " flex flex-row gap-10 mt-10"}>
+            <a href="#about">
+              <button  className="bg-electric-yellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                Learn More
+              </button>
+            </a>
+            <a href="/hitl">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Try it out
+              </button>
+            </a>
+          </div>
+      </div>}
+      <div id="about" className="flex flex-col gap-2 min-h-screen font-bold bg-slate-400 p-5 ">
+        <div className="bg-white rounded-lg p-5 w-[30%] text-2xl flex items-center justify-center">
+          About the Project.
         </div>
+      </div>
     </main>
   )
 }
