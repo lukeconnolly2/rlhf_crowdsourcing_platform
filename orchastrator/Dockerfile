@@ -10,6 +10,7 @@ RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY main.py /code/main.py 
 COPY models.py /code/models.py
+COPY constants.py /code/constants.py
 
 EXPOSE 8080
 
