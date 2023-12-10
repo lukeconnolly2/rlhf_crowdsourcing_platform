@@ -3,7 +3,6 @@ export const runtime = "edge";
 
 export async function GET(request: NextRequest) {
     const user = request.nextUrl.searchParams.get("user")
-    console.log(`${process.env.ORCHESTRATOR_URL}/getAPIKey?user=${user}`)
     const res = await fetch(`http://${process.env.ORCHESTRATOR_URL}/getAPIKey?user=${user}`,
         {
             headers: 
@@ -14,6 +13,5 @@ export async function GET(request: NextRequest) {
         }
     )
     const apikey = await res.json()
-    console.log(apikey, "key")
     return Response.json({ apikey })
   }

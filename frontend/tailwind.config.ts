@@ -19,10 +19,10 @@ const config: Config = {
         'electric-purple': '#5D2E8C',
         'electric-yellow': '#E6AF2E',
         'night': '#0A100D',
-      }
-    },
-    height: {
-      video: '512px',
+      },
+      height: {
+        video: '512px',
+      },
     },
   },
   plugins: [],
