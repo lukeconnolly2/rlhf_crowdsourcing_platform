@@ -6,16 +6,18 @@ from fastapi.encoders import jsonable_encoder
 from models import VideoData
 import os, uuid
 from azure.identity import DefaultAzureCredential
-from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, generate_blob_sas, BlobSasPermissions
 from dotenv import load_dotenv
 from constants import SALT 
 import hashlib
+import re
+from datetime import datetime, timedelta
 
+PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
 client_uri = "mongodb://admin:admin@db:27017/"
 PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
 
-print(PRIVATE_API_KEY)
 
 if not CONNECTION_STRING:
     print("Running in local mode. Getting connection strings from .env.local")
@@ -23,6 +25,10 @@ if not CONNECTION_STRING:
     CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
     client_uri = os.getenv("MONGO_CONNECTION_STRING")
     PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
+
+ACCOUNT_NAME = re.search("AccountName=(.+?);", CONNECTION_STRING).group(1)
+ACCOUNT_KEY = re.search("AccountKey=(.+?);", CONNECTION_STRING).group(1)
+
 
 blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
 container_client = blob_service_client.get_container_client("videos")
@@ -76,23 +82,12 @@ def get_videos():
     return videos
 
 @app.post("/video")
-def add_video(request: Request, video: VideoData = Body(...) ):
+def add_video(request: Request, video: VideoData = Body(...), api_key: str = Security(check_public_api_key)):
     video = jsonable_encoder(video)
+    video['user'] = api_key
     result = app.database["videos"].insert_one(video)
     return {"id": str(result.inserted_id)}
 
-@app.get("/videolinks")
-def get_video_links():
-    links = []
-    videos = list(app.database.videos.find())
-    for vid in videos:
-        if vid['viewed'] == True:
-            continue
-        
-        name = vid['videoName']
-        url = container_client.get_blob_client(name).url
-        links.append(url)
-    return links
     
 @app.get("/getAPIKey")
 def get_api_key(user: str, api_key: str = Security(check_private_api_key)):
@@ -105,3 +100,15 @@ def get_api_key(user: str, api_key: str = Security(check_private_api_key)):
         api_key = hashlib.sha256((user + SALT).encode()).hexdigest()
         app.database.users.insert_one({"user": user, "key": api_key})
     return {"key": api_key}
+
+@app.get("/getUploadURL")
+def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
+    sas_token = generate_blob_sas(
+        account_name=ACCOUNT_NAME,
+        container_name='videos',
+        blob_name=filename,
+        account_key=ACCOUNT_KEY,
+        permission=BlobSasPermissions(write=True),
+        expiry=datetime.utcnow() + timedelta(hours=1)  # Token valid for 1 hour
+    )
+    return {"url": PUBLIC_DATALAKE_URL + filename + "?" + sas_token}
