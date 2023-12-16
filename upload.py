@@ -41,9 +41,9 @@ def send_metadata(api_key, hostname, public_url):
     else:
         raise Exception("Metadata upload failed")
 
-upload_url = request_upload_url("localhost:8000", "video4.mp4", API_KEY)
+upload_url = request_upload_url("127.0.0.1:56983", "video5.mp4", API_KEY)
 if upload_url != -1:
-    public_url = upload_to_azure(upload_url, "./frontend/public/Reference_Clips/MuJoCo_Clips/TestPairClip_1.mp4")
+    public_url = upload_to_azure(upload_url, "./frontend/public/Reference_Clips/MuJoCo_Clips/TestPairClip_2.mp4")
 
 if public_url != -1:
-    send_metadata(API_KEY, "localhost:8000", public_url)
+    send_metadata(API_KEY, "127.0.0.1:56983", public_url)
