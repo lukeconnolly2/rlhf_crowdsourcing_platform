@@ -1,7 +1,8 @@
 'use client'
-import LoadingSpinner from '@/components/LoadingSpinner';
-import VideoPlayer from '@/components/VideoPlayer';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
+import VideoPlayer from '@/components/video-player';
 import React, { useEffect, useState } from "react"
 
 
@@ -44,36 +45,33 @@ export default function Home() {
 
   return (
     <>
-    <SignedIn>
-      <main className="flex min-h-screen flex-col items-center gap-10 p-2 bg-background text-black">
-          <div className="grid grid-cols-2 gap-4">
-              <div className='w-max'>
+      <main className="container">
+        <section className="grid grid-cols-2 items-center gap-6 pt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Interact to Train AI models</CardTitle>
+                <CardDescription>Help train AI models by providing feedback on which video is better.</CardDescription>
+              </CardHeader>
+              <CardContent>
                 {videos.length > 0 && <VideoPlayer fileName={videos[videoIndex].public_url} />}
-                <div className="w-full flex flex-row place-content-evenly mt-5">
-                  <button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onClick={() => humanInput(videoIndex, [1, 0])} >Left</button>
-                  <button type="button" className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" onClick={() => humanInput(videoIndex, [0.5, 0.5])} >Can't Tell</button>
-                  <button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800" onClick={() => humanInput(videoIndex, [0, 1])} >Right</button>
+                <div className="flex flex-row justify-between pt-3">
+                  <Button onClick={() => humanInput(videoIndex, [0, 0])}>Left is better</Button>
+                  <Button variant='secondary' onClick={() => humanInput(videoIndex, [0, 0])}>Cant Tell</Button>
+                  <Button onClick={() => humanInput(videoIndex, [0, 0])}>Right is better</Button>
                 </div>
-              </div>
-              <div className='flex flex-col pt-7 gap-5 border border-white rounded-lg p-2'>
-                {/* <p>Current Video: {videos[videoIndex]}</p> */}
-                {/* {
-                  preferences.map((preference, index) => {
-                    return (
-                      <div key={index} className='flex flex-col gap-1'>
-                        <p>Video: {videos[preference.index].split('/')[3]}</p>
-                        <p>Preference: {preference.preference[0]} : {preference.preference[1]}</p>
-                      </div>
-                    )
-                  })
-                } */}
-              </div>
-          </div>
+              </CardContent>
+            </Card>
+          <Card className='h-full'>
+              <CardHeader>
+                <CardTitle>Some Details</CardTitle>
+                <CardDescription>Something will go down here</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p>Some details will go here</p>
+              </CardContent>
+            </Card>
+        </section>
       </main>
-    </SignedIn>
-    <SignedOut>
-      <LoadingSpinner />
-    </SignedOut>
     </>
   )
 }

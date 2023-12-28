@@ -8,16 +8,16 @@ import os, uuid
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, generate_blob_sas, BlobSasPermissions
 from dotenv import load_dotenv
-from constants import SALT 
+from constants import SALT, ROLES 
 import hashlib
 import re
 from datetime import datetime, timedelta
+
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
 client_uri = "mongodb://admin:admin@db:27017/"
 PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
-
 
 if not CONNECTION_STRING:
     print("Running in local mode. Getting connection strings from .env.local")
@@ -112,3 +112,16 @@ def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
         expiry=datetime.utcnow() + timedelta(hours=1)  # Token valid for 1 hour
     )
     return {"url": PUBLIC_DATALAKE_URL + filename + "?" + sas_token}
+
+@app.get("/getUserData")
+def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
+    if app.database.users.find_one({"user": user}):
+        return app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+    else:
+        api_key = hashlib.sha256((user + SALT).encode()).hexdigest()
+        role = ROLES["USER"]
+        print(app.database.users.insert_one({"user": user, "key": api_key, "role": role}))
+        user = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+        print(user)
+        return user
+

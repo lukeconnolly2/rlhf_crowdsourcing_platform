@@ -1,58 +1,69 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import { useUser } from "@clerk/nextjs";
-import LoadingSpinner from '@/components/LoadingSpinner';
-import NumberCard from '@/components/NumberCard';
-import ListCard from '@/components/ListCard';
+  
+"use client"
+import EditableNumberCard from "@/components/editable-number-card"
+import NumberCard from "@/components/number-card"
+import { DataTable } from "./data-table" 
+import { columns } from "./columns"
+import { videos } from "@/lib/test-data"
+import { Settings } from "lucide-react"
+import Link from "next/link"
 
-function Developer() {
-    const { user, isLoaded } = useUser();
-    const [apikey, setApikey] = useState("");
-
-    useEffect(() => {
-        if(isLoaded) {
-            fetch(`/api/get_api_key?user=${user.primaryEmailAddress.emailAddress}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    const {apikey} = data
-                    setApikey(apikey.key)
-                })
-        }
-        if(!isLoaded) {
-            setApikey("Loading...")
-        }
-    }, [isLoaded])
-
-
-    if(!isLoaded) {
-        return ( 
-            <div className="flex flex-col items-center justify-center min-h-screen py-2">
-                <LoadingSpinner />
-            </div>
-        )
-    }
-
+export default function Developer() {
     return (
-        //dashboard
-        <div className="flex flex-col min-h-screen p-10 h-full bg-gray-100 gap-10">
-            <div className='flex flex-row justify-evenly h-64 '>
-                <NumberCard number={100} title={'Videos'} callback={() => {alert('make this work')}} />
-                <NumberCard number={100} title={'Preferences collected'} callback={() => {alert('make this work')}} />
-                <NumberCard number={100} title={'Views per video'} callback={() => {alert('make this work')}} />
-                <NumberCard number={1000} title={'Notifications Sent'} callback={() => {alert('make this work')}} />
+        <>
+        <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">
+            <div className="flex w-full flex-row justify-between gap-2">
+                <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+                    Developer Page
+                </h1>
+                <Link href="/developer/set-up">
+                    <Settings className="h-6 w-6" />
+                </Link>
             </div>
-            <div className='flex flex-row justify-evenly h-96'>
-                <ListCard />
-                <ListCard />
+        </section>
+        <section className="container">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full">
+                <EditableNumberCard 
+                    title="Views per Video"
+                    number={3}
+                    description={"How many times each video needs to be viewed before preference is collected."}
+                    className="col-span-1"
+                    min={1}
+                    max={10}
+                />
+                <NumberCard 
+                    title="Videos"
+                    number={3}
+                    description={"Number of videos uploaded to the system."}
+                    min={1}
+                    max={10}
+
+                />
+                <NumberCard 
+                    title="Notifications sent"
+                    number={100}
+                    description={"Number of Notifications sent to users."}
+                    min={1}
+                    max={10}
+                />
             </div>
-            <div className='flex flex-row h-10 bg-white rounded-lg shadow-md'>
-                <div className='flex flex-row items-center justify-between w-full px-3'>
-                    <p>API Key</p>
-                    <p>{apikey}</p>
+        </section>
+        <section className="container grid gap-6 pb-8 pt-5 md:py-10">
+            <div className="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-6">
+                <div className="grid gap-4">
+                    <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
+                        Videos
+                    </h3>
+                    <DataTable columns={columns} data={videos} />
+                </div>
+                <div className="grid gap-4">
+                    <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
+                        Videos
+                    </h3>
+                    <DataTable columns={columns} data={videos} />
                 </div>
             </div>
-        </div>
-  )
+        </section>
+        </>
+    )
 }
-
-export default Developer

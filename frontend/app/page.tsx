@@ -1,38 +1,45 @@
-'use client'
-import React from "react"
-import { Playfair_Display, Roboto } from 'next/font/google'
-import { useSession } from "@clerk/nextjs"
+import Link from "next/link"
 
-const playfair = Playfair_Display({ subsets: ['latin'] })
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] })
+import { siteConfig } from "@/config/site"
+import { buttonVariants } from "@/components/ui/button"
 
-export default function Home() {
-  const { isLoaded, session, isSignedIn } = useSession();
-
+export default function IndexPage() {
   return (
-    <main className="flex flex-col ">
-      { !isSignedIn &&
-      <div className="min-h-screen flex flex-col items-center justify-center text-4xl gap-2"> 
-         <h1 className={playfair.className + " font-bold"}> Human in the loop </h1>
-         <p className={roboto.className}> Luke Connolly </p>
-         <div className={playfair.className + " flex flex-row gap-10 mt-10"}>
-            <a href="#about">
-              <button  className="bg-electric-yellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                Learn More
-              </button>
-            </a>
-            <a href="/hitl">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Try it out
-              </button>
-            </a>
-          </div>
-      </div>}
-      <div id="about" className="flex flex-col gap-2 min-h-screen font-bold bg-slate-400 p-5 ">
-        <div className="bg-white rounded-lg p-5 w-[30%] text-2xl flex items-center justify-center">
-          About the Project.
-        </div>
+    <>
+    <section className="container grid  items-center gap-6 md:py-10 h-screen">
+      <div className="flex max-w-[980px] flex-col items-start gap-2">
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          A human in the loop framework.
+        </h1>
+        <p className="max-w-[700px] text-lg text-muted-foreground">
+          Final year project for the BSc in Computer Science at UCD.
+        </p>
       </div>
-    </main>
+      <div className="flex gap-4">
+        <Link
+          href={siteConfig.links.about}
+          className={buttonVariants({ variant: "outline"}) + " w-1/6 h-24 text-xl"}
+        >
+          About
+        </Link>
+        <Link
+          href={siteConfig.links.hitl}
+          className={buttonVariants() + " w-1/6 h-24 text-xl"}
+        >
+          Try it out.
+        </Link>
+      </div>
+    </section>
+    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10 h-screen" id="about">
+      <div className="flex max-w-[980px] flex-col items-start gap-2">
+        <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
+          About
+        </h1>
+        <p className="max-w-[700px] text-lg text-muted-foreground">
+          Final year project for the BSc in Computer Science at UCD.
+        </p>
+      </div>
+    </section>
+  </>
   )
 }
