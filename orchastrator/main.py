@@ -12,6 +12,7 @@ from constants import SALT, ROLES
 import hashlib
 import re
 from datetime import datetime, timedelta
+from utils.utils import generate_api_key
 
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
@@ -59,7 +60,6 @@ def startup_db_client():
         print("Connected to the MongoDB database!")
     except PyMongoError:
         print("Connection to MongoDB failed! ")
-
 
 
 @app.on_event("shutdown")
@@ -115,13 +115,17 @@ def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
 
 @app.get("/getUserData")
 def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
+    print(user)
     if app.database.users.find_one({"user": user}):
-        return app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+        user_data = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+        user_videos = list(app.database.videos.find({"user": user_data['key']}))
+        user_data['videos'] = user_videos
+        return user_data
     else:
-        api_key = hashlib.sha256((user + SALT).encode()).hexdigest()
+        api_key = generate_api_key(user)
         role = ROLES["USER"]
-        print(app.database.users.insert_one({"user": user, "key": api_key, "role": role}))
+        app.database.users.insert_one({"user": user, "key": api_key, "role": role})
         user = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
-        print(user)
+        user['videos'] = []
         return user
 

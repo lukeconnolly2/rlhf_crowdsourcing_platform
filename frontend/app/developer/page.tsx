@@ -7,8 +7,11 @@ import { columns } from "./columns"
 import { videos } from "@/lib/test-data"
 import { Settings } from "lucide-react"
 import Link from "next/link"
+import { useUserData } from "@/providers/user-context"
 
 export default function Developer() {
+    const { userData } = useUserData();
+    console.log(userData)
     return (
         <>
         <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">

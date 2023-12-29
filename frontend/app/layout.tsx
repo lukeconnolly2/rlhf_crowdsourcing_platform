@@ -9,6 +9,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from '@clerk/themes';
+import { UserProvider } from '@/providers/user-context';
 
 export const metadata: Metadata = {
   title: {
@@ -40,23 +41,25 @@ export default function RootLayout({ children }: RootLayoutProps) {
           colorPrimary: '#6d27d9',
         }
         }}>
-        <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-          <head />
-          <body
-            className={cn(
-              "min-h-screen bg-background font-sans antialiased",
-              fontSans.variable
-            )}
-          >
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="relative flex min-h-screen flex-col">
-                <SiteHeader />
-                <div className="flex-1">{children}</div>
-              </div>
-              <TailwindIndicator />
-            </ThemeProvider>
-          </body>
-        </html>
+          <UserProvider>
+            <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+              <head />
+              <body
+                className={cn(
+                  "min-h-screen bg-background font-sans antialiased",
+                  fontSans.variable
+                )}
+              >
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                  <div className="relative flex min-h-screen flex-col">
+                    <SiteHeader />
+                    <div className="flex-1">{children}</div>
+                  </div>
+                  <TailwindIndicator />
+                </ThemeProvider>
+              </body>
+            </html>
+          </UserProvider>
       </ClerkProvider>
     </>
   )

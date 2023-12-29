@@ -52,9 +52,10 @@ export default function Home() {
                 <CardTitle>Interact to Train AI models</CardTitle>
                 <CardDescription>Help train AI models by providing feedback on which video is better.</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className='flex flex-col justify-center items-center'>
+                {videos.length === 0 && <div className='aspect-square w-5/12 flex items-center justify-center'> No Videos available currently</div>}
                 {videos.length > 0 && <VideoPlayer fileName={videos[videoIndex].public_url} />}
-                <div className="flex flex-row justify-between pt-3">
+                <div className="flex flex-row justify-between pt-3 gap-6">
                   <Button onClick={() => humanInput(videoIndex, [0, 0])}>Left is better</Button>
                   <Button variant='secondary' onClick={() => humanInput(videoIndex, [0, 0])}>Cant Tell</Button>
                   <Button onClick={() => humanInput(videoIndex, [0, 0])}>Right is better</Button>
