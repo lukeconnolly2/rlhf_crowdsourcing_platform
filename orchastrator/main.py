@@ -12,8 +12,6 @@ from constants import SALT, ROLES
 import hashlib
 import re
 from datetime import datetime, timedelta
-from utils import generate_api_key
-
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
@@ -47,6 +45,9 @@ def check_private_api_key(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Invalid or missing API Key",
     )
+
+def generate_api_key(user):
+    return hashlib.sha256((user + SALT).encode()).hexdigest()
 
 
 app = FastAPI()
