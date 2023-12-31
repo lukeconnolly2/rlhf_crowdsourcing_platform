@@ -1,3 +1,12 @@
+import { Video } from "types/video"
+
 export interface UserContextProps {
-    userData: object
+    userData: UserContextUserData
+    refreshData: () => void
+}
+
+interface UserContextUserData {
+    role?: string
+    key?: string
+    videos?: Video[]
 }

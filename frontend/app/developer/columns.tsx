@@ -1,13 +1,13 @@
 "use client"
  
 import { ColumnDef } from "@tanstack/react-table"
-import { Video } from "@/types/number-card"
+import { Video } from "@/types/video"
 
 export const columns: ColumnDef<Video>[] = [
     {
       accessorKey: "id",
       header: () => <div className="text-center">ID</div>,
-      cell: ({row}) => <div className="text-center">{row.getValue("id")}</div>,
+      cell: ({row}) => <div className="text-center">{String(row.getValue("id")).substring(0, 10)}</div>,
     },
     {
       accessorKey: "views",

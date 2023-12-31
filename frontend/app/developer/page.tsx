@@ -4,14 +4,15 @@ import EditableNumberCard from "@/components/editable-number-card"
 import NumberCard from "@/components/number-card"
 import { DataTable } from "./data-table" 
 import { columns } from "./columns"
-import { videos } from "@/lib/test-data"
 import { Settings } from "lucide-react"
 import Link from "next/link"
 import { useUserData } from "@/providers/user-context"
+import RefreshButton from "@/components/refreshButton"
+import { testVideos } from "@/lib/test-data"
 
 export default function Developer() {
-    const { userData } = useUserData();
-    console.log(userData)
+    const { userData: { videos }, refreshData} = useUserData();
+    console.log(videos);
     return (
         <>
         <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">
@@ -19,9 +20,12 @@ export default function Developer() {
                 <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
                     Developer Page
                 </h1>
-                <Link href="/developer/set-up">
-                    <Settings className="h-6 w-6" />
-                </Link>
+                <div className="flex flex-row gap-6 items-center">
+                    <Link href="/developer/set-up">
+                        <Settings className="h-6 w-6" />
+                    </Link>
+                    <RefreshButton refresh={refreshData}/>
+                </div>
             </div>
         </section>
         <section className="container">
@@ -36,10 +40,10 @@ export default function Developer() {
                 />
                 <NumberCard 
                     title="Videos"
-                    number={3}
+                    number={videos ? videos.length : 0}
                     description={"Number of videos uploaded to the system."}
-                    min={1}
-                    max={10}
+                    min={0}
+                    max={1000}
 
                 />
                 <NumberCard 
@@ -57,13 +61,12 @@ export default function Developer() {
                     <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
                         Videos
                     </h3>
-                    <DataTable columns={columns} data={videos} />
+                    <DataTable columns={columns} data={testVideos} />
                 </div>
                 <div className="grid gap-4">
                     <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
                         Videos
                     </h3>
-                    <DataTable columns={columns} data={videos} />
                 </div>
             </div>
         </section>

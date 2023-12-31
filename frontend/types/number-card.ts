@@ -7,8 +7,4 @@ export interface EditableNumberCardItem {
     max: number
   }
 
-export type Video = {
-    id: string;
-    views: number;
-    status: "Unreleased" | "Collecting preferences" | "Success" | "Failed";
-};
+
