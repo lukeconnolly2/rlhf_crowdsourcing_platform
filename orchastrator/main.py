@@ -12,7 +12,7 @@ from constants import SALT, ROLES
 import hashlib
 import re
 from datetime import datetime, timedelta
-from utils.utils import generate_api_key
+from utils import generate_api_key
 
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
