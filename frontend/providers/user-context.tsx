@@ -5,12 +5,16 @@ import { UserContextProps } from "@/types/user-context";
 import { useUser } from '@clerk/nextjs';
 
 const UserContext = createContext<UserContextProps>({ 
-  userData: {},
+  userData: {
+    videos: [],
+  },
   refreshData: () => {}
 });
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    videos: [],
+  });
   const { isSignedIn, user, isLoaded } = useUser();
 
   const fetchData = async () => {

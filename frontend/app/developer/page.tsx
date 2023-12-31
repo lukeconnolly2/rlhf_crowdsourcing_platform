@@ -8,7 +8,6 @@ import { Settings } from "lucide-react"
 import Link from "next/link"
 import { useUserData } from "@/providers/user-context"
 import RefreshButton from "@/components/refreshButton"
-import { testVideos } from "@/lib/test-data"
 
 export default function Developer() {
     const { userData: { videos }, refreshData} = useUserData();
@@ -61,7 +60,7 @@ export default function Developer() {
                     <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
                         Videos
                     </h3>
-                    <DataTable columns={columns} data={testVideos} />
+                    <DataTable columns={columns} data={videos} />
                 </div>
                 <div className="grid gap-4">
                     <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">

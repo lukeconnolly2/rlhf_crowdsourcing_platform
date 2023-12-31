@@ -8,5 +8,5 @@ export interface UserContextProps {
 interface UserContextUserData {
     role?: string
     key?: string
-    videos?: Video[]
+    videos: Video[]
 }

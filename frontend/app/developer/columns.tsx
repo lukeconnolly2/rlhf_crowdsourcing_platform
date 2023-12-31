@@ -7,7 +7,7 @@ export const columns: ColumnDef<Video>[] = [
     {
       accessorKey: "id",
       header: () => <div className="text-center">ID</div>,
-      cell: ({row}) => <div className="text-center">{String(row.getValue("id")).substring(0, 10)}</div>,
+      cell: ({row}) => <div className="text-center">{row.getValue("id") ? String(row.getValue("id")).substring(0, 10) : ""}</div>,
     },
     {
       accessorKey: "views",
