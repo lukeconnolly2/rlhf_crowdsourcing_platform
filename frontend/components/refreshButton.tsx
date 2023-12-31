@@ -11,15 +11,16 @@ interface RefreshButtonProps {
 
 export default function RefreshButton({ refresh }: RefreshButtonProps) {
     const [loading, setLoading] = useState(false);
+    const { reset } = useTimeout(() => setLoading(false), 3000);
 
     const handleOnClick = () => {
         refresh();
         setLoading(true);
-        useTimeout(() => setLoading(false), 1000);
+        reset();
     }
     return (
-        <Button className={`${loading ? "animate-pulse" : ""}`} variant="outline" size="icon" onClick={refresh}>
-            <RefreshCcw className="h-4 w-4" />
+        <Button disabled={loading} variant="outline" size="icon" onClick={handleOnClick}>
+            <RefreshCcw className={`${loading ? "animate-spin" : ""} h-4 w-4`} />
         </Button>
     );
 }
