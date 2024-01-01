@@ -5,6 +5,7 @@ import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
+
 import { buttonVariants } from "./ui/button"
 
 interface MainNavProps {
@@ -27,7 +28,8 @@ export function MainNav({ items }: MainNavProps) {
                   key={index}
                   href={item.href}
                   className={cn(
-                    "flex items-center text-md font-large cursor-pointer dark:text-white", buttonVariants({ variant: "link" }),
+                    "flex items-center text-md font-large cursor-pointer dark:text-white",
+                    buttonVariants({ variant: "link" }),
                     item.disabled && "cursor-not-allowed opacity-80"
                   )}
                 >

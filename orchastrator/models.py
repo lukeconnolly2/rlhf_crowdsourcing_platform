@@ -20,7 +20,7 @@ class VideoData(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
     public_url: str
     user: Optional[str] = None
-    viewed: int = 0
+    views: int = 0
 
     class Config:
         allow_population_by_field_name = True

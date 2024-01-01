@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Body, Request, HTTPException, status, Security
-from fastapi.security import APIKeyHeader, APIKeyQuery
+from fastapi.security import APIKeyHeader
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 from fastapi.encoders import jsonable_encoder
@@ -28,10 +28,8 @@ if not CONNECTION_STRING:
 ACCOUNT_NAME = re.search("AccountName=(.+?);", CONNECTION_STRING).group(1)
 ACCOUNT_KEY = re.search("AccountKey=(.+?);", CONNECTION_STRING).group(1)
 
-
 blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
 container_client = blob_service_client.get_container_client("videos")
-
 
 api_key_header = APIKeyHeader(name="x-api-key", auto_error=False)
 
@@ -49,7 +47,6 @@ def check_private_api_key(
 def generate_api_key(user):
     return hashlib.sha256((user + SALT).encode()).hexdigest()
 
-
 app = FastAPI()
 
 @app.on_event("startup")
@@ -61,7 +58,6 @@ def startup_db_client():
         print("Connected to the MongoDB database!")
     except PyMongoError:
         print("Connection to MongoDB failed! ")
-
 
 @app.on_event("shutdown")
 def shutdown_db_client():

@@ -1,4 +1,4 @@
-import { Video } from "@/types/video";
+import { Video } from "@/types/video"
 
 export const testVideos: Video[] = [
   { id: "v1", views: 0, status: "Unreleased", requiredViews: 1 },
@@ -15,4 +15,4 @@ export const testVideos: Video[] = [
   { id: "v12", views: 3, status: "Collecting preferences", requiredViews: 2 },
   { id: "v13", views: 0, status: "Success", requiredViews: 1 },
   { id: "v14", views: 1, status: "Failed", requiredViews: 2 },
-];
+]

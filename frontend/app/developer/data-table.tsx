@@ -8,6 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import { Button } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -16,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -27,7 +27,6 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  
   const table = useReactTable({
     data,
     columns,
@@ -98,6 +97,5 @@ export function DataTable<TData, TValue>({
         </Button>
       </div>
     </div>
-    
   )
 }

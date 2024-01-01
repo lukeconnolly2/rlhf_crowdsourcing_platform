@@ -2,8 +2,7 @@ export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
   name: "HITL",
-  description:
-    "A human in the loop framework for final year project.",
+  description: "A human in the loop framework for final year project.",
   mainNav: [
     {
       title: "Home",
