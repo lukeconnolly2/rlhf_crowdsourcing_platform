@@ -9,4 +9,5 @@ interface UserContextUserData {
   role?: string
   key?: string
   videos: Video[]
+  default_required_views: number
 }

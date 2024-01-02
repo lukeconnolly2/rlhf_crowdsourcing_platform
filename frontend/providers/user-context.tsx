@@ -8,6 +8,7 @@ import { UserContextProps } from "@/types/user-context"
 const UserContext = createContext<UserContextProps>({
   userData: {
     videos: [],
+    default_required_views: 1,
   },
   refreshData: () => {},
 })
@@ -17,6 +18,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const [userData, setUserData] = useState({
     videos: [],
+    default_required_views: 1,
   })
   const { isSignedIn, user, isLoaded } = useUser()
 
@@ -25,6 +27,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await fetch(
         `/api/getUserData?user=${user?.primaryEmailAddress?.emailAddress}`
       ).then((res) => res.json())
+      console.log(data)
       setUserData(data)
     }
   }

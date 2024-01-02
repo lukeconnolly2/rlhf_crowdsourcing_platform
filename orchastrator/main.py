@@ -75,28 +75,16 @@ def check_public_api_key(
 
 @app.get("/video")
 def get_videos():
-    videos = list(app.database.videos.find())
+    videos = list(app.database.videos.find({"status": "Collecting preferences"}))
     return videos
 
 @app.post("/video")
 def add_video(request: Request, video: VideoData = Body(...), api_key: str = Security(check_public_api_key)):
     video = jsonable_encoder(video)
     video['user'] = api_key
+    video["required_views"] = app.database.users.find_one({"key": api_key}, {"_id": 0, "default_required_views": 1})['default_required_views']
     result = app.database["videos"].insert_one(video)
     return {"id": str(result.inserted_id)}
-
-    
-@app.get("/getAPIKey")
-def get_api_key(user: str, api_key: str = Security(check_private_api_key)):
-    #check if user exists
-    if app.database.users.find_one({"user": user}):
-        print("User already exists")
-        return {"key": app.database.users.find_one({"user": user})['key']}
-    else:
-        print("Creating new user")
-        api_key = hashlib.sha256((user + SALT).encode()).hexdigest()
-        app.database.users.insert_one({"user": user, "key": api_key})
-    return {"key": api_key}
 
 @app.get("/getUploadURL")
 def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
@@ -112,17 +100,17 @@ def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
 
 @app.get("/getUserData")
 def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
-    print(user)
     if app.database.users.find_one({"user": user}):
-        user_data = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+        user_data = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1})
         user_videos = list(app.database.videos.find({"user": user_data['key']}))
         user_data['videos'] = user_videos
         return user_data
     else:
         api_key = generate_api_key(user)
         role = ROLES["USER"]
-        app.database.users.insert_one({"user": user, "key": api_key, "role": role})
-        user = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1})
+        default_required_views = 2
+        app.database.users.insert_one({"user": user, "key": api_key, "role": role, "default_required_views": default_required_views})
+        user = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1})
         user['videos'] = []
         return user
 

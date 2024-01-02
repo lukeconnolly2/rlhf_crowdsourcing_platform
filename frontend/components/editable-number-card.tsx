@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { use, useEffect, useState } from "react"
 import { X } from "lucide-react"
 
 import { EditableNumberCardItem } from "@/types/number-card"
@@ -26,6 +26,11 @@ export default function EditableNumberCard({
 }: EditableNumberCardItem) {
   const [isEditing, setIsEditing] = useState(false)
   const [value, setValue] = useState(number)
+
+  useEffect(() => {
+    setValue(number)
+  }, [number])
+
   return (
     <Card
       className={`${className} ${

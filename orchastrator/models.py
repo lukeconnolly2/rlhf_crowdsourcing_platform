@@ -21,7 +21,9 @@ class VideoData(BaseModel):
     public_url: str
     user: Optional[str] = None
     views: int = 0
-
+    status: str = "Unreleased"
+    required_views: int = 2
+     
     class Config:
         allow_population_by_field_name = True
         schema_extra = {

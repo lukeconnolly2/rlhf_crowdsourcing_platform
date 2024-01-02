@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
+import { Eye } from "lucide-react"
 
 import { Video } from "@/types/video"
 import { Button } from "@/components/ui/button"
@@ -11,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Icons } from "@/components/icons"
+import RefreshButton from "@/components/refreshButton"
 import VideoPlayer from "@/components/video-player"
 
 interface Preference {
@@ -22,6 +25,7 @@ export default function Home() {
   const [videoIndex, setVideoIndex] = useState(0)
   const [preferences, setPreferences] = useState([] as Preference[])
   const [videos, setVideos] = useState([] as Video[])
+  const [focused, setFocused] = useState(false)
 
   useEffect(() => {
     fetch("/api")
@@ -50,14 +54,27 @@ export default function Home() {
   return (
     <>
       <main className="container">
-        <section className="grid grid-cols-2 items-center gap-6 pt-6">
+        <section
+          className={`grid transition-all duration-300 ease-in-out ${
+            focused ? "lg:grid-cols-1" : "lg:grid-cols-2"
+          } md:grid-cols-1 sm:grid-cols-1 items-center gap-6 pt-6`}
+        >
           <Card>
-            <CardHeader>
-              <CardTitle>Interact to Train AI models</CardTitle>
-              <CardDescription>
-                Help train AI models by providing feedback on which video is
-                better.
-              </CardDescription>
+            <CardHeader className="flex flex-row justify-between">
+              <div>
+                <CardTitle>Interact to Train AI models</CardTitle>
+                <CardDescription>
+                  Help train AI models by providing feedback on which video is
+                  better.
+                </CardDescription>
+              </div>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setFocused(!focused)}
+              >
+                <Eye className="h-4 w-4" />
+              </Button>
             </CardHeader>
             <CardContent className="flex flex-col justify-center items-center">
               {videos.length === 0 && (

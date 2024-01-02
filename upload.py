@@ -41,7 +41,7 @@ def send_metadata(api_key, hostname, public_url):
     else:
         raise Exception("Metadata upload failed")
 
-upload_url = request_upload_url("127.0.0.1:8000", "video1.mp4", API_KEY)
+upload_url = request_upload_url("127.0.0.1:8000", "video2.mp4", API_KEY)
 if upload_url != -1:
     public_url = upload_to_azure(upload_url, "clip.mp4")
 
