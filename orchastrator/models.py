@@ -21,6 +21,7 @@ class VideoData(BaseModel):
     public_url: str
     user: Optional[str] = None
     views: int = 0
+    preferences: list = []
     status: str = "Unreleased"
     required_views: int = 2
      
