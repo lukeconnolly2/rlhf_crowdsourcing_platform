@@ -1,61 +1,116 @@
-from fastapi import FastAPI, Body, Request
+from fastapi import FastAPI, Body, Request, HTTPException, status, Security
+from fastapi.security import APIKeyHeader
 from pymongo import MongoClient
+from pymongo.errors import PyMongoError
 from fastapi.encoders import jsonable_encoder
-from minio import Minio
 from models import VideoData
+import os, uuid
+from azure.identity import DefaultAzureCredential
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, generate_blob_sas, BlobSasPermissions
+from dotenv import load_dotenv
+from constants import SALT, ROLES 
+import hashlib
+import re
+from datetime import datetime, timedelta
 
-datalake = Minio(
-    "datalake:9000",
-    access_key="test",
-    secret_key="DZP7JUMve3bgE1Ft1aQXcljSVxHIRZzyHBXyCnFs",
-    secure=False,
-)
+PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
+CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
+client_uri = "mongodb://admin:admin@db:27017/"
+PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
+
+if not CONNECTION_STRING:
+    print("Running in local mode. Getting connection strings from .env.local")
+    load_dotenv(".env.local")
+    CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
+    client_uri = os.getenv("MONGO_CONNECTION_STRING")
+    PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
+
+ACCOUNT_NAME = re.search("AccountName=(.+?);", CONNECTION_STRING).group(1)
+ACCOUNT_KEY = re.search("AccountKey=(.+?);", CONNECTION_STRING).group(1)
+
+blob_service_client = BlobServiceClient.from_connection_string(CONNECTION_STRING)
+container_client = blob_service_client.get_container_client("videos")
+
+api_key_header = APIKeyHeader(name="x-api-key", auto_error=False)
+
+def check_private_api_key(
+        api_key_header: str = Security(api_key_header),
+) -> str:
+    if api_key_header == PRIVATE_API_KEY:
+        print("Private API Key accepted")
+        return api_key_header
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or missing API Key",
+    )
+
+def generate_api_key(user):
+    return hashlib.sha256((user + SALT).encode()).hexdigest()
 
 app = FastAPI()
-
-# Connect to MongoDB
-client_uri = "mongodb://admin:admin@db:27017/"
 
 @app.on_event("startup")
 def startup_db_client():
     app.mongodb_client = MongoClient(client_uri)
-    app.database = app.mongodb_client['videos']
-    print("Connected to the MongoDB database!")
+    app.database = app.mongodb_client['FYP']
+    try:
+        app.mongodb_client.admin.command('ismaster')
+        print("Connected to the MongoDB database!")
+    except PyMongoError:
+        print("Connection to MongoDB failed! ")
 
 @app.on_event("shutdown")
 def shutdown_db_client():
     app.mongodb_client.close()
 
-@app.get("/")
-def read_root():
-    #delete all videos
-    app.database.videos.delete_many({})
-    return {"Hello": "World"}
+def check_public_api_key(
+        api_key_header: str = Security(api_key_header),
+) -> str:
+    if api_key_header in list(app.database.users.distinct('key')):
+        return api_key_header
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or missing API Key",
+    )
 
 @app.get("/video")
 def get_videos():
-    videos = list(app.database.videos.find())
+    videos = list(app.database.videos.find({"status": "Collecting preferences"}))
     return videos
 
 @app.post("/video")
-def add_video(request: Request, video: VideoData = Body(...) ):
+def add_video(request: Request, video: VideoData = Body(...), api_key: str = Security(check_public_api_key)):
     video = jsonable_encoder(video)
+    video['user'] = api_key
+    video["required_views"] = app.database.users.find_one({"key": api_key}, {"_id": 0, "default_required_views": 1})['default_required_views']
     result = app.database["videos"].insert_one(video)
     return {"id": str(result.inserted_id)}
 
-@app.get("/videolinks")
-def get_video_links():
-    links = []
-    videos = list(app.database.videos.find())
-    for vid in videos:
-        name = vid['videoName']
-        #url = datalake.get_presigned_url(
-        #    "GET",
-        #    'videos',
-        #    name,
-        #)
-        #print(url)
-        url = "http://localhost:9000/videos/" + name
-        links.append(url)
-    return links
-    
+@app.get("/getUploadURL")
+def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
+    sas_token = generate_blob_sas(
+        account_name=ACCOUNT_NAME,
+        container_name='videos',
+        blob_name=filename,
+        account_key=ACCOUNT_KEY,
+        permission=BlobSasPermissions(write=True),
+        expiry=datetime.utcnow() + timedelta(hours=1)  # Token valid for 1 hour
+    )
+    return {"url": PUBLIC_DATALAKE_URL + filename + "?" + sas_token}
+
+@app.get("/getUserData")
+def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
+    if app.database.users.find_one({"user": user}):
+        user_data = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1})
+        user_videos = list(app.database.videos.find({"user": user_data['key']}))
+        user_data['videos'] = user_videos
+        return user_data
+    else:
+        api_key = generate_api_key(user)
+        role = ROLES["USER"]
+        default_required_views = 2
+        app.database.users.insert_one({"user": user, "key": api_key, "role": role, "default_required_views": default_required_views})
+        user = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1})
+        user['videos'] = []
+        return user
+
