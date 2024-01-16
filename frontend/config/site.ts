@@ -22,8 +22,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
+    github: "https://csgitlab.ucd.ie/lukeconnolly/fyp",
     hitl: "/hitl",
     developer: "/developer",
     about: "#about",
