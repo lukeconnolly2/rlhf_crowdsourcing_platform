@@ -12,8 +12,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Icons } from "@/components/icons"
-import RefreshButton from "@/components/refreshButton"
 import VideoPlayer from "@/components/video-player"
 
 interface Preference {
@@ -31,6 +29,7 @@ export default function Home() {
     fetch("/api")
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         setVideos(data)
       })
   }, [])
