@@ -1,5 +1,5 @@
 import "@/styles/globals.css"
-import { Metadata, Viewport } from "next"
+import { Metadata, type Viewport } from "next"
 import { UserProvider } from "@/providers/user-context"
 import { ClerkProvider } from "@clerk/nextjs"
 import { dark } from "@clerk/themes"
