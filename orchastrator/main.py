@@ -114,3 +114,9 @@ def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
         user['videos'] = []
         return user
 
+@app.post("/preference")
+def update_preferences(api_key: str = Security(check_private_api_key), video_id: str = Body(...), preference: list = Body(...)):
+    print(type(preference))
+    print(type(video_id))
+    print(video_id)
+    return None
