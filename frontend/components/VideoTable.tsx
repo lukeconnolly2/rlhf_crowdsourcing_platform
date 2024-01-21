@@ -1,11 +1,25 @@
-import { columns } from "../lib/columns"
-import { DataTable } from "../lib/data-table"
+import { currentUser } from "@clerk/nextjs"
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query"
+
 import getVideos from "../lib/getVideos"
-import { Video } from "../types/video"
+import VideoTableWithPolling from "./VideoTableWithPolling"
 
 async function VideoTable() {
-  const videos: Video[] = await getVideos()
-  return <DataTable columns={columns} data={videos} />
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ["videos"],
+    queryFn: getVideos,
+  })
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <VideoTableWithPolling />
+    </HydrationBoundary>
+  )
 }
 
 export default VideoTable

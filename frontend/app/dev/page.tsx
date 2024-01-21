@@ -1,10 +1,7 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { currentUser } from "@clerk/nextjs"
 import { Settings } from "lucide-react"
 
-import { Video } from "@/types/video"
-import getVideos from "@/lib/getVideos"
 import VideoTable from "@/components/VideoTable"
 import VideoTableSkeleton from "@/components/VideoTableSkeleton"
 import EditableNumberCard from "@/components/editable-number-card"
@@ -12,8 +9,6 @@ import NumberCard from "@/components/number-card"
 import RefreshButton from "@/components/refreshButton"
 
 async function Dev_Page() {
-  const videos: Video[] = await getVideos()
-  const user = await currentUser()
   return (
     <>
       <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">
@@ -40,7 +35,7 @@ async function Dev_Page() {
           />
           <NumberCard
             title="Videos"
-            number={videos ? videos.length : 0}
+            number={1}
             description={"Number of videos uploaded to the system."}
             min={0}
             max={1000}
@@ -60,7 +55,6 @@ async function Dev_Page() {
             <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
               Videos
             </h3>
-            <RefreshButton />
           </div>
           <Suspense fallback={<VideoTableSkeleton />}>
             <VideoTable />

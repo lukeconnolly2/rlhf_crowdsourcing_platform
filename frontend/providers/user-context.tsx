@@ -27,7 +27,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       const data = await fetch(
         `/api/getUserData?user=${user?.primaryEmailAddress?.emailAddress}`
       ).then((res) => res.json())
-      console.log(data)
       setUserData(data)
     }
   }
