@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
 import { Video } from "@/types/video"
+import { releaseVideo } from "@/lib/releaseVideo"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -104,7 +105,7 @@ export const columns: ColumnDef<Video>[] = [
                 <DropdownMenuItem>View Video</DropdownMenuItem>
               </DialogTrigger>
               {video.status === "Unreleased" && (
-                <DropdownMenuItem onClick={() => alert("Release the video")}>
+                <DropdownMenuItem onClick={() => releaseVideo(video._id)}>
                   Release Video
                 </DropdownMenuItem>
               )}

@@ -7,16 +7,12 @@ import useTimeout from "@/hooks/use-timeout"
 
 import { Button } from "./ui/button"
 
-interface RefreshButtonProps {
-  refresh: () => void
-}
-
-export default function RefreshButton({ refresh }: RefreshButtonProps) {
+export default function RefreshButton() {
   const [loading, setLoading] = useState(false)
   const { reset } = useTimeout(() => setLoading(false), 3000)
 
   const handleOnClick = () => {
-    refresh()
+    
     setLoading(true)
     reset()
   }

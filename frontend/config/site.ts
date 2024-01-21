@@ -14,7 +14,7 @@ export const siteConfig = {
     },
     {
       title: "Developer",
-      href: "/developer",
+      href: "/dev",
     },
     {
       title: "About",

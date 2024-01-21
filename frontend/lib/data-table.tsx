@@ -1,5 +1,6 @@
 "use client"
 
+import { useUserData } from "@/providers/user-context"
 import {
   ColumnDef,
   flexRender,
@@ -21,6 +22,7 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  revalidate?: () => void
 }
 
 export function DataTable<TData, TValue>({

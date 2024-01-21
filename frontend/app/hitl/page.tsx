@@ -39,7 +39,14 @@ export default function Home() {
     setPreferences([])
   }
 
-  const humanInput = (index: number, preference: [number, number]) => {
+  const humanInput = async (index: number, preference: [number, number]) => {
+    fetch("/api/addPreference", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ index, preference }),
+    })
     setPreferences([...preferences, { index, preference }])
 
     if (index + 1 === videos.length) {

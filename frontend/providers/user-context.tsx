@@ -37,7 +37,6 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [isSignedIn, user, isLoaded])
 
   const refreshData = () => {
-    console.log("refreshing data")
     fetchData()
   }
 

@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["DATALAKE"]
+  "cSpell.words": ["DATALAKE"],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -1,23 +1,19 @@
-"use client"
-
+import { Suspense } from "react"
 import Link from "next/link"
-import { useUserData } from "@/providers/user-context"
+import { currentUser } from "@clerk/nextjs"
 import { Settings } from "lucide-react"
 
+import { Video } from "@/types/video"
+import getVideos from "@/lib/getVideos"
+import VideoTable from "@/components/VideoTable"
+import VideoTableSkeleton from "@/components/VideoTableSkeleton"
 import EditableNumberCard from "@/components/editable-number-card"
 import NumberCard from "@/components/number-card"
+import RefreshButton from "@/components/refreshButton"
 
-// import RefreshButton from "@/components/refreshButton"
-
-import { columns } from "../../lib/columns"
-import { DataTable } from "../../lib/data-table"
-
-export default function Developer() {
-  const {
-    userData: { videos, default_required_views },
-    refreshData,
-  } = useUserData()
-
+async function Dev_Page() {
+  const videos: Video[] = await getVideos()
+  const user = await currentUser()
   return (
     <>
       <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">
@@ -29,7 +25,6 @@ export default function Developer() {
             <Link href="/developer/set-up">
               <Settings className="h-6 w-6" />
             </Link>
-            {/* <RefreshButton refresh={refreshData} /> */}
           </div>
         </div>
       </section>
@@ -37,7 +32,7 @@ export default function Developer() {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full">
           <EditableNumberCard
             title="Views per Video"
-            number={default_required_views}
+            number={2}
             description={"Default number of views required for a video"}
             className="col-span-1"
             min={1}
@@ -61,12 +56,19 @@ export default function Developer() {
       </section>
       <section className="container grid gap-6 pb-8 pt-5 md:py-10">
         <div className="grid gap-4">
-          <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
-            Videos
-          </h3>
-          <DataTable columns={columns} data={videos} />
+          <div className="flex flex-row justify-between">
+            <h3 className="text-2xl font-extrabold leading-tight tracking-tighter md:text-3xl">
+              Videos
+            </h3>
+            <RefreshButton />
+          </div>
+          <Suspense fallback={<VideoTableSkeleton />}>
+            <VideoTable />
+          </Suspense>
         </div>
       </section>
     </>
   )
 }
+
+export default Dev_Page

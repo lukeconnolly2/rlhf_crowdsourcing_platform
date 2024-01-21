@@ -1,8 +1,6 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { ReactPlayerProps } from "react-player"
-import BaseReactPlayer from "react-player/base"
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false })
 

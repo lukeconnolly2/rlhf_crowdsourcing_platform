@@ -7,7 +7,7 @@ COPY . .
 RUN apt-get update
 RUN apt-get install -y python3
 
-RUN npm install --platform=linux --arch=arm --libc=glibc
+RUN npm install --force
 RUN npm run build
 EXPOSE 3000
 CMD ["npm", "start"]

@@ -12,6 +12,7 @@ from constants import SALT, ROLES
 import hashlib
 import re
 from datetime import datetime, timedelta
+import time
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
@@ -75,7 +76,8 @@ def check_public_api_key(
 
 @app.get("/video")
 def get_videos():
-    videos = list(app.database.videos.find({"status": "Collecting preferences"}))
+    time.sleep(5)
+    videos = list(app.database.videos.find({"status": "Released"}))
     return videos
 
 @app.post("/video")
@@ -115,8 +117,40 @@ def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
         return user
 
 @app.post("/preference")
-def update_preferences(api_key: str = Security(check_private_api_key), video_id: str = Body(...), preference: list = Body(...)):
-    print(type(preference))
-    print(type(video_id))
-    print(video_id)
-    return None
+def update_preferences(api_key: str = Security(check_private_api_key), video_id: str = Body(...), preference: list[int] = Body(...)):
+    print(f"Adding preference f{preference} to video {video_id}")
+    possible_preferences = [-1, 0, 1]
+    if(len(preference) != 2):
+        return {"status": "failed", "reason": "Invalid preference"}
+    
+    if (preference[0] not in possible_preferences) or (preference[1] not in possible_preferences):
+        return {"status": "failed", "reason": "Invalid preference"}
+
+    if not app.database.videos.find_one({"_id": video_id}):
+        return {"status": "failed", "reason": "Video not found"}
+    
+    print( f"preference: {preference}", f"video_id: {video_id}")
+
+    return {"status": "success"}
+
+    app.database.videos.update_one({"_id": video_id}, {"$push": {"preferences": preference}})
+    
+    return {"status": "success"}
+
+@app.post("/release")
+def release_video(api_key: str = Security(check_private_api_key), video_ids: object = Body(...)):
+    
+    print(f"Releasing videos: {video_ids}")
+    video_ids_list = video_ids['videoIds']
+    
+    print(f"Updating status of videos: {video_ids_list}")
+
+    for video_id in video_ids_list:
+        if not app.database.videos.find_one({"_id": video_id}):
+            print(f"Video {video_id} not found")
+            return {"status": "failed", "reason": f"Video {video_id} not found"}
+        else:
+            app.database.videos.update_one({"_id": video_id}, {"$set": {"status": "Released"}})
+
+    return {"status": "success"}
+
