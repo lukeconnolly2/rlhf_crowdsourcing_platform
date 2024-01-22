@@ -1,6 +1,7 @@
 import requests
 
-API_KEY = "3b729c34e729af5dd6b809bc561a942d84e58180b01999a615ea3534923e5a3e"
+API_KEY = "73e301c17e57599f9848e4e1dabc0ec40fb3132d047904b0fd18c96ad2d4b791"
+
 
 def request_upload_url(hostname, file_name, api_key):
     url = f"http://{hostname}/getUploadURL"
@@ -16,18 +17,22 @@ def request_upload_url(hostname, file_name, api_key):
     else:
         raise Exception("Funny Error")
 
+
 def upload_to_azure(upload_url, file_path):
-    with open(file_path, 'rb') as file:
+    with open(file_path, "rb") as file:
         file_content = file.read()
 
     # Make the PUT request to upload the file
-    response = requests.put(upload_url, data=file_content, headers={'x-ms-blob-type': 'BlockBlob'})
+    response = requests.put(
+        upload_url, data=file_content, headers={"x-ms-blob-type": "BlockBlob"}
+    )
 
     # Check if the upload was successful
     if response.status_code == 201:
-        return upload_url.split('?')[0]
+        return upload_url.split("?")[0]
     else:
         raise Exception("Upload failed")
+
 
 def send_metadata(api_key, hostname, public_url):
     url = f"http://{hostname}/video"
@@ -40,6 +45,7 @@ def send_metadata(api_key, hostname, public_url):
         print("Metadata sent successfully")
     else:
         raise Exception("Metadata upload failed")
+
 
 upload_url = request_upload_url("127.0.0.1:8000", "video2.mp4", API_KEY)
 if upload_url != -1:

@@ -1,10 +1,10 @@
 "use client"
 
+import { releaseAction } from "@/actions/releaseAction"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
 import { Video } from "@/types/video"
-import { releaseVideo } from "@/lib/releaseVideo"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -105,9 +105,12 @@ export const columns: ColumnDef<Video>[] = [
                 <DropdownMenuItem>View Video</DropdownMenuItem>
               </DialogTrigger>
               {video.status === "Unreleased" && (
-                <DropdownMenuItem onClick={() => releaseVideo(video._id)}>
-                  Release Video
-                </DropdownMenuItem>
+                <form action={releaseAction}>
+                  <DropdownMenuItem>
+                    <input type="hidden" name="video_id" value={video._id} />
+                    <button type="submit">Release Video</button>
+                  </DropdownMenuItem>
+                </form>
               )}
             </DropdownMenuContent>
           </DropdownMenu>

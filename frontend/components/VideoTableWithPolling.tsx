@@ -5,10 +5,10 @@ import { DataTable } from "@/lib/data-table"
 import { useGetPosts } from "@/lib/getVideosPolling"
 
 function VideoTableWithPolling() {
-  const { data: videos, isFetching } = useGetPosts()
+  const { data: videos } = useGetPosts()
   return (
     <>
-      <DataTable isFetching={isFetching} columns={columns} data={videos} />
+      <DataTable columns={columns} data={videos} />
     </>
   )
 }

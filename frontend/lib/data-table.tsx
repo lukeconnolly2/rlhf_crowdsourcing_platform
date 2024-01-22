@@ -21,13 +21,11 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  isFetching: boolean
 }
 //Fetching might be needed
 export function DataTable<TData, TValue>({
   columns,
   data,
-  isFetching,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
