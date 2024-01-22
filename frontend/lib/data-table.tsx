@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import { releaseManyAction } from "@/actions/releaseManyAction"
 import {
   ColumnDef,
   flexRender,
@@ -27,11 +29,19 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [rowSelection, setRowSelection] = useState(
+    {} as { [key: number]: boolean }
+  )
+  console.log(rowSelection)
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onRowSelectionChange: setRowSelection,
+    state: {
+      rowSelection,
+    },
   })
   return (
     <div className="rounded-md border">
@@ -77,7 +87,32 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+
       <div className="flex items-center justify-end space-x-2 p-4">
+        {table.getFilteredSelectedRowModel().rows.length > 1 && (
+          <form action={releaseManyAction}>
+            <input
+              type="hidden"
+              name="video_ids"
+              value={table
+                .getFilteredSelectedRowModel()
+                .rows.map((row) => row.getValue("_id"))}
+            />
+            <Button
+              variant="default"
+              size="sm"
+              disabled={
+                table
+                  .getFilteredSelectedRowModel()
+                  .rows.filter((row) => row.getValue("status") != "Unreleased")
+                  .length > 0
+              }
+              type="submit"
+            >
+              Release all selected
+            </Button>
+          </form>
+        )}
         <Button
           variant="outline"
           size="sm"

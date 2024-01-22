@@ -191,3 +191,21 @@ def release_video(
         )
     print(f"Video {video_id} released")
     return {"status": "success"}
+
+
+@app.post("/release/list")
+def release_videos(
+    api_key: str = Security(check_private_api_key), req: object = Body(...)
+):
+    print(f"Releasing videos: {req}")
+    video_ids = req["video_ids"]
+    for video_id in video_ids:
+        if not app.database.videos.find_one({"_id": video_id}):
+            print(f"Video {video_id} not found")
+            return {"status": "failed", "reason": f"Video {video_id} not found"}
+        else:
+            app.database.videos.update_one(
+                {"_id": video_id}, {"$set": {"status": "Released"}}
+            )
+        print(f"Video {video_id} released")
+    return {"status": "success"}
