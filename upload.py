@@ -1,6 +1,6 @@
 import requests
 
-API_KEY = "73e301c17e57599f9848e4e1dabc0ec40fb3132d047904b0fd18c96ad2d4b791"
+API_KEY = "3b729c34e729af5dd6b809bc561a942d84e58180b01999a615ea3534923e5a3e"
 
 
 def request_upload_url(hostname, file_name, api_key):
@@ -47,7 +47,7 @@ def send_metadata(api_key, hostname, public_url):
         raise Exception("Metadata upload failed")
 
 
-upload_url = request_upload_url("127.0.0.1:8000", "video2.mp4", API_KEY)
+upload_url = request_upload_url("127.0.0.1:8000", "clip.mp4", API_KEY)
 if upload_url != -1:
     public_url = upload_to_azure(upload_url, "clip.mp4")
 

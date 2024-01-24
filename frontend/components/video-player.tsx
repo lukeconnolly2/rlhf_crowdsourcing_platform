@@ -9,7 +9,7 @@ interface Props {
   className?: string
 }
 
-export default function VideoPlayer({ fileName, className }: Props) {
+export function VideoPlayerWithoutPolling({ fileName, className }: Props) {
   return (
     <div className={`max-w-full bg-transparent overflow-hidden ${className}`}>
       <ReactPlayer

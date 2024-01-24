@@ -32,7 +32,6 @@ export function DataTable<TData, TValue>({
   const [rowSelection, setRowSelection] = useState(
     {} as { [key: number]: boolean }
   )
-  console.log(rowSelection)
   const table = useReactTable({
     data,
     columns,

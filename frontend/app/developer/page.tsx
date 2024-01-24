@@ -6,6 +6,7 @@ import { Settings } from "lucide-react"
 
 import EditableNumberCard from "@/components/editable-number-card"
 import NumberCard from "@/components/number-card"
+import VideoNumberCard from "@/components/video-number-card"
 
 // import RefreshButton from "@/components/refreshButton"
 
@@ -43,13 +44,7 @@ export default function Developer() {
             min={1}
             max={10}
           />
-          <NumberCard
-            title="Videos"
-            number={videos ? videos.length : 0}
-            description={"Number of videos uploaded to the system."}
-            min={0}
-            max={1000}
-          />
+          <VideoNumberCard />
           <NumberCard
             title="Notifications sent"
             number={100}

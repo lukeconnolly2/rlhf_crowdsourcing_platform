@@ -2,11 +2,12 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { Settings } from "lucide-react"
 
+import NumberCardSkeleton from "@/components/NumberCardSkeleton"
 import VideoTable from "@/components/VideoTable"
 import VideoTableSkeleton from "@/components/VideoTableSkeleton"
 import EditableNumberCard from "@/components/editable-number-card"
 import NumberCard from "@/components/number-card"
-import RefreshButton from "@/components/refreshButton"
+import VideoNumberCard from "@/components/video-number-card"
 
 async function Dev_Page() {
   return (
@@ -33,13 +34,9 @@ async function Dev_Page() {
             min={1}
             max={10}
           />
-          <NumberCard
-            title="Videos"
-            number={1}
-            description={"Number of videos uploaded to the system."}
-            min={0}
-            max={1000}
-          />
+          <Suspense fallback={<NumberCardSkeleton />}>
+            <VideoNumberCard />
+          </Suspense>
           <NumberCard
             title="Notifications sent"
             number={100}

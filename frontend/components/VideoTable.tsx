@@ -1,4 +1,3 @@
-import { currentUser } from "@clerk/nextjs"
 import {
   HydrationBoundary,
   QueryClient,

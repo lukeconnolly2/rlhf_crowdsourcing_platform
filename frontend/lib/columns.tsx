@@ -16,7 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import VideoPlayer from "@/components/video-player"
+import { VideoPlayerWithoutPolling } from "@/components/video-player"
 
 export const columns: ColumnDef<Video>[] = [
   {
@@ -106,16 +106,16 @@ export const columns: ColumnDef<Video>[] = [
               </DialogTrigger>
               {video.status === "Unreleased" && (
                 <form action={releaseAction}>
-                  <DropdownMenuItem>
-                    <input type="hidden" name="video_id" value={video._id} />
-                    <button type="submit">Release Video</button>
-                  </DropdownMenuItem>
+                  <input type="hidden" name="video_id" value={video._id} />
+                  <button className="w-full" type="submit">
+                    <DropdownMenuItem>Release Video</DropdownMenuItem>
+                  </button>
                 </form>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
           <DialogContent className="p-10">
-            <VideoPlayer fileName={video.public_url} />
+            <VideoPlayerWithoutPolling fileName={video.public_url} />
           </DialogContent>
         </Dialog>
       )

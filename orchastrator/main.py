@@ -86,6 +86,13 @@ def check_public_api_key(
     )
 
 
+@app.get("/releasedVideos")
+def get_released_videos(user: str):
+    print(user)
+    videos = list(app.database.videos.find({"status": "Released"}))
+    return videos
+
+
 @app.get("/video")
 def get_videos(user: str):
     api_key = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1})["key"]
