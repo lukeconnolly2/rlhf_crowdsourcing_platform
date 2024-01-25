@@ -32,7 +32,7 @@ export function VideoPlayerWithPolling() {
           height="100%"
         />
       </ul>
-      <div className="grid grid-flow-col gap-4">
+      <div className="grid grid-flow-col gap-4 mt-3">
         <form
           action={preferenceAction}
           onSubmit={() =>
@@ -43,9 +43,14 @@ export function VideoPlayerWithPolling() {
           <input type="hidden" name="preference" value="Left" />
           <Button type="submit"> Left is better </Button>
         </form>
-        <form action={preferenceAction}>
+        <form
+          action={preferenceAction}
+          onSubmit={() =>
+            setCurrentVideo((currentVideoIndex + 1) % numberOfVideos)
+          }
+        >
           <input type="hidden" name="video_id" value={current_video._id} />
-          <input type="hidden" name="preference" value="0" />
+          <input type="hidden" name="preference" value="No preference" />
           <Button variant={"secondary"} type="submit">
             {" "}
             No preference{" "}

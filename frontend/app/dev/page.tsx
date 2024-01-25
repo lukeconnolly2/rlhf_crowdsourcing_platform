@@ -2,14 +2,19 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { Settings } from "lucide-react"
 
+import { checkRole } from "@/lib/role"
 import NumberCardSkeleton from "@/components/NumberCardSkeleton"
 import VideoTable from "@/components/VideoTable"
 import VideoTableSkeleton from "@/components/VideoTableSkeleton"
 import EditableNumberCard from "@/components/editable-number-card"
 import NumberCard from "@/components/number-card"
+import Unauthorised from "@/components/unauthorised"
 import VideoNumberCard from "@/components/video-number-card"
 
 async function Dev_Page() {
+  if (!checkRole("admin") && !checkRole("developer")) {
+    return <Unauthorised />
+  }
   return (
     <>
       <section className="container grid items-center gap-6 pb-8 pt-1 md:py-10">
@@ -34,7 +39,14 @@ async function Dev_Page() {
             min={1}
             max={10}
           />
-          <Suspense fallback={<NumberCardSkeleton />}>
+          <Suspense
+            fallback={
+              <NumberCardSkeleton
+                title="Videos"
+                description="Number of videos you have uploaded to the system"
+              />
+            }
+          >
             <VideoNumberCard />
           </Suspense>
           <NumberCard

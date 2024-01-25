@@ -24,6 +24,13 @@
     ],
     "strictNullChecks": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/getUserData/route.js", "app/api/release/route.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/api/getUserData/route.js",
+    "app/api/release/route.js"
+  ],
   "exclude": ["node_modules"]
 }

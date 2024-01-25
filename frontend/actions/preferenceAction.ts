@@ -10,6 +10,8 @@ export const preferenceAction = async (formData: FormData) => {
     "user",
     user?.emailAddresses[0].emailAddress,
     "video_id",
-    formData.get("video_id")
+    formData.get("video_id"),
+    "preference",
+    formData.get("preference")
   )
 }

@@ -15,6 +15,14 @@ export const siteConfig = {
     {
       title: "Developer",
       href: "/dev",
+      developer: true,
+      admin: false,
+    },
+    {
+      title: "Admin",
+      href: "/admin",
+      admin: true,
+      developer: false,
     },
     {
       title: "About",
