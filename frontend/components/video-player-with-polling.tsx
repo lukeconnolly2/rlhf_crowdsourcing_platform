@@ -21,7 +21,6 @@ export function VideoPlayerWithPolling() {
   }
   return (
     <>
-      <strong>{current_video.id}</strong>
       <ul>
         <ReactPlayer
           url={current_video.public_url}
