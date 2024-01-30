@@ -15,6 +15,7 @@ export default async function getVideos() {
     )
     const json = await res.json()
     logger.info("Videos received")
+    logger.info(json)
     return json
   } catch (error) {
     logger.warn("Error getting videos")

@@ -16,9 +16,18 @@ export function VideoPlayerWithPolling() {
   const numberOfVideos = videos?.length || 0
   const current_video = videos?.[currentVideoIndex]
 
-  if (videos.length === 0) {
-    return <div>Currently there are no videos available</div>
+  console.log("videos", videos)
+
+  if (currentVideoIndex >= numberOfVideos) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        There are no more videos available.
+      </div>
+    )
   }
+
+  const handleSubmit = () => setCurrentVideo(currentVideoIndex + 1)
+
   return (
     <>
       <ul>
@@ -32,35 +41,20 @@ export function VideoPlayerWithPolling() {
         />
       </ul>
       <div className="grid grid-flow-col gap-4 mt-3">
-        <form
-          action={preferenceAction}
-          onSubmit={() =>
-            setCurrentVideo((currentVideoIndex + 1) % numberOfVideos)
-          }
-        >
+        <form action={preferenceAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
           <input type="hidden" name="preference" value="Left" />
           <Button type="submit"> Left is better </Button>
         </form>
-        <form
-          action={preferenceAction}
-          onSubmit={() =>
-            setCurrentVideo((currentVideoIndex + 1) % numberOfVideos)
-          }
-        >
+        <form action={preferenceAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
-          <input type="hidden" name="preference" value="No preference" />
+          <input type="hidden" name="preference" value="None" />
           <Button variant={"secondary"} type="submit">
             {" "}
             No preference{" "}
           </Button>
         </form>
-        <form
-          action={preferenceAction}
-          onSubmit={() =>
-            setCurrentVideo((currentVideoIndex + 1) % numberOfVideos)
-          }
-        >
+        <form action={preferenceAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
           <input type="hidden" name="preference" value="Right" />
           <Button type="submit"> Right is better </Button>

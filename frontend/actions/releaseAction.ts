@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache"
 import { logger } from "@/logger"
 import { currentUser } from "@clerk/nextjs"
 
+import { siteConfig } from "@/config/site"
+
 export const releaseAction = async (formData: FormData) => {
   logger.info(`Releasing video ${formData.get("video_id")}`)
   const user = await currentUser()
@@ -18,5 +20,5 @@ export const releaseAction = async (formData: FormData) => {
       video_id: formData.get("video_id"),
     }),
   })
-  revalidatePath("/dev")
+  revalidatePath(siteConfig.links.developer)
 }

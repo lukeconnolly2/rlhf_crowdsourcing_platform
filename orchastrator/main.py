@@ -3,8 +3,8 @@ from fastapi.security import APIKeyHeader
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
 from fastapi.encoders import jsonable_encoder
-from models import VideoData
-import os, uuid
+from models import VideoData, Preference
+import os
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import (
     BlobServiceClient,
@@ -88,8 +88,15 @@ def check_public_api_key(
 
 @app.get("/releasedVideos")
 def get_released_videos(user: str):
-    print(user)
-    videos = list(app.database.videos.find({"status": "Released"}))
+    # find all videos with status released and no preference from user
+    videos = list(
+        app.database.videos.find(
+            {
+                "status": "Released",
+                "preferences": {"$not": {"$elemMatch": {"user": user}}},
+            }
+        )
+    )
     return videos
 
 
@@ -159,24 +166,39 @@ def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
 @app.post("/preference")
 def update_preferences(
     api_key: str = Security(check_private_api_key),
-    video_id: str = Body(...),
-    preference: list[int] = Body(...),
+    preference_request: Preference = Body(...),
 ):
-    print(f"Adding preference f{preference} to video {video_id}")
-    possible_preferences = [-1, 0, 1]
-    if len(preference) != 2:
-        return {"status": "failed", "reason": "Invalid preference"}
+    user = preference_request.user
+    video_id = preference_request.video_id
+    preference = preference_request.preference
 
-    if (preference[0] not in possible_preferences) or (
-        preference[1] not in possible_preferences
-    ):
-        return {"status": "failed", "reason": "Invalid preference"}
+    match preference:
+        case "Left":
+            preference = [1, 0]
+        case "Right":
+            preference = [0, 1]
+        case "None":
+            preference = [0, 0]
+        case _:
+            return {"status": "failed", "reason": "Invalid preference"}
 
     if not app.database.videos.find_one({"_id": video_id}):
         return {"status": "failed", "reason": "Video not found"}
 
     print(f"preference: {preference}", f"video_id: {video_id}")
 
+    app.database.videos.update_one(
+        {"_id": video_id},
+        {
+            "$inc": {"views": 1},
+            "$push": {"preferences": {"preference": preference, "user": user}},
+        },
+    )
+
+    video = app.database.videos.find_one({"_id": video_id})
+
+    if video["views"] >= video["required_views"]:
+        app.database.videos.update_one({"_id": video_id}, {"$set": {"status": "Done"}})
     return {"status": "success"}
 
 

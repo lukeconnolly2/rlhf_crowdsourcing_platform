@@ -55,30 +55,38 @@ export const columns: ColumnDef<User>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(role as string)}
             >
-              Copy User ID
+              Copy Role
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem disabled={role === "user"}>
-              <form action={setRole}>
-                <input type="hidden" name="id" value={user.id} />
-                <input type="hidden" value="user" name="role" />
-                <button type="submit">Make User</button>
-              </form>
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled={role === "developer"}>
-              <form action={setRole}>
-                <input type="hidden" name="id" value={user.id} />
-                <input type="hidden" value="developer" name="role" />
-                <button type="submit">Make Developer</button>
-              </form>
-            </DropdownMenuItem>
-            <DropdownMenuItem disabled={role === "admin"}>
-              <form action={setRole}>
-                <input type="hidden" name="id" value={user.id} />
-                <input type="hidden" value="admin" name="role" />
-                <button type="submit">Make Admin</button>
-              </form>
-            </DropdownMenuItem>
+            <form action={setRole}>
+              <input type="hidden" name="id" value={user.id} />
+              <input type="hidden" value="user" name="role" />
+              <button type="submit">
+                <DropdownMenuItem disabled={role === "user"}>
+                  Make User
+                </DropdownMenuItem>
+              </button>
+            </form>
+
+            <form action={setRole}>
+              <input type="hidden" name="id" value={user.id} />
+              <input type="hidden" value="developer" name="role" />
+              <button type="submit">
+                <DropdownMenuItem disabled={role === "developer"}>
+                  Make Developer
+                </DropdownMenuItem>
+              </button>
+            </form>
+
+            <form action={setRole}>
+              <input type="hidden" name="id" value={user.id} />
+              <input type="hidden" value="admin" name="role" />
+              <button type="submit">
+                <DropdownMenuItem disabled={role === "admin"}>
+                  Make Admin
+                </DropdownMenuItem>
+              </button>
+            </form>
           </DropdownMenuContent>
         </DropdownMenu>
       )

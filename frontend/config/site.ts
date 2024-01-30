@@ -32,7 +32,9 @@ export const siteConfig = {
   links: {
     github: "https://csgitlab.ucd.ie/lukeconnolly/fyp",
     hitl: "/hitl",
-    developer: "/developer",
+    developer: "/dev",
     about: "#about",
+    admin: "/admin",
+    setup: "/dev/setup",
   },
 }

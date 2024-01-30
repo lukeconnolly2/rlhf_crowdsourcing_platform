@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import Link from "next/link"
 import { Settings } from "lucide-react"
 
+import { siteConfig } from "@/config/site"
 import { checkRole } from "@/lib/role"
 import NumberCardSkeleton from "@/components/NumberCardSkeleton"
 import VideoTable from "@/components/VideoTable"
@@ -23,7 +24,7 @@ async function Dev_Page() {
             Developer Page
           </h1>
           <div className="flex flex-row gap-6 items-center">
-            <Link href="/developer/set-up">
+            <Link href={siteConfig.links.setup}>
               <Settings className="h-6 w-6" />
             </Link>
           </div>
