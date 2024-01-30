@@ -11,14 +11,10 @@ function LeftRightChart({ left, right, nopreference, total }) {
   return (
     <TooltipProvider>
       <div className="h-full w-full flex justify-center items-center">
-        <div className="w-full h-3 rounded-lg bg-secondary text-transparent flex flex-row">
+        <div className="w-full h-3 rounded-lg bg-secondary text-transparent flex flex-row overflow-hidden">
           <Tooltip>
             <TooltipTrigger style={{ width: `${(left / total) * 100}%` }}>
-              <div
-                className={`h-full rounded-l-lg bg-green-500 text-transparent ${
-                  left === total ? "rounded-r-lg" : ""
-                }`}
-              ></div>
+              <div className={`h-full bg-green-500 text-transparent `}></div>
             </TooltipTrigger>
             <TooltipContent>Left Preferences: {left}</TooltipContent>
           </Tooltip>
@@ -27,22 +23,32 @@ function LeftRightChart({ left, right, nopreference, total }) {
               style={{ width: `${(nopreference / total) * 100}%` }}
             >
               <div
-                className={`h-full bg-slate-400 w-full text-transparent ${
-                  left === 0 ? "rounded-l-lg" : ""
-                } ${right === 0 ? "rounded-r-lg" : ""}`}
+                className={`h-full bg-slate-400 w-full text-transparent`}
               ></div>
             </TooltipTrigger>
-            <TooltipContent>No Preferences: {nopreference}</TooltipContent>
+            <TooltipContent>No Preference: {nopreference}</TooltipContent>
           </Tooltip>
           <Tooltip>
             <TooltipTrigger style={{ width: `${(right / total) * 100}%` }}>
-              <div
-                className={`h-full rounded-r-lg bg-red-500 text-transparent ${
-                  right === total ? "rounded-l-lg" : ""
-                }`}
-              ></div>
+              <div className={`h-full bg-red-500 text-transparent`}></div>
             </TooltipTrigger>
             <TooltipContent>Right Preferences: {right}</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              style={{
+                width: `${
+                  ((total - (left + right + nopreference)) / total) * 100
+                }%`,
+              }}
+            >
+              <div
+                className={`h-full rounded-r-lg bg-transparent text-transparent`}
+              ></div>
+            </TooltipTrigger>
+            <TooltipContent>
+              Waiting for {total - (left + right + nopreference)} preferences
+            </TooltipContent>
           </Tooltip>
         </div>
       </div>
