@@ -238,3 +238,38 @@ def release_videos(
             )
         print(f"Video {video_id} released")
     return {"status": "success"}
+
+
+@app.get("/getRequiredViews")
+def get_required_views(
+    user: str,
+    api_key: str = Security(check_private_api_key),
+):
+    if not app.database.users.find_one({"user": user}):
+        print(f"User {user} not found")
+        return {"status": "failed", "reason": f"User {user} not found"}
+
+    required_views = app.database.users.find_one(
+        {"user": user}, {"_id": 0, "default_required_views": 1}
+    )["default_required_views"]
+
+    return {"status": "success", "requiredViews": required_views}
+
+
+@app.post("/updateRequiredViews")
+def update_required_views(
+    api_key: str = Security(check_private_api_key),
+    req: object = Body(...),
+):
+    print(f"Updating required views: {req}")
+
+    if not app.database.users.find_one({"user": req["user"]}):
+        print(f"User {req['user']} not found")
+        return {"status": "failed", "reason": f"User {req['user']} not found"}
+
+    app.database.users.update_one(
+        {"user": req["user"]},
+        {"$set": {"default_required_views": int(req["requiredViews"])}},
+    )
+
+    return {"status": "success"}
