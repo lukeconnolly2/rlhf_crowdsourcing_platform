@@ -4,6 +4,7 @@ import { Settings } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { checkRole } from "@/lib/role"
+import DefaultNumberOfViewsCard from "@/components/DefaultNumberOfViewsCard"
 import NumberCardSkeleton from "@/components/NumberCardSkeleton"
 import VideoTable from "@/components/VideoTable"
 import VideoTableSkeleton from "@/components/VideoTableSkeleton"
@@ -32,14 +33,16 @@ async function Dev_Page() {
       </section>
       <section className="container">
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-4 w-full">
-          <EditableNumberCard
-            title="Views per Video"
-            number={2}
-            description={"Default number of views required for a video"}
-            className="col-span-1"
-            min={1}
-            max={10}
-          />
+          <Suspense
+            fallback={
+              <NumberCardSkeleton
+                title="Views per Video"
+                description="Default number of views required for a video"
+              />
+            }
+          >
+            <DefaultNumberOfViewsCard />
+          </Suspense>
           <Suspense
             fallback={
               <NumberCardSkeleton
