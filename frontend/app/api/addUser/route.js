@@ -3,7 +3,7 @@ import { NextResponse } from "next/server"
 export async function GET(request) {
   const user = request.nextUrl.searchParams.get("user")
   const res = await fetch(
-    `http://${process.env.ORCHESTRATOR_URL}/getUserData?user=${user}`,
+    `http://${process.env.ORCHESTRATOR_URL}/addUser?user=${user}`,
     {
       method: "GET",
       headers: {
