@@ -5,11 +5,10 @@ import { Settings } from "lucide-react"
 import { siteConfig } from "@/config/site"
 import { checkRole } from "@/lib/role"
 import DefaultNumberOfViewsCard from "@/components/DefaultNumberOfViewsCard"
+import NotificationsCard from "@/components/Notifications-card"
 import NumberCardSkeleton from "@/components/NumberCardSkeleton"
 import VideoTable from "@/components/VideoTable"
 import VideoTableSkeleton from "@/components/VideoTableSkeleton"
-import EditableNumberCard from "@/components/editable-number-card"
-import NumberCard from "@/components/number-card"
 import Unauthorised from "@/components/unauthorised"
 import VideoNumberCard from "@/components/video-number-card"
 
@@ -53,13 +52,16 @@ async function Dev_Page() {
           >
             <VideoNumberCard />
           </Suspense>
-          <NumberCard
-            title="Notifications sent"
-            number={100}
-            description={"Number of Notifications sent to users."}
-            min={1}
-            max={10}
-          />
+          <Suspense
+            fallback={
+              <NumberCardSkeleton
+                title="Notifications"
+                description="Number of notifications sent to users"
+              />
+            }
+          >
+            <NotificationsCard />
+          </Suspense>
         </div>
       </section>
       <section className="container grid gap-6 pb-8 pt-5 md:py-10">

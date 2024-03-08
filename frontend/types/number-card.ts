@@ -5,4 +5,5 @@ export interface EditableNumberCardItem {
   className?: string
   min: number
   max: number
+  children?: React.ReactNode
 }

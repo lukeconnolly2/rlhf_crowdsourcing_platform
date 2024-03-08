@@ -14,10 +14,11 @@ from azure.storage.blob import (
     BlobSasPermissions,
 )
 from dotenv import load_dotenv
-from constants import SALT, ROLES
+from constants import SALT
 import hashlib
 import re
 from datetime import datetime, timedelta
+import logging
 
 PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
@@ -66,8 +67,10 @@ def startup_db_client():
     try:
         app.mongodb_client.admin.command("ismaster")
         print("Connected to the MongoDB database!")
+        logging.info("Connected to the MongoDB database!")
     except PyMongoError:
         print("Connection to MongoDB failed! ")
+        logging.error("Connection to MongoDB failed! ")
 
 
 @app.on_event("shutdown")
@@ -86,6 +89,31 @@ def check_public_api_key(
     )
 
 
+@app.get("/video")
+def get_videos(user: str):
+    api_key = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1})["key"]
+    videos = list(app.database.videos.find({"user": api_key}))
+    logging.info(f"User {user} requested videos")
+    return videos
+
+
+@app.post("/video")
+def add_video(
+    request: Request,
+    video: VideoData = Body(...),
+    api_key: str = Security(check_public_api_key),
+):
+    video = jsonable_encoder(video)
+    print(video)
+    video["user"] = api_key
+    video["required_views"] = app.database.users.find_one(
+        {"key": api_key}, {"_id": 0, "default_required_views": 1}
+    )["default_required_views"]
+    result = app.database["videos"].insert_one(video)
+    logging.info(f"User {api_key} added video {video['title']}")
+    return {"id": str(result.inserted_id)}
+
+
 @app.get("/releasedVideos")
 def get_released_videos(user: str):
     # find all videos with status released and no preference from user
@@ -98,28 +126,6 @@ def get_released_videos(user: str):
         )
     )
     return videos
-
-
-@app.get("/video")
-def get_videos(user: str):
-    api_key = app.database.users.find_one({"user": user}, {"_id": 0, "key": 1})["key"]
-    videos = list(app.database.videos.find({"user": api_key}))
-    return videos
-
-
-@app.post("/video")
-def add_video(
-    request: Request,
-    video: VideoData = Body(...),
-    api_key: str = Security(check_public_api_key),
-):
-    video = jsonable_encoder(video)
-    video["user"] = api_key
-    video["required_views"] = app.database.users.find_one(
-        {"key": api_key}, {"_id": 0, "default_required_views": 1}
-    )["default_required_views"]
-    result = app.database["videos"].insert_one(video)
-    return {"id": str(result.inserted_id)}
 
 
 @app.get("/getUploadURL")
@@ -135,32 +141,23 @@ def get_upload_url(filename, api_key: str = Security(check_public_api_key)):
     return {"url": PUBLIC_DATALAKE_URL + filename + "?" + sas_token}
 
 
-@app.get("/getUserData")
+@app.get("/addUser")
 def get_user_data(user: str, api_key: str = Security(check_private_api_key)):
     if app.database.users.find_one({"user": user}):
-        user_data = app.database.users.find_one(
-            {"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1}
-        )
-        user_videos = list(app.database.videos.find({"user": user_data["key"]}))
-        user_data["videos"] = user_videos
-        return user_data
+        return
     else:
         api_key = generate_api_key(user)
-        role = ROLES["USER"]
         default_required_views = 2
+        notifications = 0
         app.database.users.insert_one(
             {
                 "user": user,
                 "key": api_key,
-                "role": role,
                 "default_required_views": default_required_views,
+                "notifications": notifications,
             }
         )
-        user = app.database.users.find_one(
-            {"user": user}, {"_id": 0, "key": 1, "role": 1, "default_required_views": 1}
-        )
-        user["videos"] = []
-        return user
+        return
 
 
 @app.post("/preference")
@@ -180,9 +177,11 @@ def update_preferences(
         case "None":
             preference = [0, 0]
         case _:
+            logging.error(f"Invalid preference: {preference}")
             return {"status": "failed", "reason": "Invalid preference"}
 
     if not app.database.videos.find_one({"_id": video_id}):
+        logging.error(f"Video {video_id} not found")
         return {"status": "failed", "reason": "Video not found"}
 
     print(f"preference: {preference}", f"video_id: {video_id}")
@@ -194,11 +193,13 @@ def update_preferences(
             "$push": {"preferences": {"preference": preference, "user": user}},
         },
     )
+    logging.info(f"User {user} updated preference for video {video_id}")
 
     video = app.database.videos.find_one({"_id": video_id})
 
     if video["views"] >= video["required_views"]:
         app.database.videos.update_one({"_id": video_id}, {"$set": {"status": "Done"}})
+        logging.info(f"Video {video_id} reached required views")
     return {"status": "success"}
 
 
@@ -206,19 +207,15 @@ def update_preferences(
 def release_video(
     api_key: str = Security(check_private_api_key), req: object = Body(...)
 ):
-    print(f"Releasing videos: {req}")
-
     video_id = req["video_id"]
-    print(f"Updating status of videos: {video_id}")
-
     if not app.database.videos.find_one({"_id": video_id}):
-        print(f"Video {video_id} not found")
+        logging.error(f"Video {video_id} not found, release failed")
         return {"status": "failed", "reason": f"Video {video_id} not found"}
     else:
+        logging.info(f"Releasing video {video_id}")
         app.database.videos.update_one(
             {"_id": video_id}, {"$set": {"status": "Released"}}
         )
-    print(f"Video {video_id} released")
     return {"status": "success"}
 
 
@@ -273,3 +270,40 @@ def update_required_views(
     )
 
     return {"status": "success"}
+
+
+@app.get("/get_api_key")
+def get_api_key(user: str, api_key: str = Security(check_private_api_key)):
+    return {
+        "api_key": app.database.users.find_one({"user": user}, {"_id": 0, "key": 1})[
+            "key"
+        ]
+    }
+
+
+@app.get("/notifications")
+def get_notifications(user: str, api_key: str = Security(check_private_api_key)):
+    try:
+        return app.database.users.find_one({"user": user})["notifications"]
+    except KeyError:
+        app.database.users.update_one({"user": user}, {"$set": {"notifications": 0}})
+        return {"notifications": 0}
+
+
+@app.post("/notifications")
+def update_notifications(
+    user: str,
+    api_key: str = Security(check_private_api_key),
+    req: object = Body(...),
+):
+    app.database.users.update_one(
+        {"user": user}, {"$inc": {"notifications": req["number_sent"]}}
+    )
+    return {"status": "success"}
+
+
+@app.get("/results")
+def get_results(api_key: str = Security(check_public_api_key)):
+    results = list(app.database.videos.find({"user": api_key, "status": "Done"}))
+    print(results)
+    return results

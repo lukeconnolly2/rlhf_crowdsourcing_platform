@@ -7,16 +7,16 @@ import { preferenceAction } from "@/actions/preferenceAction"
 import { useGetReleasedVideos } from "@/lib/getReleasedVideosPolling"
 
 import { Button } from "./ui/button"
+import { Card } from "./ui/card"
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false })
 
 export function VideoPlayerWithPolling() {
+  const [ready, setReady] = useState(false)
   const { data: videos } = useGetReleasedVideos()
   const [currentVideoIndex, setCurrentVideo] = useState(0)
   const numberOfVideos = videos?.length || 0
   const current_video = videos?.[currentVideoIndex]
-
-  console.log("videos", videos)
 
   if (currentVideoIndex >= numberOfVideos) {
     return (
@@ -38,7 +38,15 @@ export function VideoPlayerWithPolling() {
           controls={true}
           width="100%"
           height="100%"
+          onReady={() => setReady(true)}
         />
+        <div
+          className={`h-[500px] w-[500px] flex items-center justify-center bg-background ${
+            ready ? "hidden" : ""
+          }`}
+        >
+          Loading...
+        </div>
       </ul>
       <div className="grid grid-flow-col gap-4 mt-3">
         <form action={preferenceAction} onSubmit={handleSubmit}>
@@ -60,6 +68,12 @@ export function VideoPlayerWithPolling() {
           <Button type="submit"> Right is better </Button>
         </form>
       </div>
+      <Card className="mt-4 w-full">
+        <div className="flex flex-col items-center justify-center">
+          <h2 className="text-lg font-bold">{current_video.title}</h2>
+          <p className="text-sm">{current_video.description}</p>
+        </div>
+      </Card>
     </>
   )
 }

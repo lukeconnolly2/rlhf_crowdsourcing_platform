@@ -32,15 +32,6 @@ export default function Home() {
               <VideoPlayer />
             </CardContent>
           </Card>
-          <Card className="h-full">
-            <CardHeader>
-              <CardTitle>Some Details</CardTitle>
-              <CardDescription>Something will go down here</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>Some details will go here</p>
-            </CardContent>
-          </Card>
         </section>
       </main>
     </>

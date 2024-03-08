@@ -1,4 +1,5 @@
 from typing import Optional
+from click import Option
 from pydantic import BaseModel, Field
 from bson import ObjectId
 import uuid
@@ -28,6 +29,9 @@ class VideoData(BaseModel):
     preferences: list = []
     status: str = "Unreleased"
     required_views: int = 2
+    title: str = "Untitled"
+    description: str = "No description"
+    additional_data: Optional[list] = []
 
     class Config:
         allow_population_by_field_name = True

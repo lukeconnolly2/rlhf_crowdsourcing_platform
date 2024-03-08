@@ -9,6 +9,11 @@ directory = "./videos"
 for filename in os.listdir(directory):
     if filename.endswith(".mp4") or filename.endswith(".mov"):
         print(os.path.join(directory, filename))
-        uploader.upload(os.path.join(directory, filename))
+        uploader.upload(
+            os.path.join(directory, filename),
+            "Flipper AI",
+            "The Goal of this output is to make the stick man do a backflip",
+            ["test_additional_metadata"],
+        )
     else:
         continue

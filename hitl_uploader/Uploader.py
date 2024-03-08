@@ -38,10 +38,15 @@ class Uploader:
         else:
             raise Exception("Upload failed")
 
-    def _send_metadata(self, public_url):
+    def _send_metadata(self, public_url, title, description, additional_metadata):
         url = f"http://{self._hostname}/video"
         headers = {"X-API-Key": self._api_key}
-        data = {"public_url": public_url}
+        data = {
+            "public_url": public_url,
+            "title": title,
+            "description": description,
+            "additional_data": additional_metadata,
+        }
 
         response = requests.post(url, headers=headers, json=data)
 
@@ -50,7 +55,8 @@ class Uploader:
         else:
             raise Exception("Metadata upload failed")
 
-    def upload(self, file_path, additional_metadata=None):
+    def upload(self, file_path, title, description, additional_metadata):
+        print(additional_metadata)
         upload_url = self._request_upload_url()
         public_url = self._upload_to_azure(upload_url, file_path)
-        self._send_metadata(public_url)
+        self._send_metadata(public_url, title, description, additional_metadata)
