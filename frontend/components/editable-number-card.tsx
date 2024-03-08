@@ -1,6 +1,7 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import { updateRequiredViews } from "@/actions/updateRequiredViews"
 import { X } from "lucide-react"
 
 import { EditableNumberCardItem } from "@/types/number-card"
@@ -57,27 +58,31 @@ export default function EditableNumberCard({
       </CardHeader>
       <CardContent>
         {isEditing && (
-          <div className="flex flex-row justify-around">
-            <Input
-              className="w-8/12"
-              type="number"
-              value={value}
-              onChange={(e) => setValue(Number(e.target.value))}
-              min={min}
-              max={max}
-            />
-            <Button
-              className="w-3/12"
-              variant="secondary"
-              size="icon"
-              disabled={value < min || value > 10}
-              onClick={() => {
-                setIsEditing(!isEditing)
-              }}
-            >
-              Enter
-            </Button>
-          </div>
+          <form
+            action={updateRequiredViews}
+            onSubmit={() => setIsEditing(!isEditing)}
+          >
+            <div className="flex flex-row justify-around">
+              <Input
+                className="w-8/12"
+                type="number"
+                value={value}
+                onChange={(e) => setValue(Number(e.target.value))}
+                min={min}
+                max={max}
+                name="requiredViews"
+              />
+              <Button
+                className="w-3/12"
+                variant="secondary"
+                size="icon"
+                disabled={value < min || value > 10}
+                type="submit"
+              >
+                Enter
+              </Button>
+            </div>
+          </form>
         )}
         {!isEditing && <p className="font-extrabold text-5xl">{value}</p>}
       </CardContent>

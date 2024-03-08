@@ -1,13 +1,22 @@
-FROM node:21
+FROM node:18 as builder
+WORKDIR /my-space
 
-RUN mkdir -p /app
-WORKDIR /app
+COPY package.json package-lock.json ./
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    && rm -rf /var/lib/apt/lists/*
+RUN npm ci
 COPY . .
-
-RUN apt-get update
-RUN apt-get install -y python3
-
-RUN npm install --platform=linux --arch=arm --libc=glibc
 RUN npm run build
+
+FROM node:18-alpine as runner
+WORKDIR /my-space
+COPY --from=builder /my-space/package.json .
+COPY --from=builder /my-space/package-lock.json .
+COPY --from=builder /my-space/next.config.mjs ./
+COPY --from=builder /my-space/public ./public
+COPY --from=builder /my-space/.next/standalone ./
+COPY --from=builder /my-space/.next/static ./.next/static
 EXPOSE 3000
-CMD ["npm", "start"]
+ENTRYPOINT ["npm", "start"]

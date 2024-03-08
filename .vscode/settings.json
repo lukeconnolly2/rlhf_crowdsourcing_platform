@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["DATALAKE"]
+  "cSpell.words": ["DATALAKE"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "python.analysis.typeCheckingMode": "off",
+  "python.analysis.autoImportCompletions": true
 }

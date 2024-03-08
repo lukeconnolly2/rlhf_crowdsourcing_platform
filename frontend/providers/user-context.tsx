@@ -1,34 +1,20 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect } from "react"
 import { useUser } from "@clerk/nextjs"
 
-import { UserContextProps } from "@/types/user-context"
-
-const UserContext = createContext<UserContextProps>({
-  userData: {
-    videos: [],
-    default_required_views: 1,
-  },
-  refreshData: () => {},
-})
+const UserContext = createContext({})
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [userData, setUserData] = useState({
-    videos: [],
-    default_required_views: 1,
-  })
   const { isSignedIn, user, isLoaded } = useUser()
 
   const fetchData = async () => {
     if (isSignedIn && user && isLoaded) {
-      const data = await fetch(
-        `/api/getUserData?user=${user?.primaryEmailAddress?.emailAddress}`
+      fetch(
+        `/api/addUser?user=${user?.primaryEmailAddress?.emailAddress}`
       ).then((res) => res.json())
-      console.log(data)
-      setUserData(data)
     }
   }
 
@@ -36,13 +22,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
     fetchData()
   }, [isSignedIn, user, isLoaded])
 
-  const refreshData = () => {
-    console.log("refreshing data")
-    fetchData()
-  }
-
   return (
-    <UserContext.Provider value={{ userData, refreshData }}>
+    <UserContext.Provider value={{ null: null }}>
       {children}
     </UserContext.Provider>
   )

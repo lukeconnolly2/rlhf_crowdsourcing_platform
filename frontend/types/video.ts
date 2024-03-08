@@ -5,4 +5,10 @@ export type Video = {
   required_views: number
   public_url: string
   user: string
+  preferences: Preference[]
+}
+
+export type Preference = {
+  preference: number[]
+  user: string
 }

@@ -1,0 +1,713 @@
+#0 building with "mymultiarchbuilder" instance using docker-container driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 272B done
+#1 DONE 0.0s
+
+#2 [linux/arm64 internal] load metadata for docker.io/library/node:21
+#2 ...
+
+#3 [auth] library/node:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [linux/amd64 internal] load metadata for docker.io/library/node:21
+#4 ...
+
+#5 [linux/arm/v7 internal] load metadata for docker.io/library/node:21
+#5 ...
+
+#2 [linux/arm64 internal] load metadata for docker.io/library/node:21
+#2 DONE 18.3s
+
+#4 [linux/amd64 internal] load metadata for docker.io/library/node:21
+#4 DONE 18.3s
+
+#5 [linux/arm/v7 internal] load metadata for docker.io/library/node:21
+#5 DONE 18.3s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 112B done
+#6 DONE 0.0s
+
+#7 [linux/arm64 1/9] FROM docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee
+#7 resolve docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee 0.0s done
+#7 DONE 0.0s
+
+#8 [linux/arm/v7 1/9] FROM docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee
+#8 resolve docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee 0.0s done
+#8 DONE 0.0s
+
+#9 [linux/amd64 1/9] FROM docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee
+#9 resolve docker.io/library/node:21@sha256:65998e325b06014d4f1417a8a6afb1540d1ac66521cca76f2221a6953947f9ee 0.0s done
+#9 DONE 0.0s
+
+#10 [internal] load build context
+#10 transferring context: 5.51kB done
+#10 DONE 0.0s
+
+#11 [linux/amd64 2/9] RUN mkdir -p /app
+#11 CACHED
+
+#12 [linux/amd64 3/9] WORKDIR /app
+#12 CACHED
+
+#13 [linux/arm64 2/9] RUN mkdir -p /app
+#13 CACHED
+
+#14 [linux/arm64 3/9] WORKDIR /app
+#14 CACHED
+
+#15 [linux/arm/v7 2/9] RUN mkdir -p /app
+#15 CACHED
+
+#16 [linux/arm/v7 3/9] WORKDIR /app
+#16 CACHED
+
+#17 [linux/arm64 4/9] COPY . .
+#17 DONE 0.1s
+
+#18 [linux/arm/v7 4/9] COPY . .
+#18 DONE 0.1s
+
+#19 [linux/amd64 4/9] COPY . .
+#19 DONE 0.1s
+
+#20 [linux/arm/v7 5/9] RUN apt-get update
+#20 0.515 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#20 0.741 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#20 0.884 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#20 2.145 Get:4 http://deb.debian.org/debian bookworm/main armhf Packages [8498 kB]
+#20 ...
+
+#21 [linux/arm64 5/9] RUN apt-get update
+#21 0.313 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#21 0.368 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#21 0.410 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#21 0.447 Get:4 http://deb.debian.org/debian bookworm/main arm64 Packages [8685 kB]
+#21 1.292 Get:5 http://deb.debian.org/debian bookworm-updates/main arm64 Packages [12.5 kB]
+#21 1.323 Get:6 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages [141 kB]
+#21 2.569 Fetched 9093 kB in 2s (3709 kB/s)
+#21 2.569 Reading package lists...
+#21 DONE 3.4s
+
+#22 [linux/arm64 6/9] RUN apt-get install -y python3
+#22 0.113 Reading package lists...
+#22 1.001 Building dependency tree...
+#22 1.163 Reading state information...
+#22 1.413 python3 is already the newest version (3.11.2-1+b1).
+#22 1.413 python3 set to manually installed.
+#22 1.413 0 upgraded, 0 newly installed, 0 to remove and 15 not upgraded.
+#22 DONE 1.4s
+
+#23 [linux/arm64 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#23 ...
+
+#24 [linux/amd64 5/9] RUN apt-get update
+#24 0.462 Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+#24 0.584 Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#24 0.734 Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [48.0 kB]
+#24 1.802 Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8786 kB]
+#24 3.105 Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [12.7 kB]
+#24 ...
+
+#20 [linux/arm/v7 5/9] RUN apt-get update
+#20 3.968 Get:5 http://deb.debian.org/debian bookworm-updates/main armhf Packages [12.1 kB]
+#20 ...
+
+#23 [linux/arm64 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#23 30.36 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#23 30.36 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#23 30.36 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#23 31.37 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#23 31.37 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#23 31.37 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#23 33.37 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#23 33.37 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#23 33.37 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#23 37.37 Err:1 http://deb.debian.org/debian bookworm InRelease
+#23 37.37   Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http:
+#23 37.37 Err:2 http://deb.debian.org/debian bookworm-updates InRelease
+#23 37.37   Unable to connect to deb.debian.org:http:
+#23 37.37 Err:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#23 37.37   Unable to connect to deb.debian.org:http:
+#23 37.38 Reading package lists...
+#23 37.83 W: Failed to fetch http://deb.debian.org/debian/dists/bookworm/InRelease  Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http:
+#23 37.83 W: Failed to fetch http://deb.debian.org/debian/dists/bookworm-updates/InRelease  Unable to connect to deb.debian.org:http:
+#23 37.83 W: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/InRelease  Unable to connect to deb.debian.org:http:
+#23 37.83 W: Some index files failed to download. They have been ignored, or old ones used instead.
+#23 37.84 Reading package lists...
+#23 38.33 Building dependency tree...
+#23 38.43 Reading state information...
+#23 38.55 The following additional packages will be installed:
+#23 38.55   gettext gettext-base gir1.2-gsf-1 gir1.2-harfbuzz-0.0 gir1.2-pango-1.0
+#23 38.55   gir1.2-poppler-0.18 gir1.2-vips-8.0 hdf5-helpers libaec-dev libaec0
+#23 38.55   libaom-dev libcfitsio-dev libcfitsio-doc libcfitsio10 libcgif-dev libcgif0
+#23 38.55   libdatrie-dev libdav1d-dev libde265-dev libfftw3-bin libfftw3-dev
+#23 38.55   libfftw3-long3 libfftw3-single3 libfribidi-dev libgfortran5 libgraphite2-dev
+#23 38.55   libgsf-1-114 libgsf-1-common libgsf-1-dev libharfbuzz-dev
+#23 38.55   libharfbuzz-gobject0 libharfbuzz-icu0 libharfbuzz-subset0 libhdf5-103-1
+#23 38.55   libhdf5-cpp-103-1 libhdf5-dev libhdf5-fortran-102 libhdf5-hl-100
+#23 38.55   libhdf5-hl-cpp-100 libhdf5-hl-fortran-100 libheif-dev libhwy-dev libhwy1
+#23 38.55   libimagequant-dev libimagequant0 libjxl-dev libjxl0.7 libmatio-dev
+#23 38.55   libmatio11 libnspr4 libnss3 libopenslide-dev libopenslide0 liborc-0.4-0
+#23 38.55   liborc-0.4-dev liborc-0.4-dev-bin libpango1.0-dev libpangoxft-1.0-0
+#23 38.55   libpoppler-dev libpoppler-glib-dev libpoppler-glib8 libpoppler126 libsz2
+#23 38.55   libthai-dev libvips-doc libvips-tools libvips42 libx265-dev libxft-dev
+#23 38.55   libxft2 pango1.0-tools poppler-data
+#23 38.55 Suggested packages:
+#23 38.55   autopoint gettext-doc libasprintf-dev libgettextpo-dev libdatrie-doc
+#23 38.55   libfftw3-doc libgraphite2-utils libhdf5-doc libmatio-doc liborc-0.4-doc
+#23 38.55   libpango1.0-doc libpoppler-glib-doc libthai-doc nip2 libx265-doc
+#23 38.55   graphicsmagick poppler-utils ghostscript fonts-japanese-mincho
+#23 38.55   | fonts-ipafont-mincho fonts-japanese-gothic | fonts-ipafont-gothic
+#23 38.55   fonts-arphic-ukai fonts-arphic-uming fonts-nanum
+#23 38.99 The following NEW packages will be installed:
+#23 38.99   gettext gettext-base gir1.2-gsf-1 gir1.2-harfbuzz-0.0 gir1.2-pango-1.0
+#23 38.99   gir1.2-poppler-0.18 gir1.2-vips-8.0 hdf5-helpers libaec-dev libaec0
+#23 38.99   libaom-dev libcfitsio-dev libcfitsio-doc libcfitsio10 libcgif-dev libcgif0
+#23 38.99   libdatrie-dev libdav1d-dev libde265-dev libfftw3-bin libfftw3-dev
+#23 38.99   libfftw3-long3 libfftw3-single3 libfribidi-dev libgfortran5 libgraphite2-dev
+#23 38.99   libgsf-1-114 libgsf-1-common libgsf-1-dev libharfbuzz-dev
+#23 38.99   libharfbuzz-gobject0 libharfbuzz-icu0 libharfbuzz-subset0 libhdf5-103-1
+#23 38.99   libhdf5-cpp-103-1 libhdf5-dev libhdf5-fortran-102 libhdf5-hl-100
+#23 38.99   libhdf5-hl-cpp-100 libhdf5-hl-fortran-100 libheif-dev libhwy-dev libhwy1
+#23 38.99   libimagequant-dev libimagequant0 libjxl-dev libjxl0.7 libmatio-dev
+#23 38.99   libmatio11 libnspr4 libnss3 libopenslide-dev libopenslide0 liborc-0.4-0
+#23 38.99   liborc-0.4-dev liborc-0.4-dev-bin libpango1.0-dev libpangoxft-1.0-0
+#23 38.99   libpoppler-dev libpoppler-glib-dev libpoppler-glib8 libpoppler126 libsz2
+#23 38.99   libthai-dev libvips-dev libvips-doc libvips-tools libvips42 libx265-dev
+#23 38.99   libxft-dev libxft2 pango1.0-tools poppler-data
+#23 ...
+
+#20 [linux/arm/v7 5/9] RUN apt-get update
+#20 35.75 Ign:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 36.76 Ign:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 38.76 Ign:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 42.76 Ign:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 42.77 Err:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 42.77   Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#20 42.77 Ign:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 42.77 Err:6 http://deb.debian.org/debian-security bookworm-security/main armhf Packages
+#20 42.77   Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#20 42.85 Fetched 8764 kB in 42s (207 kB/s)
+#20 42.85 Reading package lists...
+#20 46.91 W: Failed to fetch http://deb.debian.org/debian-security/dists/bookworm-security/main/binary-armhf/Packages  Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#20 46.91 W: Some index files failed to download. They have been ignored, or old ones used instead.
+#20 DONE 46.9s
+
+#24 [linux/amd64 5/9] RUN apt-get update
+#24 ...
+
+#25 [linux/arm/v7 6/9] RUN apt-get install -y python3
+#25 0.180 Reading package lists...
+#25 4.226 Building dependency tree...
+#25 4.873 Reading state information...
+#25 5.394 python3 is already the newest version (3.11.2-1+b1).
+#25 5.394 python3 set to manually installed.
+#25 5.394 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+#25 DONE 5.4s
+
+#26 [linux/arm/v7 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#26 ...
+
+#24 [linux/amd64 5/9] RUN apt-get update
+#24 90.18 Ign:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages
+#24 ...
+
+#23 [linux/arm64 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#23 115.6 0 upgraded, 73 newly installed, 0 to remove and 15 not upgraded.
+#23 115.6 Need to get 32.0 MB of archives.
+#23 115.6 After this operation, 128 MB of additional disk space will be used.
+#23 115.6 Ign:1 http://deb.debian.org/debian bookworm/main arm64 poppler-data all 0.4.12-1
+#23 115.6 Ign:2 http://deb.debian.org/debian bookworm/main arm64 gettext-base arm64 0.21-12
+#23 115.6 Ign:3 http://deb.debian.org/debian bookworm/main arm64 gettext arm64 0.21-12
+#23 115.6 Ign:4 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-common all 1.14.50-1
+#23 115.6 Ign:5 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-114 arm64 1.14.50-1
+#23 115.6 Ign:6 http://deb.debian.org/debian bookworm/main arm64 gir1.2-gsf-1 arm64 1.14.50-1
+#23 115.6 Ign:7 http://deb.debian.org/debian bookworm/main arm64 gir1.2-harfbuzz-0.0 arm64 6.0.0+dfsg-3
+#23 115.6 Ign:8 http://deb.debian.org/debian bookworm/main arm64 libxft2 arm64 2.3.6-1
+#23 115.6 Ign:9 http://deb.debian.org/debian bookworm/main arm64 libpangoxft-1.0-0 arm64 1.50.12+ds-1
+#23 115.6 Ign:10 http://deb.debian.org/debian bookworm/main arm64 gir1.2-pango-1.0 arm64 1.50.12+ds-1
+#23 115.6 Ign:11 http://deb.debian.org/debian bookworm/main arm64 libnspr4 arm64 2:4.35-1
+#23 115.6 Ign:12 http://deb.debian.org/debian bookworm/main arm64 libnss3 arm64 2:3.87.1-1
+#23 115.6 Ign:13 http://deb.debian.org/debian bookworm/main arm64 libpoppler126 arm64 22.12.0-2+b1
+#23 115.6 Ign:14 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib8 arm64 22.12.0-2+b1
+#23 115.6 Ign:15 http://deb.debian.org/debian bookworm/main arm64 gir1.2-poppler-0.18 arm64 22.12.0-2+b1
+#23 115.6 Ign:16 http://deb.debian.org/debian bookworm/main arm64 libcfitsio10 arm64 4.2.0-3
+#23 115.6 Ign:17 http://deb.debian.org/debian bookworm/main arm64 libcgif0 arm64 0.3.0-1
+#23 115.6 Ign:18 http://deb.debian.org/debian bookworm/main arm64 libimagequant0 arm64 2.17.0-1
+#23 115.6 Ign:19 http://deb.debian.org/debian bookworm/main arm64 libhwy1 arm64 1.0.3-3+deb12u1
+#23 115.6 Ign:20 http://deb.debian.org/debian bookworm/main arm64 libjxl0.7 arm64 0.7.0-10
+#23 115.6 Ign:21 http://deb.debian.org/debian bookworm/main arm64 libaec0 arm64 1.0.6-1+b1
+#23 115.6 Ign:22 http://deb.debian.org/debian bookworm/main arm64 libsz2 arm64 1.0.6-1+b1
+#23 115.6 Ign:23 http://deb.debian.org/debian bookworm/main arm64 libhdf5-103-1 arm64 1.10.8+repack1-1
+#23 115.6 Ign:24 http://deb.debian.org/debian bookworm/main arm64 libmatio11 arm64 1.5.23-2
+#23 115.6 Ign:25 http://deb.debian.org/debian bookworm/main arm64 libopenslide0 arm64 3.4.1+dfsg-6+b1
+#23 115.6 Ign:26 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-0 arm64 1:0.4.33-2
+#23 115.6 Ign:27 http://deb.debian.org/debian bookworm/main arm64 libvips42 arm64 8.14.1-3+deb12u1
+#23 115.6 Ign:28 http://deb.debian.org/debian bookworm/main arm64 gir1.2-vips-8.0 arm64 8.14.1-3+deb12u1
+#23 115.6 Ign:29 http://deb.debian.org/debian bookworm/main arm64 hdf5-helpers arm64 1.10.8+repack1-1
+#23 115.6 Ign:30 http://deb.debian.org/debian bookworm/main arm64 libaec-dev arm64 1.0.6-1+b1
+#23 115.6 Ign:31 http://deb.debian.org/debian bookworm/main arm64 libaom-dev arm64 3.6.0-1
+#23 115.6 Ign:32 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-dev arm64 4.2.0-3
+#23 115.6 Ign:33 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-doc all 4.2.0-3
+#23 115.6 Ign:34 http://deb.debian.org/debian bookworm/main arm64 libcgif-dev arm64 0.3.0-1
+#23 115.6 Ign:35 http://deb.debian.org/debian bookworm/main arm64 libdatrie-dev arm64 0.2.13-2+b1
+#23 115.6 Ign:36 http://deb.debian.org/debian bookworm/main arm64 libdav1d-dev arm64 1.0.0-2
+#23 115.6 Ign:37 http://deb.debian.org/debian bookworm/main arm64 libde265-dev arm64 1.0.11-1+deb12u2
+#23 115.6 Ign:38 http://deb.debian.org/debian bookworm/main arm64 libfftw3-long3 arm64 3.3.10-1
+#23 115.6 Ign:39 http://deb.debian.org/debian bookworm/main arm64 libfftw3-single3 arm64 3.3.10-1
+#23 115.6 Ign:40 http://deb.debian.org/debian bookworm/main arm64 libfftw3-bin arm64 3.3.10-1
+#23 115.6 Ign:41 http://deb.debian.org/debian bookworm/main arm64 libfftw3-dev arm64 3.3.10-1
+#23 115.6 Ign:42 http://deb.debian.org/debian bookworm/main arm64 libfribidi-dev arm64 1.0.8-2.1
+#23 115.6 Ign:43 http://deb.debian.org/debian bookworm/main arm64 libgfortran5 arm64 12.2.0-14
+#23 115.6 Ign:44 http://deb.debian.org/debian bookworm/main arm64 libgraphite2-dev arm64 1.3.14-1
+#23 115.6 Ign:45 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-dev arm64 1.14.50-1
+#23 115.6 Ign:46 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-icu0 arm64 6.0.0+dfsg-3
+#23 115.6 Ign:47 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-gobject0 arm64 6.0.0+dfsg-3
+#23 115.6 Ign:48 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-subset0 arm64 6.0.0+dfsg-3
+#23 115.6 Ign:49 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-dev arm64 6.0.0+dfsg-3
+#23 115.6 Ign:50 http://deb.debian.org/debian bookworm/main arm64 libhdf5-cpp-103-1 arm64 1.10.8+repack1-1
+#23 115.6 Ign:51 http://deb.debian.org/debian bookworm/main arm64 libhdf5-fortran-102 arm64 1.10.8+repack1-1
+#23 115.6 Ign:52 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-100 arm64 1.10.8+repack1-1
+#23 115.6 Ign:53 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-fortran-100 arm64 1.10.8+repack1-1
+#23 115.6 Ign:54 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-cpp-100 arm64 1.10.8+repack1-1
+#23 115.6 Ign:55 http://deb.debian.org/debian bookworm/main arm64 libhdf5-dev arm64 1.10.8+repack1-1
+#23 115.6 Ign:56 http://deb.debian.org/debian bookworm/main arm64 libx265-dev arm64 3.5-2+b1
+#23 115.6 Ign:57 http://deb.debian.org/debian bookworm/main arm64 libheif-dev arm64 1.15.1-1
+#23 115.6 Ign:58 http://deb.debian.org/debian bookworm/main arm64 libhwy-dev arm64 1.0.3-3+deb12u1
+#23 115.6 Ign:59 http://deb.debian.org/debian bookworm/main arm64 libimagequant-dev arm64 2.17.0-1
+#23 115.6 Ign:60 http://deb.debian.org/debian bookworm/main arm64 libjxl-dev arm64 0.7.0-10
+#23 115.6 Ign:61 http://deb.debian.org/debian bookworm/main arm64 libmatio-dev arm64 1.5.23-2
+#23 115.6 Ign:62 http://deb.debian.org/debian bookworm/main arm64 libopenslide-dev arm64 3.4.1+dfsg-6+b1
+#23 115.6 Ign:63 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev-bin arm64 1:0.4.33-2
+#23 115.6 Ign:64 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev arm64 1:0.4.33-2
+#23 115.6 Ign:65 http://deb.debian.org/debian bookworm/main arm64 libthai-dev arm64 0.1.29-1
+#23 115.6 Ign:66 http://deb.debian.org/debian bookworm/main arm64 libxft-dev arm64 2.3.6-1
+#23 115.6 Ign:67 http://deb.debian.org/debian bookworm/main arm64 pango1.0-tools arm64 1.50.12+ds-1
+#23 115.6 Ign:68 http://deb.debian.org/debian bookworm/main arm64 libpango1.0-dev arm64 1.50.12+ds-1
+#23 115.6 Ign:69 http://deb.debian.org/debian bookworm/main arm64 libpoppler-dev arm64 22.12.0-2+b1
+#23 115.6 Ign:70 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib-dev arm64 22.12.0-2+b1
+#23 115.6 Ign:71 http://deb.debian.org/debian bookworm/main arm64 libvips-dev arm64 8.14.1-3+deb12u1
+#23 115.6 Ign:72 http://deb.debian.org/debian bookworm/main arm64 libvips-doc all 8.14.1-3+deb12u1
+#23 115.6 Ign:73 http://deb.debian.org/debian bookworm/main arm64 libvips-tools arm64 8.14.1-3+deb12u1
+#23 116.6 Ign:1 http://deb.debian.org/debian bookworm/main arm64 poppler-data all 0.4.12-1
+#23 116.6 Ign:2 http://deb.debian.org/debian bookworm/main arm64 gettext-base arm64 0.21-12
+#23 116.6 Ign:3 http://deb.debian.org/debian bookworm/main arm64 gettext arm64 0.21-12
+#23 116.6 Ign:4 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-common all 1.14.50-1
+#23 116.6 Ign:5 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-114 arm64 1.14.50-1
+#23 116.6 Ign:6 http://deb.debian.org/debian bookworm/main arm64 gir1.2-gsf-1 arm64 1.14.50-1
+#23 116.6 Ign:7 http://deb.debian.org/debian bookworm/main arm64 gir1.2-harfbuzz-0.0 arm64 6.0.0+dfsg-3
+#23 116.6 Ign:8 http://deb.debian.org/debian bookworm/main arm64 libxft2 arm64 2.3.6-1
+#23 116.6 Ign:9 http://deb.debian.org/debian bookworm/main arm64 libpangoxft-1.0-0 arm64 1.50.12+ds-1
+#23 116.6 Ign:10 http://deb.debian.org/debian bookworm/main arm64 gir1.2-pango-1.0 arm64 1.50.12+ds-1
+#23 116.6 Ign:11 http://deb.debian.org/debian bookworm/main arm64 libnspr4 arm64 2:4.35-1
+#23 116.6 Ign:12 http://deb.debian.org/debian bookworm/main arm64 libnss3 arm64 2:3.87.1-1
+#23 116.6 Ign:13 http://deb.debian.org/debian bookworm/main arm64 libpoppler126 arm64 22.12.0-2+b1
+#23 116.6 Ign:14 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib8 arm64 22.12.0-2+b1
+#23 116.6 Ign:15 http://deb.debian.org/debian bookworm/main arm64 gir1.2-poppler-0.18 arm64 22.12.0-2+b1
+#23 116.6 Ign:16 http://deb.debian.org/debian bookworm/main arm64 libcfitsio10 arm64 4.2.0-3
+#23 116.6 Ign:17 http://deb.debian.org/debian bookworm/main arm64 libcgif0 arm64 0.3.0-1
+#23 116.6 Ign:18 http://deb.debian.org/debian bookworm/main arm64 libimagequant0 arm64 2.17.0-1
+#23 116.6 Ign:19 http://deb.debian.org/debian bookworm/main arm64 libhwy1 arm64 1.0.3-3+deb12u1
+#23 116.6 Ign:20 http://deb.debian.org/debian bookworm/main arm64 libjxl0.7 arm64 0.7.0-10
+#23 116.6 Ign:21 http://deb.debian.org/debian bookworm/main arm64 libaec0 arm64 1.0.6-1+b1
+#23 116.6 Ign:22 http://deb.debian.org/debian bookworm/main arm64 libsz2 arm64 1.0.6-1+b1
+#23 116.6 Ign:23 http://deb.debian.org/debian bookworm/main arm64 libhdf5-103-1 arm64 1.10.8+repack1-1
+#23 116.6 Ign:24 http://deb.debian.org/debian bookworm/main arm64 libmatio11 arm64 1.5.23-2
+#23 116.6 Ign:25 http://deb.debian.org/debian bookworm/main arm64 libopenslide0 arm64 3.4.1+dfsg-6+b1
+#23 116.6 Ign:26 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-0 arm64 1:0.4.33-2
+#23 116.6 Ign:27 http://deb.debian.org/debian bookworm/main arm64 libvips42 arm64 8.14.1-3+deb12u1
+#23 116.6 Ign:28 http://deb.debian.org/debian bookworm/main arm64 gir1.2-vips-8.0 arm64 8.14.1-3+deb12u1
+#23 116.6 Ign:29 http://deb.debian.org/debian bookworm/main arm64 hdf5-helpers arm64 1.10.8+repack1-1
+#23 116.6 Ign:30 http://deb.debian.org/debian bookworm/main arm64 libaec-dev arm64 1.0.6-1+b1
+#23 116.6 Ign:31 http://deb.debian.org/debian bookworm/main arm64 libaom-dev arm64 3.6.0-1
+#23 116.6 Ign:32 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-dev arm64 4.2.0-3
+#23 116.6 Ign:33 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-doc all 4.2.0-3
+#23 116.6 Ign:34 http://deb.debian.org/debian bookworm/main arm64 libcgif-dev arm64 0.3.0-1
+#23 116.6 Ign:35 http://deb.debian.org/debian bookworm/main arm64 libdatrie-dev arm64 0.2.13-2+b1
+#23 116.6 Ign:36 http://deb.debian.org/debian bookworm/main arm64 libdav1d-dev arm64 1.0.0-2
+#23 116.6 Ign:37 http://deb.debian.org/debian bookworm/main arm64 libde265-dev arm64 1.0.11-1+deb12u2
+#23 116.6 Ign:38 http://deb.debian.org/debian bookworm/main arm64 libfftw3-long3 arm64 3.3.10-1
+#23 116.6 Ign:39 http://deb.debian.org/debian bookworm/main arm64 libfftw3-single3 arm64 3.3.10-1
+#23 116.6 Ign:40 http://deb.debian.org/debian bookworm/main arm64 libfftw3-bin arm64 3.3.10-1
+#23 116.6 Ign:41 http://deb.debian.org/debian bookworm/main arm64 libfftw3-dev arm64 3.3.10-1
+#23 116.6 Ign:42 http://deb.debian.org/debian bookworm/main arm64 libfribidi-dev arm64 1.0.8-2.1
+#23 116.6 Ign:43 http://deb.debian.org/debian bookworm/main arm64 libgfortran5 arm64 12.2.0-14
+#23 116.6 Ign:44 http://deb.debian.org/debian bookworm/main arm64 libgraphite2-dev arm64 1.3.14-1
+#23 116.6 Ign:45 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-dev arm64 1.14.50-1
+#23 116.6 Ign:46 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-icu0 arm64 6.0.0+dfsg-3
+#23 116.6 Ign:47 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-gobject0 arm64 6.0.0+dfsg-3
+#23 116.6 Ign:48 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-subset0 arm64 6.0.0+dfsg-3
+#23 116.6 Ign:49 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-dev arm64 6.0.0+dfsg-3
+#23 116.6 Ign:50 http://deb.debian.org/debian bookworm/main arm64 libhdf5-cpp-103-1 arm64 1.10.8+repack1-1
+#23 116.6 Ign:51 http://deb.debian.org/debian bookworm/main arm64 libhdf5-fortran-102 arm64 1.10.8+repack1-1
+#23 116.6 Ign:52 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-100 arm64 1.10.8+repack1-1
+#23 116.6 Ign:53 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-fortran-100 arm64 1.10.8+repack1-1
+#23 116.6 Ign:54 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-cpp-100 arm64 1.10.8+repack1-1
+#23 116.6 Ign:55 http://deb.debian.org/debian bookworm/main arm64 libhdf5-dev arm64 1.10.8+repack1-1
+#23 116.6 Ign:56 http://deb.debian.org/debian bookworm/main arm64 libx265-dev arm64 3.5-2+b1
+#23 116.6 Ign:57 http://deb.debian.org/debian bookworm/main arm64 libheif-dev arm64 1.15.1-1
+#23 116.6 Ign:58 http://deb.debian.org/debian bookworm/main arm64 libhwy-dev arm64 1.0.3-3+deb12u1
+#23 116.6 Ign:59 http://deb.debian.org/debian bookworm/main arm64 libimagequant-dev arm64 2.17.0-1
+#23 116.6 Ign:60 http://deb.debian.org/debian bookworm/main arm64 libjxl-dev arm64 0.7.0-10
+#23 116.6 Ign:61 http://deb.debian.org/debian bookworm/main arm64 libmatio-dev arm64 1.5.23-2
+#23 116.6 Ign:62 http://deb.debian.org/debian bookworm/main arm64 libopenslide-dev arm64 3.4.1+dfsg-6+b1
+#23 116.6 Ign:63 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev-bin arm64 1:0.4.33-2
+#23 116.6 Ign:64 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev arm64 1:0.4.33-2
+#23 116.6 Ign:65 http://deb.debian.org/debian bookworm/main arm64 libthai-dev arm64 0.1.29-1
+#23 116.6 Ign:66 http://deb.debian.org/debian bookworm/main arm64 libxft-dev arm64 2.3.6-1
+#23 116.6 Ign:67 http://deb.debian.org/debian bookworm/main arm64 pango1.0-tools arm64 1.50.12+ds-1
+#23 116.6 Ign:68 http://deb.debian.org/debian bookworm/main arm64 libpango1.0-dev arm64 1.50.12+ds-1
+#23 116.6 Ign:69 http://deb.debian.org/debian bookworm/main arm64 libpoppler-dev arm64 22.12.0-2+b1
+#23 116.6 Ign:70 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib-dev arm64 22.12.0-2+b1
+#23 116.6 Ign:71 http://deb.debian.org/debian bookworm/main arm64 libvips-dev arm64 8.14.1-3+deb12u1
+#23 116.6 Ign:72 http://deb.debian.org/debian bookworm/main arm64 libvips-doc all 8.14.1-3+deb12u1
+#23 116.6 Ign:73 http://deb.debian.org/debian bookworm/main arm64 libvips-tools arm64 8.14.1-3+deb12u1
+#23 118.6 Ign:1 http://deb.debian.org/debian bookworm/main arm64 poppler-data all 0.4.12-1
+#23 118.6 Ign:2 http://deb.debian.org/debian bookworm/main arm64 gettext-base arm64 0.21-12
+#23 118.6 Ign:3 http://deb.debian.org/debian bookworm/main arm64 gettext arm64 0.21-12
+#23 118.6 Ign:4 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-common all 1.14.50-1
+#23 118.6 Ign:5 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-114 arm64 1.14.50-1
+#23 118.6 Ign:6 http://deb.debian.org/debian bookworm/main arm64 gir1.2-gsf-1 arm64 1.14.50-1
+#23 118.6 Ign:7 http://deb.debian.org/debian bookworm/main arm64 gir1.2-harfbuzz-0.0 arm64 6.0.0+dfsg-3
+#23 118.6 Ign:8 http://deb.debian.org/debian bookworm/main arm64 libxft2 arm64 2.3.6-1
+#23 118.6 Ign:9 http://deb.debian.org/debian bookworm/main arm64 libpangoxft-1.0-0 arm64 1.50.12+ds-1
+#23 118.6 Ign:10 http://deb.debian.org/debian bookworm/main arm64 gir1.2-pango-1.0 arm64 1.50.12+ds-1
+#23 118.6 Ign:11 http://deb.debian.org/debian bookworm/main arm64 libnspr4 arm64 2:4.35-1
+#23 118.6 Ign:12 http://deb.debian.org/debian bookworm/main arm64 libnss3 arm64 2:3.87.1-1
+#23 118.6 Ign:13 http://deb.debian.org/debian bookworm/main arm64 libpoppler126 arm64 22.12.0-2+b1
+#23 118.6 Ign:14 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib8 arm64 22.12.0-2+b1
+#23 118.6 Ign:15 http://deb.debian.org/debian bookworm/main arm64 gir1.2-poppler-0.18 arm64 22.12.0-2+b1
+#23 118.6 Ign:16 http://deb.debian.org/debian bookworm/main arm64 libcfitsio10 arm64 4.2.0-3
+#23 118.6 Ign:17 http://deb.debian.org/debian bookworm/main arm64 libcgif0 arm64 0.3.0-1
+#23 118.6 Ign:18 http://deb.debian.org/debian bookworm/main arm64 libimagequant0 arm64 2.17.0-1
+#23 118.6 Ign:19 http://deb.debian.org/debian bookworm/main arm64 libhwy1 arm64 1.0.3-3+deb12u1
+#23 118.6 Ign:20 http://deb.debian.org/debian bookworm/main arm64 libjxl0.7 arm64 0.7.0-10
+#23 118.6 Ign:21 http://deb.debian.org/debian bookworm/main arm64 libaec0 arm64 1.0.6-1+b1
+#23 118.6 Ign:22 http://deb.debian.org/debian bookworm/main arm64 libsz2 arm64 1.0.6-1+b1
+#23 118.6 Ign:23 http://deb.debian.org/debian bookworm/main arm64 libhdf5-103-1 arm64 1.10.8+repack1-1
+#23 118.6 Ign:24 http://deb.debian.org/debian bookworm/main arm64 libmatio11 arm64 1.5.23-2
+#23 118.6 Ign:25 http://deb.debian.org/debian bookworm/main arm64 libopenslide0 arm64 3.4.1+dfsg-6+b1
+#23 118.6 Ign:26 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-0 arm64 1:0.4.33-2
+#23 118.6 Ign:27 http://deb.debian.org/debian bookworm/main arm64 libvips42 arm64 8.14.1-3+deb12u1
+#23 118.6 Ign:28 http://deb.debian.org/debian bookworm/main arm64 gir1.2-vips-8.0 arm64 8.14.1-3+deb12u1
+#23 118.6 Ign:29 http://deb.debian.org/debian bookworm/main arm64 hdf5-helpers arm64 1.10.8+repack1-1
+#23 118.6 Ign:30 http://deb.debian.org/debian bookworm/main arm64 libaec-dev arm64 1.0.6-1+b1
+#23 118.6 Ign:31 http://deb.debian.org/debian bookworm/main arm64 libaom-dev arm64 3.6.0-1
+#23 118.6 Ign:32 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-dev arm64 4.2.0-3
+#23 118.6 Ign:33 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-doc all 4.2.0-3
+#23 118.6 Ign:34 http://deb.debian.org/debian bookworm/main arm64 libcgif-dev arm64 0.3.0-1
+#23 118.6 Ign:35 http://deb.debian.org/debian bookworm/main arm64 libdatrie-dev arm64 0.2.13-2+b1
+#23 118.6 Ign:36 http://deb.debian.org/debian bookworm/main arm64 libdav1d-dev arm64 1.0.0-2
+#23 118.6 Ign:37 http://deb.debian.org/debian bookworm/main arm64 libde265-dev arm64 1.0.11-1+deb12u2
+#23 118.6 Ign:38 http://deb.debian.org/debian bookworm/main arm64 libfftw3-long3 arm64 3.3.10-1
+#23 118.6 Ign:39 http://deb.debian.org/debian bookworm/main arm64 libfftw3-single3 arm64 3.3.10-1
+#23 118.6 Ign:40 http://deb.debian.org/debian bookworm/main arm64 libfftw3-bin arm64 3.3.10-1
+#23 118.6 Ign:41 http://deb.debian.org/debian bookworm/main arm64 libfftw3-dev arm64 3.3.10-1
+#23 118.6 Ign:42 http://deb.debian.org/debian bookworm/main arm64 libfribidi-dev arm64 1.0.8-2.1
+#23 118.6 Ign:43 http://deb.debian.org/debian bookworm/main arm64 libgfortran5 arm64 12.2.0-14
+#23 118.6 Ign:44 http://deb.debian.org/debian bookworm/main arm64 libgraphite2-dev arm64 1.3.14-1
+#23 118.6 Ign:45 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-dev arm64 1.14.50-1
+#23 118.6 Ign:46 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-icu0 arm64 6.0.0+dfsg-3
+#23 118.6 Ign:47 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-gobject0 arm64 6.0.0+dfsg-3
+#23 118.6 Ign:48 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-subset0 arm64 6.0.0+dfsg-3
+#23 118.6 Ign:49 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-dev arm64 6.0.0+dfsg-3
+#23 118.6 Ign:50 http://deb.debian.org/debian bookworm/main arm64 libhdf5-cpp-103-1 arm64 1.10.8+repack1-1
+#23 118.6 Ign:51 http://deb.debian.org/debian bookworm/main arm64 libhdf5-fortran-102 arm64 1.10.8+repack1-1
+#23 118.6 Ign:52 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-100 arm64 1.10.8+repack1-1
+#23 118.6 Ign:53 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-fortran-100 arm64 1.10.8+repack1-1
+#23 118.6 Ign:54 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-cpp-100 arm64 1.10.8+repack1-1
+#23 118.6 Ign:55 http://deb.debian.org/debian bookworm/main arm64 libhdf5-dev arm64 1.10.8+repack1-1
+#23 118.6 Ign:56 http://deb.debian.org/debian bookworm/main arm64 libx265-dev arm64 3.5-2+b1
+#23 118.6 Ign:57 http://deb.debian.org/debian bookworm/main arm64 libheif-dev arm64 1.15.1-1
+#23 118.6 Ign:58 http://deb.debian.org/debian bookworm/main arm64 libhwy-dev arm64 1.0.3-3+deb12u1
+#23 118.6 Ign:59 http://deb.debian.org/debian bookworm/main arm64 libimagequant-dev arm64 2.17.0-1
+#23 118.6 Ign:60 http://deb.debian.org/debian bookworm/main arm64 libjxl-dev arm64 0.7.0-10
+#23 118.6 Ign:61 http://deb.debian.org/debian bookworm/main arm64 libmatio-dev arm64 1.5.23-2
+#23 118.6 Ign:62 http://deb.debian.org/debian bookworm/main arm64 libopenslide-dev arm64 3.4.1+dfsg-6+b1
+#23 118.6 Ign:63 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev-bin arm64 1:0.4.33-2
+#23 118.6 Ign:64 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev arm64 1:0.4.33-2
+#23 118.6 Ign:65 http://deb.debian.org/debian bookworm/main arm64 libthai-dev arm64 0.1.29-1
+#23 118.6 Ign:66 http://deb.debian.org/debian bookworm/main arm64 libxft-dev arm64 2.3.6-1
+#23 118.6 Ign:67 http://deb.debian.org/debian bookworm/main arm64 pango1.0-tools arm64 1.50.12+ds-1
+#23 118.6 Ign:68 http://deb.debian.org/debian bookworm/main arm64 libpango1.0-dev arm64 1.50.12+ds-1
+#23 118.6 Ign:69 http://deb.debian.org/debian bookworm/main arm64 libpoppler-dev arm64 22.12.0-2+b1
+#23 118.6 Ign:70 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib-dev arm64 22.12.0-2+b1
+#23 118.6 Ign:71 http://deb.debian.org/debian bookworm/main arm64 libvips-dev arm64 8.14.1-3+deb12u1
+#23 118.6 Ign:72 http://deb.debian.org/debian bookworm/main arm64 libvips-doc all 8.14.1-3+deb12u1
+#23 118.6 Ign:73 http://deb.debian.org/debian bookworm/main arm64 libvips-tools arm64 8.14.1-3+deb12u1
+#23 ...
+
+#24 [linux/amd64 5/9] RUN apt-get update
+#24 121.2 Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [144 kB]
+#24 121.4 Fetched 9197 kB in 2min 1s (76.0 kB/s)
+#24 121.4 Reading package lists...
+#24 DONE 124.6s
+
+#27 [linux/amd64 6/9] RUN apt-get install -y python3
+#27 0.180 Reading package lists...
+#27 CANCELED
+
+#23 [linux/arm64 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#23 122.6 Err:1 http://deb.debian.org/debian bookworm/main arm64 poppler-data all 0.4.12-1
+#23 122.6   Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:2 http://deb.debian.org/debian bookworm/main arm64 gettext-base arm64 0.21-12
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:3 http://deb.debian.org/debian bookworm/main arm64 gettext arm64 0.21-12
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:4 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-common all 1.14.50-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:5 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-114 arm64 1.14.50-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:6 http://deb.debian.org/debian bookworm/main arm64 gir1.2-gsf-1 arm64 1.14.50-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:7 http://deb.debian.org/debian bookworm/main arm64 gir1.2-harfbuzz-0.0 arm64 6.0.0+dfsg-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:8 http://deb.debian.org/debian bookworm/main arm64 libxft2 arm64 2.3.6-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:9 http://deb.debian.org/debian bookworm/main arm64 libpangoxft-1.0-0 arm64 1.50.12+ds-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:10 http://deb.debian.org/debian bookworm/main arm64 gir1.2-pango-1.0 arm64 1.50.12+ds-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:11 http://deb.debian.org/debian bookworm/main arm64 libnspr4 arm64 2:4.35-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:12 http://deb.debian.org/debian bookworm/main arm64 libnss3 arm64 2:3.87.1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:13 http://deb.debian.org/debian bookworm/main arm64 libpoppler126 arm64 22.12.0-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:14 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib8 arm64 22.12.0-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:15 http://deb.debian.org/debian bookworm/main arm64 gir1.2-poppler-0.18 arm64 22.12.0-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:16 http://deb.debian.org/debian bookworm/main arm64 libcfitsio10 arm64 4.2.0-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:17 http://deb.debian.org/debian bookworm/main arm64 libcgif0 arm64 0.3.0-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:18 http://deb.debian.org/debian bookworm/main arm64 libimagequant0 arm64 2.17.0-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:19 http://deb.debian.org/debian bookworm/main arm64 libhwy1 arm64 1.0.3-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:20 http://deb.debian.org/debian bookworm/main arm64 libjxl0.7 arm64 0.7.0-10
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:21 http://deb.debian.org/debian bookworm/main arm64 libaec0 arm64 1.0.6-1+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:22 http://deb.debian.org/debian bookworm/main arm64 libsz2 arm64 1.0.6-1+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:23 http://deb.debian.org/debian bookworm/main arm64 libhdf5-103-1 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:24 http://deb.debian.org/debian bookworm/main arm64 libmatio11 arm64 1.5.23-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:25 http://deb.debian.org/debian bookworm/main arm64 libopenslide0 arm64 3.4.1+dfsg-6+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:26 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-0 arm64 1:0.4.33-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:27 http://deb.debian.org/debian bookworm/main arm64 libvips42 arm64 8.14.1-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:28 http://deb.debian.org/debian bookworm/main arm64 gir1.2-vips-8.0 arm64 8.14.1-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:29 http://deb.debian.org/debian bookworm/main arm64 hdf5-helpers arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:30 http://deb.debian.org/debian bookworm/main arm64 libaec-dev arm64 1.0.6-1+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:31 http://deb.debian.org/debian bookworm/main arm64 libaom-dev arm64 3.6.0-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:32 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-dev arm64 4.2.0-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:33 http://deb.debian.org/debian bookworm/main arm64 libcfitsio-doc all 4.2.0-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:34 http://deb.debian.org/debian bookworm/main arm64 libcgif-dev arm64 0.3.0-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:35 http://deb.debian.org/debian bookworm/main arm64 libdatrie-dev arm64 0.2.13-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:36 http://deb.debian.org/debian bookworm/main arm64 libdav1d-dev arm64 1.0.0-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:37 http://deb.debian.org/debian bookworm/main arm64 libde265-dev arm64 1.0.11-1+deb12u2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:38 http://deb.debian.org/debian bookworm/main arm64 libfftw3-long3 arm64 3.3.10-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:39 http://deb.debian.org/debian bookworm/main arm64 libfftw3-single3 arm64 3.3.10-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:40 http://deb.debian.org/debian bookworm/main arm64 libfftw3-bin arm64 3.3.10-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:41 http://deb.debian.org/debian bookworm/main arm64 libfftw3-dev arm64 3.3.10-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:42 http://deb.debian.org/debian bookworm/main arm64 libfribidi-dev arm64 1.0.8-2.1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:43 http://deb.debian.org/debian bookworm/main arm64 libgfortran5 arm64 12.2.0-14
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:44 http://deb.debian.org/debian bookworm/main arm64 libgraphite2-dev arm64 1.3.14-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:45 http://deb.debian.org/debian bookworm/main arm64 libgsf-1-dev arm64 1.14.50-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:46 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-icu0 arm64 6.0.0+dfsg-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:47 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-gobject0 arm64 6.0.0+dfsg-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:48 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-subset0 arm64 6.0.0+dfsg-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:49 http://deb.debian.org/debian bookworm/main arm64 libharfbuzz-dev arm64 6.0.0+dfsg-3
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:50 http://deb.debian.org/debian bookworm/main arm64 libhdf5-cpp-103-1 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:51 http://deb.debian.org/debian bookworm/main arm64 libhdf5-fortran-102 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:52 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-100 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:53 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-fortran-100 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:54 http://deb.debian.org/debian bookworm/main arm64 libhdf5-hl-cpp-100 arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:55 http://deb.debian.org/debian bookworm/main arm64 libhdf5-dev arm64 1.10.8+repack1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:56 http://deb.debian.org/debian bookworm/main arm64 libx265-dev arm64 3.5-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:57 http://deb.debian.org/debian bookworm/main arm64 libheif-dev arm64 1.15.1-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:58 http://deb.debian.org/debian bookworm/main arm64 libhwy-dev arm64 1.0.3-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:59 http://deb.debian.org/debian bookworm/main arm64 libimagequant-dev arm64 2.17.0-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:60 http://deb.debian.org/debian bookworm/main arm64 libjxl-dev arm64 0.7.0-10
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:61 http://deb.debian.org/debian bookworm/main arm64 libmatio-dev arm64 1.5.23-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:62 http://deb.debian.org/debian bookworm/main arm64 libopenslide-dev arm64 3.4.1+dfsg-6+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:63 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev-bin arm64 1:0.4.33-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:64 http://deb.debian.org/debian bookworm/main arm64 liborc-0.4-dev arm64 1:0.4.33-2
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:65 http://deb.debian.org/debian bookworm/main arm64 libthai-dev arm64 0.1.29-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:66 http://deb.debian.org/debian bookworm/main arm64 libxft-dev arm64 2.3.6-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:67 http://deb.debian.org/debian bookworm/main arm64 pango1.0-tools arm64 1.50.12+ds-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:68 http://deb.debian.org/debian bookworm/main arm64 libpango1.0-dev arm64 1.50.12+ds-1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:69 http://deb.debian.org/debian bookworm/main arm64 libpoppler-dev arm64 22.12.0-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:70 http://deb.debian.org/debian bookworm/main arm64 libpoppler-glib-dev arm64 22.12.0-2+b1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:71 http://deb.debian.org/debian bookworm/main arm64 libvips-dev arm64 8.14.1-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:72 http://deb.debian.org/debian bookworm/main arm64 libvips-doc all 8.14.1-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 Err:73 http://deb.debian.org/debian bookworm/main arm64 libvips-tools arm64 8.14.1-3+deb12u1
+#23 122.6   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler-data/poppler-data_0.4.12-1_all.deb  Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/gettext/gettext-base_0.21-12_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/gettext/gettext_0.21-12_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libg/libgsf/libgsf-1-common_1.14.50-1_all.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libg/libgsf/libgsf-1-114_1.14.50-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libg/libgsf/gir1.2-gsf-1_1.14.50-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/harfbuzz/gir1.2-harfbuzz-0.0_6.0.0%2bdfsg-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/x/xft/libxft2_2.3.6-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/libpangoxft-1.0-0_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/gir1.2-pango-1.0_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/n/nspr/libnspr4_4.35-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/n/nss/libnss3_3.87.1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler126_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler-glib8_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/gir1.2-poppler-0.18_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/c/cfitsio/libcfitsio10_4.2.0-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/c/cgif/libcgif0_0.3.0-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libi/libimagequant/libimagequant0_2.17.0-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/highway/libhwy1_1.0.3-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/j/jpeg-xl/libjxl0.7_0.7.0-10_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/liba/libaec/libaec0_1.0.6-1%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/liba/libaec/libsz2_1.0.6-1%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-103-1_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libm/libmatio/libmatio11_1.5.23-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/o/openslide/libopenslide0_3.4.1%2bdfsg-6%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/o/orc/liborc-0.4-0_0.4.33-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips42_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/gir1.2-vips-8.0_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/hdf5-helpers_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/liba/libaec/libaec-dev_1.0.6-1%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/a/aom/libaom-dev_3.6.0-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/c/cfitsio/libcfitsio-dev_4.2.0-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/c/cfitsio/libcfitsio-doc_4.2.0-3_all.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/c/cgif/libcgif-dev_0.3.0-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libd/libdatrie/libdatrie-dev_0.2.13-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/d/dav1d/libdav1d-dev_1.0.0-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libd/libde265/libde265-dev_1.0.11-1%2bdeb12u2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/f/fftw3/libfftw3-long3_3.3.10-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/f/fftw3/libfftw3-single3_3.3.10-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/f/fftw3/libfftw3-bin_3.3.10-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/f/fftw3/libfftw3-dev_3.3.10-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/f/fribidi/libfribidi-dev_1.0.8-2.1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/gcc-12/libgfortran5_12.2.0-14_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/g/graphite2/libgraphite2-dev_1.3.14-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libg/libgsf/libgsf-1-dev_1.14.50-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/harfbuzz/libharfbuzz-icu0_6.0.0%2bdfsg-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/harfbuzz/libharfbuzz-gobject0_6.0.0%2bdfsg-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/harfbuzz/libharfbuzz-subset0_6.0.0%2bdfsg-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/harfbuzz/libharfbuzz-dev_6.0.0%2bdfsg-3_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-cpp-103-1_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-fortran-102_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-hl-100_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-hl-fortran-100_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-hl-cpp-100_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/hdf5/libhdf5-dev_1.10.8%2brepack1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/x/x265/libx265-dev_3.5-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libh/libheif/libheif-dev_1.15.1-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/h/highway/libhwy-dev_1.0.3-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libi/libimagequant/libimagequant-dev_2.17.0-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/j/jpeg-xl/libjxl-dev_0.7.0-10_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libm/libmatio/libmatio-dev_1.5.23-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/o/openslide/libopenslide-dev_3.4.1%2bdfsg-6%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/o/orc/liborc-0.4-dev-bin_0.4.33-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/o/orc/liborc-0.4-dev_0.4.33-2_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libt/libthai/libthai-dev_0.1.29-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/x/xft/libxft-dev_2.3.6-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/pango1.0-tools_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/libpango1.0-dev_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler-dev_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler-glib-dev_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-dev_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-doc_8.14.1-3%2bdeb12u1_all.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-tools_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#23 122.6 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+#23 ERROR: process "/bin/sh -c apt-get update && apt-get install -y libvips-dev" did not complete successfully: exit code: 100
+
+#26 [linux/arm/v7 7/9] RUN apt-get update && apt-get install -y libvips-dev
+#26 68.15 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#26 68.15 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#26 68.15 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#26 69.15 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#26 69.15 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#26 69.15 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#26 71.15 Ign:1 http://deb.debian.org/debian bookworm InRelease
+#26 71.15 Ign:2 http://deb.debian.org/debian bookworm-updates InRelease
+#26 71.16 Ign:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#26 75.15 Err:1 http://deb.debian.org/debian bookworm InRelease
+#26 75.15   Could not connect to debian.map.fastlydns.net:80 (199.232.26.132), connection timed out Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#26 75.16 Err:2 http://deb.debian.org/debian bookworm-updates InRelease
+#26 75.16   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#26 75.16 Err:3 http://deb.debian.org/debian-security bookworm-security InRelease
+#26 75.16   Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+#26 CANCELED
+------
+ > [linux/arm64 7/9] RUN apt-get update && apt-get install -y libvips-dev:
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/libt/libthai/libthai-dev_0.1.29-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/x/xft/libxft-dev_2.3.6-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/pango1.0-tools_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/pango1.0/libpango1.0-dev_1.50.12%2bds-1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler-dev_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/p/poppler/libpoppler-glib-dev_22.12.0-2%2bb1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-dev_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-doc_8.14.1-3%2bdeb12u1_all.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Failed to fetch http://deb.debian.org/debian/pool/main/v/vips/libvips-tools_8.14.1-3%2bdeb12u1_arm64.deb  Unable to connect to deb.debian.org:http: [IP: 199.232.26.132 80]
+122.6 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+------
+Dockerfile:9
+--------------------
+   7 |     RUN apt-get update
+   8 |     RUN apt-get install -y python3
+   9 | >>> RUN apt-get update && apt-get install -y libvips-dev
+  10 |     
+  11 |     RUN npm install --force
+--------------------
+ERROR: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y libvips-dev" did not complete successfully: exit code: 100

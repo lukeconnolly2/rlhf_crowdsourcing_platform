@@ -1,8 +1,6 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { ReactPlayerProps } from "react-player"
-import BaseReactPlayer from "react-player/base"
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false })
 
@@ -11,7 +9,7 @@ interface Props {
   className?: string
 }
 
-export default function VideoPlayer({ fileName, className }: Props) {
+export function VideoPlayerWithoutPolling({ fileName, className }: Props) {
   return (
     <div className={`max-w-full bg-transparent overflow-hidden ${className}`}>
       <ReactPlayer

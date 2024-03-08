@@ -3,6 +3,7 @@ import Link from "next/link"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
+import { checkRole } from "@/lib/role"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
@@ -13,6 +14,15 @@ interface MainNavProps {
 }
 
 export function MainNav({ items }: MainNavProps) {
+  const roleFilter = (item: NavItem) => {
+    if (item.developer) {
+      return checkRole("developer") || checkRole("admin")
+    }
+    if (item.admin) {
+      return checkRole("admin")
+    }
+    return true
+  }
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="flex items-center space-x-2">
@@ -21,7 +31,7 @@ export function MainNav({ items }: MainNavProps) {
       </Link>
       {items?.length ? (
         <nav className="flex gap-6">
-          {items?.map(
+          {items?.filter(roleFilter).map(
             (item, index) =>
               item.href && (
                 <Link

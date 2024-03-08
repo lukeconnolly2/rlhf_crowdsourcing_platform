@@ -5,6 +5,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -24,8 +25,9 @@ export default function NumberCard({
         <CardTitle>{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-row gap-10 items-center">
         <p className="font-extrabold text-5xl">{number}</p>
+        {props.children}
       </CardContent>
     </Card>
   )
