@@ -16,7 +16,7 @@ async function Setup() {
   const apiKey = await getApiKey()
   const uploadCode =
     `import os\n` +
-    `from hitl_uploader.Uploader import Uploader\n\n` +
+    `from hitl import Uploader \n\n` +
     `uploader = Uploader(\n` +
     `    "${apiKey}",\n` +
     `    "interactiverl.lukeconnolly.dev",\n` +
@@ -35,7 +35,7 @@ async function Setup() {
     `        continue`
 
   const resultsCode =
-    `from hitl_uploader.Uploader import Uploader\n\n` +
+    `from hitl import Uploader\n\n` +
     `uploader = Uploader(\n` +
     `    "${apiKey}",\n` +
     `    "interactiverl.lukeconnolly.dev",\n` +
