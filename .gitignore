@@ -1,5 +1,4 @@
 
-*.yaml
 # Logs
 logs
 *.log
@@ -318,8 +317,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-clip*
-*.mp4
-*.mov
+
 
 secrets.yaml

@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: lukeconnolly2/fyp-frontend:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+            - name: CLERK_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: CLERK_SECRET_KEY
+            - name: NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+            - name: NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+            - name: PRIVATE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: PRIVATE_API_KEY
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: DATABASE_URL
+            - name: ORCHESTRATOR_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: ORCHESTRATOR_URL
+            - name: RESEND_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: RESEND_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: ClusterIP # Changed from NodePort to ClusterIP
+  selector:
+    app: frontend
+  ports:
+    - port: 3000
+      targetPort: 3000

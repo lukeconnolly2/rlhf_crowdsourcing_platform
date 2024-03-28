@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: interactiverl.lukeconnolly.dev
+      http:
+        paths:
+          - path: /getUploadURL
+            pathType: Prefix
+            backend:
+              service:
+                name: orchastrator
+                port:
+                  number: 8080
+          - path: /video
+            pathType: Prefix
+            backend:
+              service:
+                name: orchastrator
+                port:
+                  number: 8080
+          # Default catch-all route for frontend service
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 3000

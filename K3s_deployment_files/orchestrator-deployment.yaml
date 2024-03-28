@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchastrator
+spec:
+  selector:
+    matchLabels:
+      app: orchastrator
+  template:
+    metadata:
+      labels:
+        app: orchastrator
+    spec:
+      containers:
+        - name: orchastrator
+          image: lukeconnolly2/fyp-orchestrator:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATALAKE_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: DATALAKE_CONNECTION_STRING
+            - name: PRIVATE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: PRIVATE_API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchastrator
+spec:
+  type: ClusterIP
+  selector:
+    app: orchastrator
+  ports:
+    - port: 8080
+      targetPort: 8080
