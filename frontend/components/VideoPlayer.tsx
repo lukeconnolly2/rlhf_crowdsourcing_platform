@@ -1,4 +1,5 @@
 import React from "react"
+import { preferenceAction } from "@/actions/preferenceAction"
 import {
   HydrationBoundary,
   QueryClient,
@@ -18,7 +19,7 @@ async function VideoPlayer() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <VideoPlayerWithPolling />
+      <VideoPlayerWithPolling serverAction={preferenceAction} />
     </HydrationBoundary>
   )
 }

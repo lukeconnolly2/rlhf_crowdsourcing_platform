@@ -305,5 +305,4 @@ def update_notifications(
 @app.get("/results")
 def get_results(api_key: str = Security(check_public_api_key)):
     results = list(app.database.videos.find({"user": api_key, "status": "Done"}))
-    print(results)
     return results

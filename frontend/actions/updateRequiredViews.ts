@@ -7,6 +7,7 @@ import { currentUser } from "@clerk/nextjs"
 export const updateRequiredViews = async (formData: FormData) => {
   logger.info(`Releasing video ${formData.get("requiredViews")}`)
   const user = await currentUser()
+
   const requiredViews = formData.get("requiredViews") as string
   fetch(`http://${process.env.ORCHESTRATOR_URL}/updateRequiredViews`, {
     method: "POST",

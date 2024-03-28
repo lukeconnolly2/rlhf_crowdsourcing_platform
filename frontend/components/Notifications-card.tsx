@@ -1,4 +1,5 @@
 import React from "react"
+import { sendNotification } from "@/actions/setNotificationsSent"
 
 import getNotificationsSent from "@/lib/getNotificationsSent"
 
@@ -15,7 +16,7 @@ async function NotificationsCard() {
       min={0}
       max={100000}
     >
-      <Notification />
+      <Notification serverAction={sendNotification} />
     </NumberCard>
   )
 }

@@ -1,3 +1,4 @@
+import { releaseManyAction } from "@/actions/releaseManyAction"
 import {
   HydrationBoundary,
   QueryClient,
@@ -16,7 +17,7 @@ async function VideoTable() {
   })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <VideoTableWithPolling />
+      <VideoTableWithPolling serverAction={releaseManyAction} />
     </HydrationBoundary>
   )
 }

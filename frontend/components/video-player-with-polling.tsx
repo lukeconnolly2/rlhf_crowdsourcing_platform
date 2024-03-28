@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import dynamic from "next/dynamic"
-import { preferenceAction } from "@/actions/preferenceAction"
+
 
 import { useGetReleasedVideos } from "@/lib/getReleasedVideosPolling"
 
@@ -11,7 +11,11 @@ import { Card } from "./ui/card"
 
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false })
 
-export function VideoPlayerWithPolling() {
+export function VideoPlayerWithPolling({
+  serverAction,
+}: {
+  serverAction: (formData: FormData) => Promise<void>
+}) {
   const [ready, setReady] = useState(false)
   const { data: videos } = useGetReleasedVideos()
   const [currentVideoIndex, setCurrentVideo] = useState(0)
@@ -49,12 +53,12 @@ export function VideoPlayerWithPolling() {
         </div>
       </ul>
       <div className="grid grid-flow-col gap-4 mt-3">
-        <form action={preferenceAction} onSubmit={handleSubmit}>
+        <form action={serverAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
           <input type="hidden" name="preference" value="Left" />
           <Button type="submit"> Left is better </Button>
         </form>
-        <form action={preferenceAction} onSubmit={handleSubmit}>
+        <form action={serverAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
           <input type="hidden" name="preference" value="None" />
           <Button variant={"secondary"} type="submit">
@@ -62,7 +66,7 @@ export function VideoPlayerWithPolling() {
             No preference{" "}
           </Button>
         </form>
-        <form action={preferenceAction} onSubmit={handleSubmit}>
+        <form action={serverAction} onSubmit={handleSubmit}>
           <input type="hidden" name="video_id" value={current_video._id} />
           <input type="hidden" name="preference" value="Right" />
           <Button type="submit"> Right is better </Button>

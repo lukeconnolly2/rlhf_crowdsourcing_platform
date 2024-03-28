@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { releaseManyAction } from "@/actions/releaseManyAction"
 import {
   ColumnDef,
   flexRender,
@@ -23,11 +22,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  serverAction: (formData: FormData) => Promise<void>
 }
-//Fetching might be needed
+
 export function DataTable<TData, TValue>({
   columns,
   data,
+  serverAction,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState(
     {} as { [key: number]: boolean }
@@ -88,8 +89,8 @@ export function DataTable<TData, TValue>({
       </Table>
 
       <div className="flex items-center justify-end space-x-2 p-4">
-        {table.getFilteredSelectedRowModel().rows.length > 1 && (
-          <form action={releaseManyAction}>
+        {table.getFilteredSelectedRowModel().rows.length >= 1 && (
+          <form action={serverAction}>
             <input
               type="hidden"
               name="video_ids"

@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { updateRequiredViews } from "@/actions/updateRequiredViews"
 import { X } from "lucide-react"
 
 import { EditableNumberCardItem } from "@/types/number-card"
@@ -23,6 +22,7 @@ export default function EditableNumberCard({
   min,
   max,
   className,
+  serverAction,
   ...props
 }: EditableNumberCardItem) {
   const [isEditing, setIsEditing] = useState(false)
@@ -58,10 +58,7 @@ export default function EditableNumberCard({
       </CardHeader>
       <CardContent>
         {isEditing && (
-          <form
-            action={updateRequiredViews}
-            onSubmit={() => setIsEditing(!isEditing)}
-          >
+          <form action={serverAction} onSubmit={() => setIsEditing(!isEditing)}>
             <div className="flex flex-row justify-around">
               <Input
                 className="w-8/12"

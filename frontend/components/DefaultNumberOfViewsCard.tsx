@@ -1,4 +1,5 @@
 import React from "react"
+import { updateRequiredViews } from "@/actions/updateRequiredViews"
 
 import getDefaultRequiredViews from "@/lib/getDefaultRequiredViews"
 
@@ -15,6 +16,7 @@ async function DefaultNumberOfViewsCard() {
       className="col-span-1"
       min={1}
       max={10}
+      serverAction={updateRequiredViews}
     />
   )
 }
