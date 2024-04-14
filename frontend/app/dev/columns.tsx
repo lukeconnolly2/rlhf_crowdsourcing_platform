@@ -1,6 +1,5 @@
 "use client"
 
-import { releaseAction } from "@/actions/releaseAction"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
 
@@ -153,14 +152,6 @@ export const columns: ColumnDef<Video>[] = [
               <DialogTrigger asChild>
                 <DropdownMenuItem>View Video</DropdownMenuItem>
               </DialogTrigger>
-              {video.status === "Unreleased" && (
-                <form action={releaseAction}>
-                  <input type="hidden" name="video_id" value={video._id} />
-                  <button className="w-full" type="submit">
-                    <DropdownMenuItem>Release Video</DropdownMenuItem>
-                  </button>
-                </form>
-              )}
             </DropdownMenuContent>
           </DropdownMenu>
           <DialogContent className="p-10">

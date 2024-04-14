@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import Link from "next/link"
-import { Settings } from "lucide-react"
+import { HelpCircle } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
 import { checkRole } from "@/lib/role"
@@ -25,7 +25,7 @@ async function Dev_Page() {
           </h1>
           <div className="flex flex-row gap-6 items-center">
             <Link href={siteConfig.links.setup}>
-              <Settings className="h-6 w-6" />
+              <HelpCircle className="h-6 w-6" />
             </Link>
           </div>
         </div>
@@ -35,7 +35,7 @@ async function Dev_Page() {
           <Suspense
             fallback={
               <NumberCardSkeleton
-                title="Views per Video"
+                title="Views per Video a"
                 description="Default number of views required for a video"
               />
             }

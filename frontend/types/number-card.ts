@@ -5,5 +5,6 @@ export interface EditableNumberCardItem {
   className?: string
   min: number
   max: number
+  serverAction?: (formData: FormData) => Promise<void>
   children?: React.ReactNode
 }

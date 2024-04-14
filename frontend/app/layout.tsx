@@ -20,9 +20,9 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "../public/favicon.ico",
+    shortcut: "../public/favicon-16x16.png",
+    apple: "../public/apple-touch-icon.png",
   },
 }
 export const viewport: Viewport = {
@@ -40,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <ClerkProvider
+        publishableKey="pk_live_Y2xlcmsubHVrZWNvbm5vbGx5LmRldiQ"
         appearance={{
           baseTheme: dark,
           variables: {

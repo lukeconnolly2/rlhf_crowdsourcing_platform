@@ -8,7 +8,7 @@ class Uploader:
         self._hostname = hostname
 
     def _request_upload_url(self):
-        url = f"http://{self._hostname}/getUploadURL"
+        url = f"https://{self._hostname}/getUploadURL"
         params = {"filename": str(uuid4())}
         headers = {"X-API-Key": self._api_key}
 
@@ -49,7 +49,7 @@ class Uploader:
         }
 
         response = requests.post(url, headers=headers, json=data)
-
+        print(response.text)
         if response.status_code == 200:
             print("Metadata sent successfully")
         else:
@@ -60,3 +60,9 @@ class Uploader:
         upload_url = self._request_upload_url()
         public_url = self._upload_to_azure(upload_url, file_path)
         self._send_metadata(public_url, title, description, additional_metadata)
+
+    def get_results(self) -> dict:
+        url = f"http://{self._hostname}/results"
+        headers = {"X-API-Key": self._api_key}
+        response = requests.get(url, headers=headers)
+        return response.json()

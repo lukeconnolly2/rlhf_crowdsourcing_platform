@@ -1,16 +1,20 @@
 "use client"
 
 import React from "react"
-import { sendNotification } from "@/actions/setNotificationsSent"
 
 import { cn } from "@/lib/utils"
 
 import { Button, buttonVariants } from "./ui/button"
 
-function Notification() {
+function Notification({
+  serverAction,
+  ...props
+}: {
+  serverAction: (FormData) => Promise<void>
+}) {
   return (
     <div className="w-full">
-      <form action={sendNotification}>
+      <form action={serverAction}>
         <Button
           className={cn(buttonVariants({ variant: "default" }), "w-full")}
           type="submit"
