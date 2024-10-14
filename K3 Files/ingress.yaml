@@ -4,11 +4,20 @@ metadata:
   name: example-ingress
   annotations:
     kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.middlewares: default-test-header@kubernetescrd
 spec:
   rules:
-    - host: interactiverl.lukeconnolly.dev
+    - host: #Your domain
       http:
         paths:
+          - path: /results
+            pathType: Prefix
+            backend:
+              service:
+                name: orchastrator
+                port:
+                  number: 8080
+ 
           - path: /getUploadURL
             pathType: Prefix
             backend:
@@ -23,6 +32,7 @@ spec:
                 name: orchastrator
                 port:
                   number: 8080
+                    
           # Default catch-all route for frontend service
           - path: /
             pathType: Prefix

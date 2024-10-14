@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: orchastrator
-          image: lukeconnolly2/fyp-orchestrator:latest
+          image: lukeconnolly2/fyp-backend-test:latest
           resources:
             limits:
               memory: "128Mi"
@@ -31,6 +31,31 @@ spec:
                 secretKeyRef:
                   name: fyp-secrets
                   key: PRIVATE_API_KEY
+            - name: PUBLIC_DATALAKE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: PUBLIC_DATALAKE_URL
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: MONGO_USER
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: fyp-secrets
+                  key: MONGO_PASS
+            - name: DATABASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: DATABASE_URL
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: DATABASE_PORT
 
 ---
 apiVersion: v1

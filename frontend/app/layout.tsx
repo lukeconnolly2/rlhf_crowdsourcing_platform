@@ -37,6 +37,8 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  console.log(process.env.CLERK_SECRET_KEY, "SECRET KEY")
+  console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, "PUBLIC KEY")
   return (
     <>
       <ClerkProvider

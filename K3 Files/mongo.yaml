@@ -14,10 +14,6 @@ spec:
       containers:
       - name: mongodb
         image: mongo
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 27017
         env:
@@ -31,6 +27,13 @@ spec:
             secretKeyRef:
               name: fyp-secrets
               key: MONGO_PASS 
+        volumeMounts:
+        - name: mongodb-data
+          mountPath: /data/db
+      volumes:
+      - name: mongodb-data
+        persistentVolumeClaim:
+          claimName: mongodb-pvc
 ---
 
 apiVersion: v1

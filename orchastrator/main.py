@@ -8,8 +8,6 @@ import os
 from azure.identity import DefaultAzureCredential
 from azure.storage.blob import (
     BlobServiceClient,
-    BlobClient,
-    ContainerClient,
     generate_blob_sas,
     BlobSasPermissions,
 )
@@ -20,16 +18,20 @@ import re
 from datetime import datetime, timedelta
 import logging
 
-PUBLIC_DATALAKE_URL = "https://fypstorageucd.blob.core.windows.net/videos/"
+PUBLIC_DATALAKE_URL = os.getenv("PUBLIC_DATALAKE_URL")
 CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
-client_uri = "mongodb://admin:admin@db:27017/"
+MONGO_USER = os.getenv("MONGO_USER")
+MONGO_PASS = os.getenv("MONGO_PASS")
+DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_PORT = os.getenv("DATABASE_PORT")
+CLIENT_URI = f"mongodb://{MONGO_USER}:{MONGO_PASS}@{DATABASE_URL}:{DATABASE_PORT}/"
 PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
 
 if not CONNECTION_STRING:
     print("Running in local mode. Getting connection strings from .env.local")
     load_dotenv(".env.local")
     CONNECTION_STRING = os.getenv("DATALAKE_CONNECTION_STRING")
-    client_uri = os.getenv("MONGO_CONNECTION_STRING")
+    CLIENT_URI = os.getenv("MONGO_CONNECTION_STRING")
     PRIVATE_API_KEY = os.getenv("PRIVATE_API_KEY")
 
 ACCOUNT_NAME = re.search("AccountName=(.+?);", CONNECTION_STRING).group(1)
@@ -62,14 +64,13 @@ app = FastAPI()
 
 @app.on_event("startup")
 def startup_db_client():
-    app.mongodb_client = MongoClient(client_uri)
+    app.mongodb_client = MongoClient(CLIENT_URI)
     app.database = app.mongodb_client["FYP"]
     try:
         app.mongodb_client.admin.command("ismaster")
         print("Connected to the MongoDB database!")
         logging.info("Connected to the MongoDB database!")
     except PyMongoError:
-        print("Connection to MongoDB failed! ")
         logging.error("Connection to MongoDB failed! ")
 
 
@@ -104,7 +105,6 @@ def add_video(
     api_key: str = Security(check_public_api_key),
 ):
     video = jsonable_encoder(video)
-    print(video)
     video["user"] = api_key
     video["required_views"] = app.database.users.find_one(
         {"key": api_key}, {"_id": 0, "default_required_views": 1}

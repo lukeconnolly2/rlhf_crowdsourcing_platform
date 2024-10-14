@@ -4,6 +4,10 @@ metadata:
   name: fyp-config
 data:
   DATABASE_URL: db
+  DATABASE_PORT: "27017"
+  PUBLIC_DATALAKE_URL: #your datalake domain
   ORCHESTRATOR_URL: orchastrator:8080
   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: /
   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: /
+  NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
+  NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up

@@ -5,7 +5,6 @@ WORKDIR /code
 COPY ./requirements.txt /code/requirements.txt
 
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo pkgconfig
-RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip3 install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY main.py /code/main.py 

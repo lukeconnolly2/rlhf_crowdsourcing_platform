@@ -13,9 +13,16 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: lukeconnolly2/fyp-frontend:latest
+          image: lukeconnolly2/fyp-frontend-test:latest
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
           env:
             - name: NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
               valueFrom:
@@ -27,6 +34,16 @@ spec:
                 secretKeyRef:
                   name: fyp-secrets
                   key: CLERK_SECRET_KEY
+            - name: NEXT_PUBLIC_CLERK_SIGN_IN_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: NEXT_PUBLIC_CLERK_SIGN_IN_URL
+            - name: NEXT_PUBLIC_CLERK_SIGN_UP_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: NEXT_PUBLIC_CLERK_SIGN_UP_URL
             - name: NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
               valueFrom:
                 configMapKeyRef:
