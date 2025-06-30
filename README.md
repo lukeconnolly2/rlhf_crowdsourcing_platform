@@ -1,4 +1,4 @@
-This repo contains the web-based crowdsourcing platform for the Themis framework submitted in WWW2025. For our RLHF system visit: [https://anonymous.4open.science/r/Themis-157E](https://anonymous.4open.science/r/Themis-157E) (Open in new tab).
+This repo contains the web-based crowdsourcing platform for the Themis framework. For our RLHF system visit: [https://anonymous.4open.science/r/Themis-157E](https://anonymous.4open.science/r/Themis-157E) (Open in new tab).
 
 # Crowdsourcing platform setup guide
 
