@@ -2,36 +2,34 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: example-ingress
-  annotations:
-    kubernetes.io/ingress.class: "traefik"
-    traefik.ingress.kubernetes.io/router.middlewares: default-test-header@kubernetescrd
 spec:
+  ingressClassName: traefik
   rules:
-    - host: #Your domain
+    - host: daisthree.ucd.ie #Your domain
       http:
         paths:
           - path: /results
             pathType: Prefix
             backend:
               service:
-                name: orchastrator
+                name: orchestrator
                 port:
-                  number: 8080
+                  number: 80
  
           - path: /getUploadURL
             pathType: Prefix
             backend:
               service:
-                name: orchastrator
+                name: orchestrator
                 port:
-                  number: 8080
+                  number: 80
           - path: /video
             pathType: Prefix
             backend:
               service:
-                name: orchastrator
+                name: orchestrator
                 port:
-                  number: 8080
+                  number: 80
                     
           # Default catch-all route for frontend service
           - path: /

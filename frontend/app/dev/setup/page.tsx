@@ -19,7 +19,7 @@ async function Setup() {
     `from hitl import Uploader \n\n` +
     `uploader = Uploader(\n` +
     `    "${apiKey}",\n` +
-    `    "interactiverl.lukeconnolly.dev",\n` +
+    `    "daisthree.ucd.ie",\n` +
     `)\n\n` +
     `directory = "./videos"\n` +
     `for filename in os.listdir(directory):\n` +
@@ -38,7 +38,7 @@ async function Setup() {
     `from hitl import Uploader\n\n` +
     `uploader = Uploader(\n` +
     `    "${apiKey}",\n` +
-    `    "interactiverl.lukeconnolly.dev",\n` +
+    `    "daisthree.ucd.ie",\n` +
     `)\n\n` +
     `results = uploader.get_results()`
 

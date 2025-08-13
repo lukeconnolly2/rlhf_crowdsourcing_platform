@@ -12,7 +12,7 @@ export default function IndexPage() {
             A human in the loop framework.
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground">
-            Final year project for the BSc in Computer Science at UCD.
+            Themis was developed as part of a research project in Human-AI interaction.
           </p>
         </div>
         <div className="flex gap-4">
@@ -41,7 +41,17 @@ export default function IndexPage() {
             About
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground">
-            Final year project for the BSc in Computer Science at UCD.
+            Themis was developed as part of a research project in Human-AI interaction from [ANONYMOUS].<br />
+            It is a framework for building human-in-the-loop applications, allowing users to interact with AI models in a controlled and efficient manner.<br />
+            The platform is designed to facilitate the collection of human feedback on AI-generated content, enabling the continuous improvement of AI systems.<br />
+            Themis is open-source and can be customized to fit various use cases in the field of human-AI interaction.<br />
+            It provides a user-friendly interface for both AI developers and human annotators, making it easier to gather insights and improve AI models through human feedback.<br />
+            <br />
+            The Web application for the crowdsourcing platform was built as part of Final Year Project from [BLANK] for his BSc in Computer Science at [UCD ].<br />
+            The project was supervised by [ANONYMOUS] and [ANONYMOUS].<br />
+            <br />
+            The AI models and training routines were developed by [ANONYMOUS] as part of his Ph.D research in Human-AI interaction.<br /> 
+          
           </p>
         </div>
       </section>

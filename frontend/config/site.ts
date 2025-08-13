@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-  name: "HITL",
-  description: "A human in the loop framework for final year project.",
+  name: "Themis",
+  description: "A framework for training Reinforcement Learning Agents from Human Feedback.",
   mainNav: [
     {
       title: "Home",
@@ -30,7 +30,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    github: "https://csgitlab.ucd.ie/lukeconnolly/fyp",
+    github: "https://github.com/achouliaras/Themis",
     hitl: "/hitl",
     developer: "/dev",
     about: "#about",

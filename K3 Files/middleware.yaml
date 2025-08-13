@@ -14,7 +14,7 @@ spec:
     accessControlAllowHeaders:
       - "*"
     accessControlAllowOriginList:
-      - #Your Domain
+      - daisthree.ucd.ie #Your Domain
     accessControlMaxAge: 100
     addVaryHeader: true
     isDevelopment: true

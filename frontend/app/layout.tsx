@@ -42,7 +42,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <ClerkProvider
-        publishableKey="pk_live_Y2xlcmsubHVrZWNvbm5vbGx5LmRldiQ"
+        publishableKey="pk_live_Y2xlcmsuZGFpc3RocmVlLnVjZC5pZSQ" // Replace with your actual Clerk publishable key
         appearance={{
           baseTheme: dark,
           variables: {

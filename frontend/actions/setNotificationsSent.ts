@@ -16,7 +16,7 @@ export const sendNotification = async () => {
   revalidatePath("/dev")
   try {
     const data = await resend.emails.send({
-      from: "Interactive RL <luke@lukeconnolly.dev>",
+      from: "Interactive RL <andreas@daisthree.ucd.ie>",
       to: users,
       subject: "New Machine Learning Outputs!",
       react: EmailTemplate(),

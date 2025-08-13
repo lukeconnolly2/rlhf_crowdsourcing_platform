@@ -11,6 +11,6 @@ COPY main.py /code/main.py
 COPY models.py /code/models.py
 COPY constants.py /code/constants.py
 
-EXPOSE 8080
+EXPOSE 80
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
