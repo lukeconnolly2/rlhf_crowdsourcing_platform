@@ -47,6 +47,14 @@ This framework integrates with four external services to function optimally. Fol
 3. In Clerk, navigate to the development section and create a production instance.
 4. Follow Clerk’s documentation to obtain your **Publishable Key** and **Secret Key**.
    - These keys will be used for authentication in your app.
+5. Go to Configure/domains to set up the DNS settings.
+6. Go to Configure/Paths do setup the domain names for the app, sing-up and sign-in pages.
+7. Go to Configure/Sessions and customize user session token. Add the following under Claims:
+   ```yaml
+      {
+	      "metadata": "{{user.public_metadata}}"
+      }
+   ```
 
 ### Step 3: Set Up Azure Blob Storage
 
@@ -92,7 +100,21 @@ This framework integrates with four external services to function optimally. Fol
      - "https://example.yourdomain.com"
    ```
 
-### Step 6: Install k3s and Apply Configurations
+### Step 5: Install k3s and Apply Configurations
 
 1. Install k3s on your server: [k3s Installation Guide](https://k3s.io/)
 2. Apply the `yaml` files to the default namespace in your k3s cluster to deploy your service.
+
+### Step 6: Create the first admin account in the Clerk dashboard
+Register into the website with the account you intent to use as admin. Go to the Clerk Dashboard, find the user and in its profile add the followoing under public Metadata:
+```yaml
+   {
+      "role": "admin"
+   }
+```
+You only need to this step for the first admin user. Other user's roles can be changed from the admin page on the website. 
+
+### Step 7: Use the hitl library to upload videos and get the preference results
+In the developer page on the question mark are the instructions on how to upload videos and download the results.
+
+### Done: You can now begin to set-up your human studies and experiment with RLHF models

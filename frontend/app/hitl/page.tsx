@@ -21,7 +21,7 @@ export default function Home() {
           <Card>
             <CardHeader className="flex flex-row justify-between">
               <div>
-                <CardTitle>Pick the video the AI agent performs better</CardTitle>
+                <CardTitle>Pick the video where the AI agent performs better</CardTitle>
                 <CardDescription>
                   On the left and right side are two different examples of an AI agent trying to play the game.
                   Click the button that corresponds to the video in which the AI agent performs better. 
