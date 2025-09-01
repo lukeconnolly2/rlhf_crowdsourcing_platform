@@ -13,7 +13,8 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: andreasxou/hitl-frontend:v1
+          image: andreasxou/hitl-frontend:v1.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           resources:

@@ -12,7 +12,7 @@ export default function IndexPage() {
             A human in the loop framework.
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground">
-            Themis was developed as part of a research project in Human-AI interaction.
+            Themis was developed as part of a research project in Human-AI Interaction.
           </p>
         </div>
         <div className="flex gap-4">
@@ -28,7 +28,7 @@ export default function IndexPage() {
             href={siteConfig.links.hitl}
             className={buttonVariants() + " w-1/6 h-24 text-xl"}
           >
-            Try it out.
+            Sign in.
           </Link>
         </div>
       </section>
@@ -41,7 +41,7 @@ export default function IndexPage() {
             About
           </h1>
           <p className="max-w-[700px] text-lg text-muted-foreground">
-            Themis was developed as part of a research project in Human-AI interaction from [ANONYMOUS].<br />
+            Themis was developed as part of a research project in Human-AI Interaction from [ANONYMOUS].<br />
             It is a framework for building human-in-the-loop applications, allowing users to interact with AI models in a controlled and efficient manner.<br />
             The platform is designed to facilitate the collection of human feedback on AI-generated content, enabling the continuous improvement of AI systems.<br />
             Themis is open-source and can be customized to fit various use cases in the field of human-AI interaction.<br />

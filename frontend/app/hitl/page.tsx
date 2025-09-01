@@ -21,10 +21,13 @@ export default function Home() {
           <Card>
             <CardHeader className="flex flex-row justify-between">
               <div>
-                <CardTitle>Interact to Train AI models</CardTitle>
+                <CardTitle>Pick the video the AI agent performs better</CardTitle>
                 <CardDescription>
-                  Help train AI models by providing feedback on which video is
-                  better.
+                  On the left and right side are two different examples of an AI agent trying to play the game.
+                  Click the button that corresponds to the video in which the AI agent performs better. 
+                  If you can&apos;t decide, you can click the &quot;No Preference&quot; button (use sparingly). 
+                  You can watch the video as many times as you want. 
+                  After you make your choice, a new pair of videos will be shown to you.
                 </CardDescription>
               </div>
             </CardHeader>

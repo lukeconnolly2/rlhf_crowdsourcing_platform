@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: orchestrator
-          image: andreasxou/hitl-backend:v1
+          image: andreasxou/hitl-backend:v1.1
           resources:
             limits:
               memory: "128Mi"
