@@ -1,9 +1,10 @@
 import os
-from hitl import Uploader
+from Uploader import Uploader
 
 uploader = Uploader(
-    api_key="3b729c34e729af5dd6b809bc561a942d84e58180b01999a615ea3534923e5a3e",
-    hostname="daisthree.ucd.ie",
+    api_key="37b229377b890261f4eca828cb197d3beb295c9e571c3e46ce3b18b9bf8f972d",
+    hostname="daisthree.ucd.ie"
+    
 )
 
 directory = "./videos"
@@ -15,7 +16,7 @@ for filename in os.listdir(directory):
             description="The Goal of this output is to make the stick man do a backflip",
             additional_metadata=[
                 "test_additional_metadata",
-                ],
+                ]
         )
     else:
         continue

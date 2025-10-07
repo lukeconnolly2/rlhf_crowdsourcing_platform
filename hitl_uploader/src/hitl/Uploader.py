@@ -8,7 +8,7 @@ class Uploader:
         self._hostname = hostname
 
     def _request_upload_url(self):
-        url = f"https://{self._hostname}/getUploadURL"
+        url = f"http://{self._hostname}/getUploadURL"
         params = {"filename": str(uuid4())}
         headers = {"X-API-Key": self._api_key}
 
