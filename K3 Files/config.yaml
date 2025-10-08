@@ -5,9 +5,11 @@ metadata:
 data:
   DATABASE_URL: db
   DATABASE_PORT: "27017"
-  PUBLIC_DATALAKE_URL: #your datalake domain
+  PUBLIC_DATALAKE_URL: https://hitl4rl2storevideos.blob.core.windows.net/videos/ #your datalake domain
   ORCHESTRATOR_URL: orchestrator:80
   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL: /
   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL: /
   NEXT_PUBLIC_CLERK_SIGN_IN_URL: /sign-in
   NEXT_PUBLIC_CLERK_SIGN_UP_URL: /sign-up
+  NEXT_PUBLIC_CLERK_FRONTEND_API: http://clerk.daisthree.ucd.ie
+

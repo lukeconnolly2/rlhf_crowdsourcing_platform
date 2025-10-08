@@ -1,7 +1,7 @@
 "use server"
 
 import { logger } from "@/logger"
-import { currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
 export default async function setNotificationsSent(number: number) {
   const user = await currentUser()

@@ -55,6 +55,11 @@ spec:
                 configMapKeyRef:
                   name: fyp-config
                   key: NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+            - name: NEXT_PUBLIC_CLERK_FRONTEND_API
+              valueFrom:
+                configMapKeyRef:
+                  name: fyp-config
+                  key: NEXT_PUBLIC_CLERK_FRONTEND_API
             - name: PRIVATE_API_KEY
               valueFrom:
                 secretKeyRef:

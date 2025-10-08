@@ -1,12 +1,12 @@
 "use server"
 
 import { logger } from "@/logger"
-import { auth, currentUser } from "@clerk/nextjs"
+import { auth, currentUser } from "@clerk/nextjs/server"
 
 export default async function getVideos() {
   logger.info("Getting Videos")
   const user = await currentUser()
-  const { getToken } = auth()
+  const { getToken } = await auth()
   const token = await getToken()
   console.log(token)
 
@@ -21,9 +21,10 @@ export default async function getVideos() {
     const json = await res.json()
     logger.info("Videos received")
     logger.info(json)
-    return json
+    return json || []
   } catch (error) {
     logger.warn("Error getting videos")
     logger.error(error)
+    return []
   }
 }

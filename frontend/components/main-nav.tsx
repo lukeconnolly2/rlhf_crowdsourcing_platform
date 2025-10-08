@@ -3,7 +3,6 @@ import Link from "next/link"
 
 import { NavItem } from "@/types/nav"
 import { siteConfig } from "@/config/site"
-import { checkRole } from "@/lib/role"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 
@@ -11,15 +10,16 @@ import { buttonVariants } from "./ui/button"
 
 interface MainNavProps {
   items?: NavItem[]
+  userRoles: { isAdmin: boolean; isDeveloper: boolean }
 }
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav({ items, userRoles }: MainNavProps) {
   const roleFilter = (item: NavItem) => {
     if (item.developer) {
-      return checkRole("developer") || checkRole("admin")
+      return userRoles.isDeveloper || userRoles.isAdmin
     }
     if (item.admin) {
-      return checkRole("admin")
+      return userRoles.isAdmin
     }
     return true
   }

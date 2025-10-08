@@ -1,8 +1,10 @@
-import { clerkClient } from "@clerk/nextjs"
+import { clerkClient } from "@clerk/nextjs/server"
 import { User } from "@clerk/nextjs/dist/types/server"
 
 export const getUsers = async (role: string) => {
-  const users: User[] = await clerkClient.users.getUserList()
+  const cclient = await clerkClient()
+  const usersResponse = await cclient.users.getUserList();
+  const users = usersResponse.data;
   const usersByRole = users.filter(
     (user) => user.publicMetadata.role === role || !user.publicMetadata.role
   )

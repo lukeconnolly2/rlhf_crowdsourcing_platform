@@ -7,7 +7,7 @@ import Unauthorised from "@/components/unauthorised"
 import AdminDataTable from "./AdminDataTable"
 
 export default async function AdminDashboard() {
-  if (!checkRole("admin")) {
+  if (!(await checkRole("admin"))) {
     return <Unauthorised />
   }
 

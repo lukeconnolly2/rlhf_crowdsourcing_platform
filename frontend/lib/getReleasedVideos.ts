@@ -1,7 +1,7 @@
 "use server"
 
 import { logger } from "@/logger"
-import { currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
 export default async function getReleasedVideos() {
   const user = await currentUser()
@@ -17,9 +17,10 @@ export default async function getReleasedVideos() {
     )
     const json = await res.json()
     logger.info("Videos received")
-    return json
+    return json || []
   } catch (error) {
     logger.warn("Error getting videos")
     logger.error(error)
+    return []
   }
 }

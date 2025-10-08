@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { logger } from "@/logger"
-import { currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
 export const releaseManyAction = async (formData: FormData) => {
   logger.info(`Releasing video ${formData.get("video_ids")}`)

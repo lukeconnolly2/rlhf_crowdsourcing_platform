@@ -13,7 +13,7 @@ import Unauthorised from "@/components/unauthorised"
 import VideoNumberCard from "@/components/video-number-card"
 
 async function Dev_Page() {
-  if (!checkRole("admin") && !checkRole("developer")) {
+  if (!(await checkRole("admin")) && !(await checkRole("developer"))) {
     return <Unauthorised />
   }
   return (

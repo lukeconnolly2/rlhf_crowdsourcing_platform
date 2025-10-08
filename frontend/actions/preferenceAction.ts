@@ -1,7 +1,7 @@
 "use server"
 
 import { logger } from "@/logger"
-import { currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
 export const preferenceAction = async (formData: FormData) => {
   const user = await currentUser()

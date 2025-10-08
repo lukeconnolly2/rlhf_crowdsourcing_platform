@@ -1,7 +1,7 @@
 "use server"
 
 import { logger } from "@/logger"
-import { currentUser } from "@clerk/nextjs"
+import { currentUser } from "@clerk/nextjs/server"
 
 export default async function getNotificationsSent() {
   const user = await currentUser()
@@ -21,9 +21,10 @@ export default async function getNotificationsSent() {
     )
     const json = await res.json()
     logger.info("Notifications Sent: " + JSON.stringify(json))
-    return json
+    return json || 0
   } catch (error) {
     logger.warn("Error getting notifications")
     logger.error(error)
+    return 0
   }
 }

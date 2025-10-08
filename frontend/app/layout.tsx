@@ -37,12 +37,12 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  console.log(process.env.CLERK_SECRET_KEY, "SECRET KEY")
-  console.log(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY, "PUBLIC KEY")
   return (
     <>
       <ClerkProvider
-        publishableKey="pk_live_Y2xlcmsuZGFpc3RocmVlLnVjZC5pZSQ" // Replace with your actual Clerk publishable key
+        publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+        signInUrl="/sign-in"
+        signUpUrl="/sign-up"
         appearance={{
           baseTheme: dark,
           variables: {
